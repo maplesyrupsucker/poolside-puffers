@@ -12,7 +12,7 @@ export default function Home() {
         <meta property="og:description" content="Poolside Puffers is a community-centered art project to introduce the Bitcoin Cash community to smartBCH NFT's. Poolside Puffers are ready to catch!" key="ogdesc" />
         <meta property="og:type" content="website" key="ogtype" />
         <meta property="og:url" content="https://puffers.cash/" key="ogurl"/>
-        <meta property="og:image" content="https://puffers.cash/images/Hola.gif" key="ogimage"/>
+        <meta property="og:image" content="https://puffers.cash/images/puffers-bch.gif" key="ogimage"/>
         <meta property="og:site_name" content="https://puffers.cash/" key="ogsitename" />
 
         <meta name="twitter:card" content="summary_large_image" key="twcard"/>
@@ -20,7 +20,7 @@ export default function Home() {
         <meta property="twitter:url" content="https://puffers.cash/" key="twurl" />
         <meta name="twitter:title" content="Poolside Puffers Co." key="twtitle" />
         <meta name="twitter:description" content="Poolside Puffers is a community-centered art project to introduce the Bitcoin Cash community to smartBCH NFT's. Poolside Puffers are ready to catch!" key="twdesc" />
-        <meta name="twitter:image" content="https://puffers.cash/images/Hola.gif" key="twimage" />
+        <meta name="twitter:image" content="https://puffers.cash/images/puffers-bch.gif" key="twimage" />
       </Head>
 
 
@@ -32,7 +32,7 @@ export default function Home() {
               <a href="#" className="text-4xl text-white hover:text-black m-3">Home</a>
               <a href="/mint" className="text-4xl hover:text-black m-3 text-blau">MINT!</a>
               <a href="https://twitter.com/poolsidepuffers" className="text-4xl text-white hover:text-black m-3">TWITTER</a>
-              <a href="#" className="text-4xl text-white hover:text-black m-3">TELEGRAM</a>
+              <a href="https://t.me/poolsidepuffers" className="text-4xl text-white hover:text-black m-3">TELEGRAM</a>
             </nav>
              
           </div>
