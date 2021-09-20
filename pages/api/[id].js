@@ -39,8 +39,8 @@ const pufferApi = async(req, res) => {
     // let tokenName= `#${query}`
 
     const signatures = [99999,999999]
-    const trait = traits[parseInt(query)]
-    // const trait = traits[ Math.floor(Math.random() * 8888) ] // for testing on rinkeby 
+    // const trait = traits[parseInt(query)]
+    const trait = traits[ Math.floor(Math.random() * 8888) ] // for testing on rinkeby 
 
     // CHECK OPENSEA METADATA STANDARD DOCUMENTATION https://docs.opensea.io/docs/metadata-standards
     let metadata = {}
