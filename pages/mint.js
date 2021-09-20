@@ -158,7 +158,7 @@ export default function Mint() {
                 <span className="flex Poppitandfinchsans text-5xl text-white items-center bg-grey-lighter rounded rounded-r-none my-4 ">TOTAL PUFFERS CAUGHT:  <span className="text-blau text-6xl"> {!signedIn ?  <>-</>  :  <>{totalSupply}</> } / 2100</span></span>
 
                 <div id="mint" className="flex justify-around  mt-8 mx-6">
-                  <span className="flex Poppitandfinchsans text-5xl text-white items-center bg-grey-lighter rounded rounded-r-none px-3 font-bold">GIMME</span>
+                  <span className="flex Poppitandfinchsans text-5xl text-white items-center bg-grey-lighter rounded rounded-r-none px-3 font-bold">REEL IN</span>
                   
                   <input 
                     type="number" 

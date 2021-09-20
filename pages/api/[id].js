@@ -6,17 +6,17 @@ import traits from "../../database/traitsfinal.json";
 
 const infuraAddress = INFURA_ADDRESS
 
-const bananaApi = async(req, res) => {
+const pufferApi = async(req, res) => {
 
     // SOME WEB3 STUFF TO CONNECT TO SMART CONTRACT
   const provider = new Web3.providers.HttpProvider(infuraAddress)
   const web3infura = new Web3(provider);
-  const bananaContract = new web3infura.eth.Contract(ABI, ADDRESS)
+  const pufferContract = new web3infura.eth.Contract(ABI, ADDRESS)
   
 
 
   // IF YOU ARE USING INSTA REVEAL MODEL, USE THIS TO GET HOW MANY NFTS ARE MINTED
-//   const totalSupply = await bananaContract.methods.totalSupply().call();
+//   const totalSupply = await pufferContract.methods.totalSupply().call();
 //   console.log(totalSupply)
   
 
@@ -27,20 +27,18 @@ const bananaApi = async(req, res) => {
 
   // IF YOU ARE USING INSTA REVEAL MODEL, UNCOMMENT THIS AND COMMENT THE TWO LINES BELOW
 //   if(parseInt(query) < totalSupply) {
-  const totalBananas = 8888;
-  if(parseInt(query) < totalBananas) {
+  const totalPuffers = 8888;
+  if(parseInt(query) < totalPuffers) {
 
 
     // CALL CUSTOM TOKEN NAME IN THE CONTRACT
-    const tokenNameCall = await bananaContract.methods.bananaNames(query).call();
+    const tokenNameCall = await pufferContract.methods.pufferNames(query).call();
     let tokenName = `#${query}${(tokenNameCall === '') ? "" : ` - ${tokenNameCall}`}`
 
     // IF YOU ARE NOT USING CUSTOM NAMES, JUST USE THIS
     // let tokenName= `#${query}`
 
-    
-    
-    const signatures = [137,883,1327,1781,2528,2763,3833,5568,5858,6585,6812,7154,8412]
+    const signatures = [99999,999999]
     const trait = traits[parseInt(query)]
     // const trait = traits[ Math.floor(Math.random() * 8888) ] // for testing on rinkeby 
 
@@ -64,7 +62,7 @@ const bananaApi = async(req, res) => {
       }
       // console.log(metadata)
     } else {
-    // GENERAL BANANA METADATA
+    // GENERAL PUFFER METADATA
       metadata = {
         "name": tokenName,
         "description": "Poolside Puffers is a community-centered art project to introduce the Bitcoin Cash community to smartBCH NFT's. Poolside Puffers are ready to catch!",
@@ -77,21 +75,33 @@ const bananaApi = async(req, res) => {
               "value": trait["Background"]
             },
             {
-              "trait_type": "Banana Base",
-              "value": trait["Banana Base"]
+              "trait_type": "Body",
+              "value": trait["Body"]
             },
             {
-              "trait_type": "Mouth",
-              "value": trait["Mouth"]
+              "trait_type": "Tail",
+              "value": trait["Tail"]
+            },
+            {
+              "trait_type": "Assfins",
+              "value": trait["Assfins"]
+            },
+            {
+              "trait_type": "Spikes",
+              "value": trait["Spikes"]
             },
             {
               "trait_type": "Eyes",
               "value": trait["Eyes"]
             },
             {
-              "trait_type": "Head Gear",
-              "value": trait["Head Gear"]
+              "trait_type": "Fins",
+              "value": trait["Fins"]
             },
+            {
+              "trait_type": "Accessories",
+              "value": trait["Accessories"]
+            }
     
         ]
       }
@@ -104,7 +114,7 @@ const bananaApi = async(req, res) => {
     res.json(metadata)
   } else {
     res.statuscode = 404
-    res.json({error: "The banana you requested is out of range"})
+    res.json({error: "The puffer you requested is out of range"})
 
   }
 
@@ -114,4 +124,4 @@ const bananaApi = async(req, res) => {
   
 }
 
-export default bananaApi
+export default pufferApi
