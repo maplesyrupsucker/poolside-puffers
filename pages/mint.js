@@ -136,7 +136,7 @@ export default function Mint() {
             <nav className="flex flex-wrap flex-row justify-around Poppitandfinchsans">
               <a href="/" className="text-4xl text-white hover:text-black m-3">Home</a>
               <a href="/mint" className="text-4xl hover:text-black m-3 text-blau">MINT!</a>
-              <a href="https://twitter.com/poolsidepuffers" className="text-4xl text-white hover:text-black m-3">TWITTER</a>
+              {/* <a href="https://twitter.com/poolsidepuffers" className="text-4xl text-white hover:text-black m-3">TWITTER</a> */}
               <a href="https://t.me/poolsidepuffers" className="text-4xl text-white hover:text-black m-3">TELEGRAM</a>
             </nav>
              
@@ -178,7 +178,10 @@ export default function Mint() {
                   : <button className="mt-4 Poppitandfinchsans text-4xl border-6 bg-blau  text-white hover:text-black p-2 ">SALE IS NOT ACTIVE OR NO WALLET IS CONNECTED</button>        
             
               }
-                
+              <p><a href="https://smartbch.org/" target="_blank"><img src="images/smartbch.png" alt="smartbch" className="smartbch"/></a>
+              <a href="https://bitcoincash.org/" target="_blank"><img src="images/bitcoin-cash-logo-horizontal-wt.svg" alt="BCH" className="bch"/></a></p>
+              <p class="mt-5"><a href="https://read.cash/@Pjman7/how-to-add-smartbch-on-metamask-or-brave-wallet-f9abf092" className="underline">How to setup Metamask with smartBCH</a></p>
+
             </div> 
             </div>
  
