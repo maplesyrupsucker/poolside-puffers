@@ -1,0 +1,80 @@
+@font-face {
+font-family: 'Poppitandfinch';
+src: url('../fonts/PoppitAndFinch.otf') format('opentype');
+font-weight: 400;
+font-style: normal;
+font-display: swap;
+}
+@font-face {
+font-family: 'Poppitandfinchsans';
+src: url('../fonts/PoppitAndFinchSans.otf') format('opentype');
+font-weight: 400;
+font-style: normal;
+font-display: swap;
+}
+@font-face {
+font-family: 'Montserrat-Light';
+src: url('../fonts/Montserrat-Light.ttf') format('truetype');
+font-weight: 300;
+font-style: regular;
+font-display: swap;
+}
+
+
+#bodyy {
+    background-image: url('/images/tile.png');
+    background-position: 0px 0px;
+    background-repeat: repeat;
+    background-attachment: fixed;
+}
+
+.montserrat {
+    font-family: Montserrat-Light, sans-serif;
+}
+.Poppitandfinch {
+    font-family: Poppitandfinch, sans-serif;
+}
+  
+.Poppitandfinchsans {
+    font-family: Poppitandfinchsans, sans-serif;
+}
+
+.text-blau {
+    color: greenyellow;
+}
+
+.bg-blau {
+    background-color: darkslateblue;
+}
+
+strong {font-weight:800; color:#222; font-family:sans-serif;}
+
+.mint-btn {
+    display:block;
+    text-align:center;
+}
+.smartbch {
+    border-radius:5px;
+    background:#fff;
+    height:35px;
+    padding:5px;
+    display:inline-block;
+    margin-top:25px;
+    margin-right:10px;
+}
+
+.bch {
+    background: #222;
+    display:inline-block;
+    border-radius:5px;
+    padding:10px;
+    margin-top:25px;
+    height:35px;
+}
+
+.connect-btn {
+    position:fixed;
+    top:5px;
+    right:5px;
+    z-index:3;
+}
