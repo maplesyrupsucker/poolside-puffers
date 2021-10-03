@@ -9,7 +9,8 @@ export default function PufferCard({ pufferContract,walletAddress}) {
         if (pufferCardData.length == 0) {
             pufferList.push(
                 <div className="puffer flex flex-col">
-                    <h3 className="Poppitandfinchsans text-center text-4xl text-black">Searching...</h3>
+                    <img src="images/loading.gif" alt="loading" className="loading"></img>
+                    <h2 className="Poppitandfinchsans text-center text-2xl text-black">Searching Blockchain...</h2>
                 </div>
             );
         }
