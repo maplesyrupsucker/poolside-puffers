@@ -179,6 +179,8 @@ export default function Mint() {
                   : <button className="mt-4 Poppitandfinchsans text-4xl border-6 bg-blau  text-white hover:text-black p-2 ">SALE IS NOT ACTIVE OR NO WALLET IS CONNECTED</button>        
             
               }
+
+              <h3 className="mt-5 text-2xl">Visit <a href="/your-pool" className="underline">Your Pool</a> to view your puffers!</h3>
               <p><a href="https://smartbch.org/" target="_blank"><img src="images/smartbch.png" alt="smartbch" className="smartbch"/></a>
               <a href="https://bitcoincash.org/" target="_blank"><img src="images/bitcoin-cash-logo-horizontal-wt.svg" alt="BCH" className="bch"/></a></p>
               <p class="mt-5"><a href="https://read.cash/@Pjman7/how-to-add-smartbch-on-metamask-or-brave-wallet-f9abf092" className="underline">How to setup Metamask with smartBCH</a></p>
