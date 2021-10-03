@@ -18,7 +18,7 @@ export default function Home() {
         <meta name="twitter:card" content="summary_large_image" key="twcard"/>
         <meta property="twitter:domain" content="puffers.cash" key="twdomain" />
         <meta property="twitter:url" content="https://puffers.cash/" key="twurl" />
-        <meta name="twitter:title" content="Poolside Puffers Co." key="twtitle" />
+        <meta name="twitter:title" content="Poolside Puffers" key="twtitle" />
         <meta name="twitter:description" content="Poolside Puffers is a community-centered art project to introduce the Bitcoin Cash community to smartBCH NFT's. Poolside Puffers are ready to catch!" key="twdesc" />
         <meta name="twitter:image" content="https://puffers.cash/images/puffers-bch.gif" key="twimage" />
       </Head>
@@ -61,7 +61,7 @@ export default function Home() {
                     <a href="/mint" className="mt-4 Poppitandfinchsans text-4xl border-6 bg-blau  text-white hover:text-black p-2 mint-btn ">GO TO MINTING PAGE!</a>
                     <a href="https://smartbch.org/" target="_blank"><img src="images/smartbch.png" alt="smartbch" className="smartbch"/></a>
                     <a href="https://bitcoincash.org/" target="_blank"><img src="images/bitcoin-cash-logo-horizontal-wt.svg" alt="BCH" className="bch"/></a>
-                    <p class="mt-5"><a href="https://read.cash/@Pjman7/how-to-add-smartbch-on-metamask-or-brave-wallet-f9abf092" className="underline">How to setup Metamask with smartBCH</a></p>
+                    <p class="mt-5"><a href="https://read.cash/@Pjman7/how-to-add-smartbch-on-metamask-or-brave-wallet-f9abf092" className="underline">How to setup Metamask with smartBCH</a> | <a href="#" className="underline">About Poolside Puffers</a></p>
                   </div>
                   
                   <a href="/mint"><img className="w-4/4" src="images/puffers-bch.gif" alt="Poolside Puffers"/></a>
