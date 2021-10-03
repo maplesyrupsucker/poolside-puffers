@@ -22,11 +22,13 @@ export default function PufferCard({ pufferContract,walletAddress}) {
             var obj = pufferCardData[i];
             var attributes = obj.attributes;
 
+                
+
                 pufferList.push(
                 <div className="puffer flex flex-col">
                     <div className="rare">
                     {attributes.map((attributes) => {
-
+                       
                         
                         if (attributes.value.indexOf("Animated") >= 0) {
                             return <span><img src="images/diamond.png" alt="rare" className="diamond"></img><img src="images/diamond.png" alt="rare" className="diamond"></img></span>
@@ -66,7 +68,7 @@ export default function PufferCard({ pufferContract,walletAddress}) {
     useEffect( async() => {
         const bal = await pufferContract.methods.balanceOf(walletAddress).call();
         const make_range = (s, e) => Array(e - s + 1).fill().map((_, i) => s + i);
-        const CHUNK_SIZE = 10; // in case we have tooo many
+        const CHUNK_SIZE = 2100; // in case we have tooo many
 
         // const tokens = [];
         for (let c = 0; c < bal; c += CHUNK_SIZE) {
