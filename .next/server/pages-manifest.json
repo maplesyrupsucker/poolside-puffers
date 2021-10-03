@@ -2,8 +2,6 @@
   "/_app": "pages/_app.js",
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
-  "/": "pages/index.js",
-  "/mint": "pages/mint.js",
-  "/api/[id]": "pages/api/[id].js",
-  "/your-pool": "pages/your-pool.js"
+  "/your-pool": "pages/your-pool.js",
+  "/mint": "pages/mint.js"
 }

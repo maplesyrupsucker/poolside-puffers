@@ -42,6 +42,9 @@ export default function PufferCard({ pufferContract,walletAddress}) {
                         if (attributes.value.indexOf("Joint") >= 0) {
                             return <img src="images/diamond.png" alt="rare" className="diamond"></img>
                         }
+                        if (attributes.value.indexOf("Summer") >= 0) {
+                            return <img src="images/diamond.png" alt="rare" className="diamond"></img>
+                        }
                         if (attributes.value.indexOf("Pool Animated") >= 0) {
                             return <span><img src="images/diamond.png" alt="rare" className="diamond"></img><img src="images/diamond.png" alt="rare" className="diamond"></img><img src="images/diamond.png" alt="rare" className="diamond"></img></span>
                         }
