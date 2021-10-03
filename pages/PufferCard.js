@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 export default function PufferCard({ pufferContract,walletAddress}) {
     const [pufferCardData, setPufferCardData] = useState([])
 
+
     function renderCards() {
         const pufferList = [];
 
@@ -15,14 +16,18 @@ export default function PufferCard({ pufferContract,walletAddress}) {
             );
         }
 
+
         for (var i = 0; i < pufferCardData.length; i++) {
             console.log(pufferCardData);
             var obj = pufferCardData[i];
             var attributes = obj.attributes;
-            pufferList.push(
+
+                pufferList.push(
                 <div className="puffer flex flex-col">
                     <div className="rare">
                     {attributes.map((attributes) => {
+
+                        
                         if (attributes.value.indexOf("Animated") >= 0) {
                             return <span><img src="images/diamond.png" alt="rare" className="diamond"></img><img src="images/diamond.png" alt="rare" className="diamond"></img></span>
                         }
@@ -45,6 +50,7 @@ export default function PufferCard({ pufferContract,walletAddress}) {
                     <p className="Poppitandfinchsans text-center text-black">Traits:</p>
                     <ul className="pufferAttributes ">
                         {attributes.map((attributes) => {
+                            
                             return <li><span>{attributes.trait_type}:</span> {attributes.value}</li>
                         })}
                     </ul>
