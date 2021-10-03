@@ -104,22 +104,65 @@
     }
     
     #puffer-pool .puffer {
+        position: relative;
+        box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
         background:#fff;
         padding:10px;
         border-radius:10px;
         border: 1px solid #ddd;
         border-width:0 1px 1px 1px;
+        border:10px solid #016abb;
+        outline:1px solid #005392;
+        background-image: linear-gradient(to right bottom, #0087ec, #00a2f7, #00bbf6, #00d1ec, #00e4df, #2fe7d4, #4beac8, #63ecbb, #57e1b1, #4ad6a7, #3dcc9d, #2ec193);
         padding-top:20px;
-        margin:5px;
+        margin:15px 10px;
         max-width:300px;
+        /* background: rgb(67,0,111); */
+        /* background: radial-gradient(circle, rgba(67,0,111,1) 0%, rgba(0,231,236,1) 23%, rgba(72,0,255,1) 100%); */
+        background-image: linear-gradient(to top, #0087ec, #00a2f7, #00bbf6, #00d1ec, #00e4df, #2fe7d4, #4beac8, #63ecbb, #57e1b1, #4ad6a7, #3dcc9d, #2ec193);
     }
     #puffer-pool .puffer span {
-        color:#999;
+        color: greenyellow;
+        font-weight:bold;
+    }
+
+    #puffer-pool .puffer img {
+        border:1px solid #016abb;
+        box-shadow:0 3px 3px rgba(0,0,0,0.15);
+    }
+
+    #puffer-pool .puffer .rare {
+        position:absolute; 
+        top:-2px;
+        right:5px;
+        border:0;
+        box-shadow:none;
+        
+    }
+
+    #puffer-pool .puffer .diamond {
+        box-shadow:none;
+        border:0;
+        display:inline;
+        height:24px;
+        width:24px;
+    }
+
+    #puffer-pool .puffer h3 {
+        background: rgb(67,0,111);
+        background: linear-gradient(90deg, rgba(67,0,111,1) 0%, rgba(0,135,236,1) 50%, rgba(72,0,255,1) 100%);
+        border:1px solid #0087EC;
+        border-radius:15px 0 15px 0;
+        box-shadow:0 3px 5px rgba(0,0,0,0.25);
+        color:#fff;
+        width:90%;
+        margin:-10px auto 10px;
     }
     .pufferAttributes li {
+        color:#fff;
         display:inline-block;
-        background:#fff;
-        border:1px solid #ddd;
+        background:darkblue;
+        /* border:1px solid royalblue; */
         border-radius:15px;
         padding:3px 5px;
         margin:2px;

@@ -20,13 +20,35 @@ export default function PufferCard({ pufferContract,walletAddress}) {
             var attributes = obj.attributes;
             pufferList.push(
                 <div className="puffer flex flex-col">
+                    <div className="rare">
+                    {attributes.map((attributes) => {
+                        if (attributes.value.indexOf("Animated") >= 0) {
+                            return <span><img src="images/diamond.png" alt="rare" className="diamond"></img><img src="images/diamond.png" alt="rare" className="diamond"></img></span>
+                        }
+                        if (attributes.value.indexOf("Ripped") >= 0) {
+                            return <img src="images/diamond.png" alt="rare" className="diamond"></img>
+                        }
+                        if (attributes.value.indexOf("Cigarette") >= 0) {
+                            return <img src="images/diamond.png" alt="rare" className="diamond"></img>
+                        }
+                        if (attributes.value.indexOf("Joint") >= 0) {
+                            return <img src="images/diamond.png" alt="rare" className="diamond"></img>
+                        }
+                        if (attributes.value.indexOf("Pool Animated") >= 0) {
+                            return <span><img src="images/diamond.png" alt="rare" className="diamond"></img><img src="images/diamond.png" alt="rare" className="diamond"></img><img src="images/diamond.png" alt="rare" className="diamond"></img></span>
+                        }
+                    })}
+                    </div>
                     <img src={obj.image} alt={obj.name}></img>
                     <h3 className="Poppitandfinchsans text-center text-4xl text-black">{obj.name}</h3>
+                    <p className="Poppitandfinchsans text-center text-black">Traits:</p>
                     <ul className="pufferAttributes ">
                         {attributes.map((attributes) => {
                             return <li><span>{attributes.trait_type}:</span> {attributes.value}</li>
                         })}
                     </ul>
+
+                    
                 </div>
             );
         }
