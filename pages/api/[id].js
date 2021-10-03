@@ -83,7 +83,7 @@ const pufferApi = async(req, res) => {
               "value": trait["Tail"]
             },
             {
-              "trait_type": "Assfins",
+              "trait_type": "Tail Fins",
               "value": trait["Assfins"]
             },
             {
@@ -91,7 +91,7 @@ const pufferApi = async(req, res) => {
               "value": trait["Spikes"]
             },
             {
-              "trait_type": "Eyes",
+              "trait_type": "Face",
               "value": trait["Eyes"]
             },
             {

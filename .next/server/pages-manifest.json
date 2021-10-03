@@ -3,7 +3,5 @@
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
   "/mint": "pages/mint.js",
-  "/your-pool": "pages/your-pool.js",
-  "/": "pages/index.js",
-  "/api/[id]": "pages/api/[id].js"
+  "/": "pages/index.js"
 }

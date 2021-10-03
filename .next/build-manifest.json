@@ -33,11 +33,6 @@
       "static/chunks/webpack.js",
       "static/chunks/main.js",
       "static/chunks/pages/mint.js"
-    ],
-    "/your-pool": [
-      "static/chunks/webpack.js",
-      "static/chunks/main.js",
-      "static/chunks/pages/your-pool.js"
     ]
   },
   "ampFirstPages": []
