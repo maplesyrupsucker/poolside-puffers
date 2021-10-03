@@ -1,90 +1,133 @@
 @font-face {
-font-family: 'Poppitandfinch';
-src: url('../fonts/PoppitAndFinch.otf') format('opentype');
-font-weight: 400;
-font-style: normal;
-font-display: swap;
-}
-@font-face {
-font-family: 'Poppitandfinchsans';
-src: url('../fonts/PoppitAndFinchSans.otf') format('opentype');
-font-weight: 400;
-font-style: normal;
-font-display: swap;
-}
-@font-face {
-font-family: 'Montserrat-Light';
-src: url('../fonts/Montserrat-Light.ttf') format('truetype');
-font-weight: 300;
-font-style: regular;
-font-display: swap;
-}
-
-
-#bodyy {
-    background-image: url('/images/tile.png');
-    background-position: 0px 0px;
-    background-repeat: repeat;
-    background-attachment: fixed;
-}
-
-.montserrat {
-    font-family: Montserrat-Light, sans-serif;
-}
-.Poppitandfinch {
-    font-family: Poppitandfinch, sans-serif;
-}
-  
-.Poppitandfinchsans {
-    font-family: Poppitandfinchsans, sans-serif;
-}
-
-.text-blau {
-    color: greenyellow;
-}
-
-.bg-blau {
-    background-color: darkslateblue;
-}
-
-strong {font-weight:800; color:#222; font-family:sans-serif;}
-
-.mint-btn {
-    display:block;
-    text-align:center;
-}
-.smartbch {
-    border-radius:5px;
-    background:#fff;
-    height:35px;
-    padding:5px;
-    display:inline-block;
-    margin-top:25px;
-    margin-right:10px;
-}
-
-.bch {
-    background: #222;
-    display:inline-block;
-    border-radius:5px;
-    padding:10px;
-    margin-top:25px;
-    height:35px;
-}
-
-.connect-btn {
-    position:fixed;
-    top:5px;
-    right:5px;
-    z-index:3;
-}
-
-.rnftg-bg-gray-50 {
-    background:none;
-}
-
-@media (min-width: 1280px) {
-    .xl\:rnftg-grid-cols-4 {
-        grid-template-columns: repeat(3,minmax(0,1fr));
+    font-family: 'Poppitandfinch';
+    src: url('../fonts/PoppitAndFinch.otf') format('opentype');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
     }
-}
+    @font-face {
+    font-family: 'Poppitandfinchsans';
+    src: url('../fonts/PoppitAndFinchSans.otf') format('opentype');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+    }
+    @font-face {
+    font-family: 'Montserrat-Light';
+    src: url('../fonts/Montserrat-Light.ttf') format('truetype');
+    font-weight: 300;
+    font-style: regular;
+    font-display: swap;
+    }
+    
+    
+    #bodyy {
+        background-image: url('/images/tile.png');
+        /* background:blue; */
+        background-position: 0px 0px;
+        background-repeat: repeat;
+        background-attachment: fixed;
+    }
+    
+    .montserrat {
+        font-family: Montserrat-Light, sans-serif;
+    }
+    .Poppitandfinch {
+        font-family: Poppitandfinch, sans-serif;
+    }
+      
+    .Poppitandfinchsans {
+        font-family: Poppitandfinchsans, sans-serif;
+    }
+    
+    .text-blau {
+        color: greenyellow;
+    }
+    
+    .bg-blau {
+        background-color: darkslateblue;
+    }
+    
+    strong {font-weight:800; color:#222; font-family:sans-serif;}
+    
+    .mint-btn {
+        display:block;
+        text-align:center;
+    }
+    .smartbch {
+        border-radius:5px;
+        background:#fff;
+        height:35px;
+        padding:5px;
+        display:inline-block;
+        margin-top:25px;
+        margin-right:10px;
+    }
+    
+    .bch {
+        background: #222;
+        display:inline-block;
+        border-radius:5px;
+        padding:10px;
+        margin-top:25px;
+        height:35px;
+    }
+    
+    .connect-btn {
+        position:absolute;
+        top:5px;
+        right:0;
+        z-index:3;
+        font-size:12px;
+    }
+    
+    .connect-btn div {
+        font-size:8px;
+        display:block;
+    }
+    
+    .rnftg-bg-gray-50 {
+        background:none;
+    }
+    
+    .pufferAttributes {
+        display:block;
+        text-align:center;
+    }
+    
+    #puffer-pool {
+    
+    }
+    
+    #puffer-pool h3 {
+        
+    }
+    
+    #puffer-pool .puffer {
+        background:#fff;
+        padding:10px;
+        border-radius:10px;
+        border: 1px solid #ddd;
+        border-width:0 1px 1px 1px;
+        padding-top:20px;
+        margin:5px;
+        max-width:300px;
+    }
+    #puffer-pool .puffer span {
+        color:#999;
+    }
+    .pufferAttributes li {
+        display:inline-block;
+        background:#fff;
+        border:1px solid #ddd;
+        border-radius:15px;
+        padding:3px 5px;
+        margin:2px;
+        font-size:9px;
+    }
+    
+    @media (min-width: 1280px) {
+        .xl\:rnftg-grid-cols-4 {
+            grid-template-columns: repeat(3,minmax(0,1fr));
+        }
+    }
