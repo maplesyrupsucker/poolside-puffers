@@ -78,3 +78,13 @@ strong {font-weight:800; color:#222; font-family:sans-serif;}
     right:5px;
     z-index:3;
 }
+
+.rnftg-bg-gray-50 {
+    background:none;
+}
+
+@media (min-width: 1280px) {
+    .xl\:rnftg-grid-cols-4 {
+        grid-template-columns: repeat(3,minmax(0,1fr));
+    }
+}

@@ -1,0 +1,77 @@
+import { useState, useEffect } from 'react';
+
+export default function PufferCard({ pufferContract,walletAddress}) {
+    const [pufferCardData, setPufferCardData] = useState([])
+
+    function renderCards() {
+        const pufferList = [];
+
+        if (pufferCardData.length == 0) {
+            pufferList.push(
+                <div className="puffer flex flex-col">
+                    <h3 className="Poppitandfinchsans text-center text-4xl text-black">Searching...</h3>
+                </div>
+            );
+        }
+
+        for (var i = 0; i < pufferCardData.length; i++) {
+            console.log(pufferCardData);
+            var obj = pufferCardData[i];
+            var attributes = obj.attributes;
+            pufferList.push(
+                <div className="puffer flex flex-col">
+                    <img src={obj.image} alt={obj.name}></img>
+                    <h3 className="Poppitandfinchsans text-center text-4xl text-black">{obj.name}</h3>
+                    <ul className="pufferAttributes ">
+                        {attributes.map((attributes) => {
+                            return <li><span>{attributes.trait_type}:</span> {attributes.value}</li>
+                        })}
+                    </ul>
+                </div>
+            );
+        }
+
+        return pufferList;
+    }
+
+    useEffect( async() => {
+        const bal = await pufferContract.methods.balanceOf(walletAddress).call();
+        const make_range = (s, e) => Array(e - s + 1).fill().map((_, i) => s + i);
+        const CHUNK_SIZE = 10; // in case we have tooo many
+
+        // const tokens = [];
+        for (let c = 0; c < bal; c += CHUNK_SIZE) {
+            const r = make_range(c, Math.min(bal - 1, c + CHUNK_SIZE));
+            console.log(r);
+
+            try {
+                const ids = await Promise.all(r.map((i) =>
+                    pufferContract.methods.tokenOfOwnerByIndex(walletAddress, i).call()
+                ));
+                console.log(ids);
+
+                const objs = await Promise.all(ids.map((id) =>
+                    pufferContract.methods.tokenURI(Number.parseInt(id, 10)).call()
+                ));
+                console.log(objs);
+
+                // switch attrs to this once cors headers have been resolved on demopoolsidepuffers.vercel.app
+                // const attrs = await Promise.all(objs.map((obj) =>
+                //   fetch(obj).then((res) => res.json())
+                // ));
+                // console.log(attrs);
+
+                const attrs = await Promise.all(ids.map((id) =>
+                    fetch(`/api/${id}`).then((res) => res.json())
+                ));
+
+                setPufferCardData(attrs);
+            } catch (e) {
+                console.error(e);
+            }
+        }
+
+    }, []);
+
+    return (<div id="puffer-pool" className="flex flex-wrap justify-center">{renderCards()}</div>);
+}

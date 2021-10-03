@@ -16,8 +16,8 @@ const pufferApi = async(req, res) => {
 
 
   // IF YOU ARE USING INSTA REVEAL MODEL, USE THIS TO GET HOW MANY NFTS ARE MINTED
-//   const totalSupply = await pufferContract.methods.totalSupply().call();
-//   console.log(totalSupply)
+  const totalSupply = await pufferContract.methods.totalSupply().call();
+  console.log(totalSupply)
   
 
 
@@ -26,9 +26,9 @@ const pufferApi = async(req, res) => {
 
 
   // IF YOU ARE USING INSTA REVEAL MODEL, UNCOMMENT THIS AND COMMENT THE TWO LINES BELOW
-//   if(parseInt(query) < totalSupply) {
-  const totalPuffers = 8888;
-  if(parseInt(query) < totalPuffers) {
+  if(parseInt(query) < totalSupply) {
+  // const totalPuffers = 2100;
+  // if(parseInt(query) < totalPuffers) {
 
 
     // CALL CUSTOM TOKEN NAME IN THE CONTRACT
@@ -39,8 +39,8 @@ const pufferApi = async(req, res) => {
     // let tokenName= `#${query}`
 
     const signatures = [99999,999999]
-    // const trait = traits[parseInt(query)]
-    const trait = traits[ Math.floor(Math.random() * 8888) ] // for testing on rinkeby 
+    const trait = traits[parseInt(query)]
+    // const trait = traits[ Math.floor(Math.random() * 2100) ] // for testing on rinkeby 
 
     // CHECK OPENSEA METADATA STANDARD DOCUMENTATION https://docs.opensea.io/docs/metadata-standards
     let metadata = {}
