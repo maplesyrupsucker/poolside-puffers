@@ -175,6 +175,8 @@ export default function Pool() {
 
           <div className="mt5 py-6 w-4/4 text-center mt-6">
             <small>Not seeing your minted puffers? Make sure you're connected to the right wallet and refresh the page.</small>
+            <div><p className="mt-5">Contract: <span className="text-blau">0x88fA0495d5E9C1B178EAc1D76DF9D729e39fD8E8</span></p></div>
+
             {/* Link to the full collection on a NFT marketplace like Opensea */}
             {/* <a href="#" className="Poppitandfinchsans text-4xl border-6 bg-black  text-white hover:text-blau p-2 ">VIEW ENTIRE COLLECTION!</a> */}
 
