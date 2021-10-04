@@ -176,7 +176,7 @@ export default function Mint() {
                 <small>To avoid overfishing, we limit 25 puffers per mint transaction.</small>
                 {saleStarted ? 
                 <button onClick={() => mintPuffer(how_many_puffers)} className="mt-4 Poppitandfinchsans text-4xl border-6 bg-blau  text-white hover:text-black p-2 ">CATCH {how_many_puffers} puffers for {(pufferPrice * how_many_puffers) / (10 ** 18)} BCH + GAS</button>        
-                  : <button className="mt-4 Poppitandfinchsans text-4xl border-6 bg-blau  text-white hover:text-black p-2 ">SALE IS NOT ACTIVE OR NO WALLET IS CONNECTED</button>        
+                  : <button className="mt-4 Poppitandfinchsans text-4xl border-6 bg-blau  text-white hover:text-black p-2 ">NO WALLET IS CONNECTED</button>        
             
               }
 
