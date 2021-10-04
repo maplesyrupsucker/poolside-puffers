@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 
 export default function PufferCard({ pufferContract,walletAddress}) {
     const [pufferCardData, setPufferCardData] = useState([])
-
+    // const [pufferContract, setPufferContract] = useState(null)
 
     function renderCards() {
         const pufferList = [];
@@ -58,6 +58,7 @@ export default function PufferCard({ pufferContract,walletAddress}) {
                             return <li><span>{attributes.trait_type}:</span> {attributes.value}</li>
                         })}
                     </ul>
+                    <button className="transfer" onClick={() => transfer(obj)} >Transfer</button>
 
                     
                 </div>
@@ -65,6 +66,23 @@ export default function PufferCard({ pufferContract,walletAddress}) {
         }
 
         return pufferList;
+    }
+
+    async function transfer(obj) {
+        if(!obj.tokenId) {
+            alert("something went wrong")
+        } else {
+            
+            // const pufferContract = new window.web3.eth.Contract(ABI, ADDRESS)
+            let address = prompt("where would you like to send the NFT to?")
+            if(address.indexOf("0x") != -1 && address.length == 42) {
+                await pufferContract.methods.safeTransferFrom(walletAddress, address, obj.tokenId).send({
+                    from: walletAddress
+                })
+            } else {
+                alert("invalid address")
+            }
+        }
     }
 
     useEffect( async() => {
