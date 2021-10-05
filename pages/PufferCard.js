@@ -182,7 +182,14 @@ export default function PufferCard({ pufferContract, walletAddress }) {
                 }
               })}
             </div>
-            <img src={obj.image} alt={obj.name}></img>
+            <img
+              src={obj.image}
+              alt={obj.name}
+              onError={(event) => {
+                event.target.src = "";
+                event.target.src = obj.image;
+              }}
+            ></img>
             <h3 className="Poppitandfinchsans text-center text-4xl text-black">
               {obj.name}
             </h3>
