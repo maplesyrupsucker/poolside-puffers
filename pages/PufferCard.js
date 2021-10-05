@@ -11,6 +11,12 @@ export default function PufferCard({ pufferContract, walletAddress }) {
     } else {
       // const pufferContract = new window.web3.eth.Contract(ABI, ADDRESS)
       let address = prompt("where would you like to send the NFT to?");
+
+      if (!address) {
+        console.log("no address entered");
+        // probably worth verifying the addess is valid too...
+        return;
+      }
       if (address.indexOf("0x") != -1 && address.length == 42) {
         await pufferContract.methods
           .safeTransferFrom(walletAddress, address, obj.tokenId)
@@ -82,7 +88,7 @@ export default function PufferCard({ pufferContract, walletAddress }) {
     <div id="puffer-pool" className="flex flex-wrap justify-center">
       {pufferCardData.map((obj) => {
         const { attributes } = obj;
-        console.log(obj);
+
         return (
           <div className="puffer flex flex-col" key={obj.tokenId}>
             <div className="rare">
