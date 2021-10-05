@@ -95,7 +95,7 @@ export default function PufferCard({ pufferContract, walletAddress }) {
               {attributes.map((attributes) => {
                 if (attributes.value.indexOf("Animated") >= 0) {
                   return (
-                    <span>
+                    <span key={attributes.trait_type}>
                       <img
                         src="images/diamond.png"
                         alt="rare"
@@ -115,6 +115,7 @@ export default function PufferCard({ pufferContract, walletAddress }) {
                       src="images/diamond.png"
                       alt="rare"
                       className="diamond"
+                      key={attributes.trait_type}
                     ></img>
                   );
                 }
@@ -124,6 +125,7 @@ export default function PufferCard({ pufferContract, walletAddress }) {
                       src="images/diamond.png"
                       alt="rare"
                       className="diamond"
+                      key={attributes.trait_type}
                     ></img>
                   );
                 }
@@ -133,6 +135,7 @@ export default function PufferCard({ pufferContract, walletAddress }) {
                       src="images/diamond.png"
                       alt="rare"
                       className="diamond"
+                      key={attributes.trait_type}
                     ></img>
                   );
                 }
@@ -142,6 +145,7 @@ export default function PufferCard({ pufferContract, walletAddress }) {
                       src="images/diamond.png"
                       alt="rare"
                       className="diamond"
+                      key={attributes.trait_type}
                     ></img>
                   );
                 }
@@ -151,12 +155,13 @@ export default function PufferCard({ pufferContract, walletAddress }) {
                       src="images/diamond.png"
                       alt="rare"
                       className="diamond"
+                      key={attributes.trait_type}
                     ></img>
                   );
                 }
                 if (attributes.value.indexOf("Pool Animated") >= 0) {
                   return (
-                    <span>
+                    <span key={attributes.trait_type}>
                       <img
                         src="images/diamond.png"
                         alt="rare"
@@ -177,7 +182,14 @@ export default function PufferCard({ pufferContract, walletAddress }) {
                 }
               })}
             </div>
-            <img src={obj.image} alt={obj.name}></img>
+            <img
+              src={obj.image}
+              alt={obj.name}
+              onError={(event) => {
+                event.target.src = "";
+                event.target.src = obj.image;
+              }}
+            ></img>
             <h3 className="Poppitandfinchsans text-center text-4xl text-black">
               {obj.name}
             </h3>
@@ -185,7 +197,7 @@ export default function PufferCard({ pufferContract, walletAddress }) {
             <ul className="pufferAttributes ">
               {attributes.map((attributes) => {
                 return (
-                  <li>
+                  <li key={attributes.trait_type}>
                     <span>{attributes.trait_type}:</span> {attributes.value}
                   </li>
                 );
