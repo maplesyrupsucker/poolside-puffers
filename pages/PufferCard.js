@@ -64,8 +64,8 @@ export default function PufferCard({ pufferContract, walletAddress }) {
       const attrs = await Promise.all(
         ids.map((id) => fetch(`/api/${id}`).then((res) => res.json()))
       );
-
-      setPufferCardData(attrs);
+      setPufferCardData(attrs.sort((a,b)=> a.tokenId - b.tokenId));
+    //   setPufferCardData(attrs);
     } catch (e) {
       console.error(e);
     }
@@ -88,11 +88,12 @@ export default function PufferCard({ pufferContract, walletAddress }) {
     <div id="puffer-pool" className="flex flex-wrap justify-center">
       {pufferCardData.map((obj) => {
         const { attributes } = obj;
-
+      
         return (
           <div className="puffer flex flex-col" key={obj.tokenId}>
             <div className="rare">
               {attributes.map((attributes) => {
+
                 if (attributes.value.indexOf("Animated") >= 0) {
                   return (
                     <span key={attributes.trait_type}>
@@ -204,7 +205,7 @@ export default function PufferCard({ pufferContract, walletAddress }) {
               })}
             </ul>
             <button className="transfer" onClick={() => transfer(obj)}>
-              Transfer
+            <small>Transfer</small>💌
             </button>
           </div>
         );

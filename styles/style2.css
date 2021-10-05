@@ -22,15 +22,23 @@
     
 
     .transfer {
-        background-color: #0087EC; 
+        /* background-color: #6fb9f1;  */
         color: white; 
+        font-size:20px;
         font-weight: 400;
         position: absolute; 
-        bottom: -4px;
-        padding: 5px;
+        bottom: 0;
+        padding: 0;
         border-radius: 7px;
-        left: 0;
-        width: 100%;
+        right: 10px;
+        width: auto;
+    }
+
+    .transfer small {
+        font-size:10px;
+        margin-right:2px;
+        vertical-align: middle;
+        color:#80c2f5
     }
 
     #bodyy {
