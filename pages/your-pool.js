@@ -164,9 +164,10 @@ export default function Pool() {
                 <h3 className="text-2xl text-white py-6">🤔 No puffers found. <a href="/mint" className="underline text-blau">Go catch some</a>, and make sure you're connected to the right wallet.</h3>
 
                 :
+                
                 // signedIn state
                 <PufferCard pufferContract={pufferContract} walletAddress={walletAddress}/>
-
+                
                 // <img src="images/loader.gif" alt="loader"/>
               // end signedIn check
             }
