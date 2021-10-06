@@ -1,4 +1,4 @@
-### HEYO BANANAS!
+### HEYO PUFFERS!
 
 The website is made with Next.js + Tailwind CSS Example
 
