@@ -64,12 +64,37 @@ export default function PufferCard({ pufferContract, walletAddress }) {
       const attrs = await Promise.all(
         ids.map((id) => fetch(`/api/${id}`).then((res) => res.json()))
       );
-      setPufferCardData(attrs.sort((a,b)=> a.tokenId - b.tokenId));
-    //   setPufferCardData(attrs);
+      setPufferCardData(attrs.sort((a, b) => a.tokenId - b.tokenId));
+      //   setPufferCardData(attrs);
     } catch (e) {
       console.error(e);
     }
   }, []);
+
+  function numberOfDiamonds(attributes) {
+    let diamondCount = 0;
+
+    //if PUREBLOOOOOD +1 diamon ************
+    // const purebloodRed = attributes.filter(i => i.value ==='Red').length >= 5;
+    // const purebloodYellow = attributes.filter(i => i.value ==='Yellow').length >= 5;
+    // const purebloodOrange = attributes.filter(i => i.value ==='Orange').length >= 5;
+    // const purebloodGreen = attributes.filter(i => i.value ==='Green').length >= 5;
+    // const purebloodBlue = attributes.filter(i => i.value ==='Blue').length >= 5;
+    // const purebloodIndigo = attributes.filter(i => i.value ==='Indigo').length >= 5;
+    // const purebloodViolet = attributes.filter(i => i.value ==='Violet').length >= 5;
+    attributes.forEach((attribute) => {
+      if (attribute.value.indexOf("Animated") >= 0) diamondCount += 2;
+      if (attribute.value.indexOf("Ripped") >= 0) diamondCount += 1;
+      if (attribute.value.indexOf("Cigarette") >= 0) diamondCount += 1;
+      if (attribute.value.indexOf("Joint") >= 0) diamondCount += 1;
+      if (attribute.value.indexOf("Summer") >= 0) diamondCount += 1;
+      if (attribute.value.indexOf("Pool") >= 0) diamondCount += 1;
+      if (attribute.value.indexOf("Animated Pool") >= 0) diamondCount += 1;
+    });
+    console.log("diamondcount", diamondCount);
+
+    return diamondCount; // return a number
+  }
 
   if (pufferCardData.length == 0) {
     return (
@@ -84,64 +109,30 @@ export default function PufferCard({ pufferContract, walletAddress }) {
     );
   }
 
-  
-
   return (
     <div id="puffer-pool" className="flex flex-wrap justify-center">
       {pufferCardData.map((obj) => {
         const { attributes } = obj;
-
+        const diamondCount = numberOfDiamonds(attributes);
+        const diamondArray = new Array(diamondCount).fill("");
+        /*  for (let i = 0; i < diamondCount; i++) {
+          diamondArray.push("");
+        }
+ */
         return (
           <div className="puffer flex flex-col" key={obj.tokenId}>
-              
             <div className="rare">
-            
-              {attributes.map((attributes) => {
-
-                    function numberOfDiamonds(attributes) {
-                        // do something here to calculate number of diamonds
-
-                        // console.log('attributes', attributes);
-                        let diamondCount = 0;
-
-
-                        //if PUREBLOOOOOD +1 diamon ************
-                        // const purebloodRed = attributes.filter(i => i.value ==='Red').length >= 5;
-                        // const purebloodYellow = attributes.filter(i => i.value ==='Yellow').length >= 5;
-                        // const purebloodOrange = attributes.filter(i => i.value ==='Orange').length >= 5;
-                        // const purebloodGreen = attributes.filter(i => i.value ==='Green').length >= 5;
-                        // const purebloodBlue = attributes.filter(i => i.value ==='Blue').length >= 5;
-                        // const purebloodIndigo = attributes.filter(i => i.value ==='Indigo').length >= 5;
-                        // const purebloodViolet = attributes.filter(i => i.value ==='Violet').length >= 5;
-
-                        if (attributes.value.indexOf("Animated") >= 0) diamondCount +=2;
-                        if (attributes.value.indexOf("Ripped") >= 0) diamondCount +=1;
-                        if (attributes.value.indexOf("Cigarette") >= 0) diamondCount +=1;
-                        if (attributes.value.indexOf("Joint") >= 0) diamondCount +=1;
-                        if (attributes.value.indexOf("Summer") >= 0) diamondCount +=1;
-                        if (attributes.value.indexOf("Pool") >= 0) diamondCount +=1;
-                        if (attributes.value.indexOf("Animated Pool") >= 0) diamondCount +=1;
-                            console.log('diamondcount', diamondCount);
-
-                        return diamondCount; // return a number
-                    }
-
-                    return (
-                        <span>
-                            {new Array(numberOfDiamonds(attributes)).map(() => 
-                            
-                            <img
-                                src="images/diamond.png"
-                                alt="rare"
-                                className="diamond"
-                            ></img>
-                            )
-                            }
-                        </span>
-                    );
-    
-
+              <span>
+                {diamondArray.map((attributes) => {
+                  return (
+                    <img
+                      src="images/diamond.png"
+                      alt="rare"
+                      className="diamond"
+                    ></img>
+                  );
                 })}
+              </span>
             </div>
             <img
               src={obj.image}
@@ -165,7 +156,7 @@ export default function PufferCard({ pufferContract, walletAddress }) {
               })}
             </ul>
             <button className="transfer" onClick={() => transfer(obj)}>
-            <small>Transfer</small>💌
+              <small>Transfer</small>💌
             </button>
           </div>
         );
