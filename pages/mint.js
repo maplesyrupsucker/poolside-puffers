@@ -158,9 +158,10 @@ export default function Mint() {
                 <span className="flex Poppitandfinchsans text-5xl text-white items-center bg-grey-lighter rounded rounded-r-none my-4 ">TOTAL PUFFERS CAUGHT:  <span className="text-blau text-6xl"> {!signedIn ?  <>-</>  :  <>{totalSupply}</> } / 2100</span></span>
 
                 <div id="mint" className="flex justify-around  mt-8 mx-6">
-                  <span className="flex Poppitandfinchsans text-5xl text-white items-center bg-grey-lighter rounded rounded-r-none px-3 font-bold">REEL IN</span>
+                  <div><h3 className="Poppitandfinchsans text-8xl text-white items-center bg-grey-lighter rounded rounded-r-none px-3 font-bold">SOLD OUT!</h3></div>
+                  {/* <span className="flex Poppitandfinchsans text-5xl text-white items-center bg-grey-lighter rounded rounded-r-none px-3 font-bold">REEL IN</span> */}
                   
-                  <input 
+                  {/* <input 
                     type="number" 
                     min="1"
                     max="25"
@@ -168,19 +169,21 @@ export default function Mint() {
                     onChange={ e => set_how_many_puffers(e.target.value) }
                     name="" 
                     className="Poppitandfinchsans pl-4 text-4xl  inline bg-grey-lighter  py-2 font-normal rounded text-grey-darkest  font-bold"
-                />
+                /> */}
                   
-                  <span className="flex Poppitandfinchsans text-5xl text-white items-center bg-grey-lighter rounded rounded-r-none px-3 font-bold">PUFFERS!</span>
+                  {/* <span className="flex Poppitandfinchsans text-5xl text-white items-center bg-grey-lighter rounded rounded-r-none px-3 font-bold">PUFFERS!</span> */}
     
                 </div>
-                <small>To avoid overfishing, we limit 25 puffers per mint transaction.</small>
-                {saleStarted ? 
+                {/* <small>To avoid overfishing, we limit 25 puffers per mint transaction.</small> */}
+                {/* {saleStarted ? 
                 <button onClick={() => mintPuffer(how_many_puffers)} className="mt-4 Poppitandfinchsans text-4xl border-6 bg-blau  text-white hover:text-black p-2 ">CATCH {how_many_puffers} puffers for {(pufferPrice * how_many_puffers) / (10 ** 18)} BCH + GAS</button>        
                   : <button className="mt-4 Poppitandfinchsans text-4xl border-6 bg-blau  text-white hover:text-black p-2 ">NO WALLET IS CONNECTED</button>        
             
-              }
+              } */}
 
               <h3 className="mt-5 text-2xl">Visit <a href="/your-pool" className="underline">Your Pool</a> to view your puffers!</h3>
+              <div><p>As NFT marketplaces emerge on SmartBCH you should be able to purchase them there.</p></div>
+
               <p><a href="https://smartbch.org/" target="_blank"><img src="images/smartbch.png" alt="smartbch" className="smartbch"/></a>
               <a href="https://bitcoincash.org/" target="_blank"><img src="images/bitcoin-cash-logo-horizontal-wt.svg" alt="BCH" className="bch"/></a></p>
               <p class="mt-5"><a href="https://read.cash/@carisdaneym2/how-to-set-up-smartbch-network-on-metamask-and-smartbch-coinflex-bridge-7f64c443" className="underline">How to setup Metamask with smartBCH &amp; Bridge BCH</a> | <a href="https://read.cash/@maplesyrupsuckr/announcing-poolside-puffers-help-mint-2100-nfts-and-support-a-local-vietnamese-orphanage-0557fc83" className="underline">About Poolside Puffers</a></p>
