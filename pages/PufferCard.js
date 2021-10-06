@@ -64,12 +64,57 @@ export default function PufferCard({ pufferContract, walletAddress }) {
       const attrs = await Promise.all(
         ids.map((id) => fetch(`/api/${id}`).then((res) => res.json()))
       );
-      setPufferCardData(attrs.sort((a,b)=> a.tokenId - b.tokenId));
-    //   setPufferCardData(attrs);
+      setPufferCardData(attrs.sort((a, b) => a.tokenId - b.tokenId));
+      //   setPufferCardData(attrs);
     } catch (e) {
       console.error(e);
     }
   }, []);
+
+  function numberOfDiamonds(attributes) {
+    let diamondCount = 0;
+
+    //if PUREBLOOOOOD +1 diamon ************
+    const purebloodRed =
+      attributes.filter((i) => i.value === "Red").length >= 5;
+    const purebloodYellow =
+      attributes.filter((i) => i.value === "Yellow").length >= 5;
+    const purebloodOrange =
+      attributes.filter((i) => i.value === "Orange").length >= 5;
+    const purebloodGreen =
+      attributes.filter((i) => i.value === "Green").length >= 5;
+    const purebloodBlue =
+      attributes.filter((i) => i.value === "Blue").length >= 5;
+    const purebloodIndigo =
+      attributes.filter((i) => i.value === "Indigo").length >= 5;
+    const purebloodViolet =
+      attributes.filter((i) => i.value === "Violet").length >= 5;
+
+    if (
+      purebloodBlue ||
+      purebloodGreen ||
+      purebloodIndigo ||
+      purebloodOrange ||
+      purebloodRed ||
+      purebloodViolet ||
+      purebloodYellow
+    ) {
+      diamondCount += 2;
+    }
+
+    attributes.forEach((attribute) => {
+      if (attribute.value.indexOf("Animated") >= 0) diamondCount += 2;
+      if (attribute.value.indexOf("Ripped") >= 0) diamondCount += 1;
+      if (attribute.value.indexOf("Cigarette") >= 0) diamondCount += 1;
+      if (attribute.value.indexOf("Joint") >= 0) diamondCount += 1;
+      if (attribute.value.indexOf("Summer") >= 0) diamondCount += 1;
+      if (attribute.value.indexOf("Pool") >= 0) diamondCount += 1;
+      if (attribute.value.indexOf("Animated Pool") >= 0) diamondCount += 1;
+    });
+    console.log("diamondcount", diamondCount);
+
+    return diamondCount; // return a number
+  }
 
   if (pufferCardData.length == 0) {
     return (
@@ -88,100 +133,26 @@ export default function PufferCard({ pufferContract, walletAddress }) {
     <div id="puffer-pool" className="flex flex-wrap justify-center">
       {pufferCardData.map((obj) => {
         const { attributes } = obj;
-      
+        const diamondCount = numberOfDiamonds(attributes);
+        const diamondArray = new Array(diamondCount).fill("");
+        /*  for (let i = 0; i < diamondCount; i++) {
+          diamondArray.push("");
+        }
+ */
         return (
           <div className="puffer flex flex-col" key={obj.tokenId}>
             <div className="rare">
-              {attributes.map((attributes) => {
-
-                if (attributes.value.indexOf("Animated") >= 0) {
-                  return (
-                    <span key={attributes.trait_type}>
-                      <img
-                        src="images/diamond.png"
-                        alt="rare"
-                        className="diamond"
-                      ></img>
-                      <img
-                        src="images/diamond.png"
-                        alt="rare"
-                        className="diamond"
-                      ></img>
-                    </span>
-                  );
-                }
-                if (attributes.value.indexOf("Ripped") >= 0) {
+              <span>
+                {diamondArray.map((attributes) => {
                   return (
                     <img
                       src="images/diamond.png"
                       alt="rare"
                       className="diamond"
-                      key={attributes.trait_type}
                     ></img>
                   );
-                }
-                if (attributes.value.indexOf("Cigarette") >= 0) {
-                  return (
-                    <img
-                      src="images/diamond.png"
-                      alt="rare"
-                      className="diamond"
-                      key={attributes.trait_type}
-                    ></img>
-                  );
-                }
-                if (attributes.value.indexOf("Joint") >= 0) {
-                  return (
-                    <img
-                      src="images/diamond.png"
-                      alt="rare"
-                      className="diamond"
-                      key={attributes.trait_type}
-                    ></img>
-                  );
-                }
-                if (attributes.value.indexOf("Summer") >= 0) {
-                  return (
-                    <img
-                      src="images/diamond.png"
-                      alt="rare"
-                      className="diamond"
-                      key={attributes.trait_type}
-                    ></img>
-                  );
-                }
-                if (attributes.value.indexOf("Pool") >= 0) {
-                  return (
-                    <img
-                      src="images/diamond.png"
-                      alt="rare"
-                      className="diamond"
-                      key={attributes.trait_type}
-                    ></img>
-                  );
-                }
-                if (attributes.value.indexOf("Pool Animated") >= 0) {
-                  return (
-                    <span key={attributes.trait_type}>
-                      <img
-                        src="images/diamond.png"
-                        alt="rare"
-                        className="diamond"
-                      ></img>
-                      <img
-                        src="images/diamond.png"
-                        alt="rare"
-                        className="diamond"
-                      ></img>
-                      <img
-                        src="images/diamond.png"
-                        alt="rare"
-                        className="diamond"
-                      ></img>
-                    </span>
-                  );
-                }
-              })}
+                })}
+              </span>
             </div>
             <img
               src={obj.image}
@@ -205,7 +176,7 @@ export default function PufferCard({ pufferContract, walletAddress }) {
               })}
             </ul>
             <button className="transfer" onClick={() => transfer(obj)}>
-            <small>Transfer</small>💌
+              <small>Transfer</small>💌
             </button>
           </div>
         );
