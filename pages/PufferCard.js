@@ -75,13 +75,33 @@ export default function PufferCard({ pufferContract, walletAddress }) {
     let diamondCount = 0;
 
     //if PUREBLOOOOOD +1 diamon ************
-    // const purebloodRed = attributes.filter(i => i.value ==='Red').length >= 5;
-    // const purebloodYellow = attributes.filter(i => i.value ==='Yellow').length >= 5;
-    // const purebloodOrange = attributes.filter(i => i.value ==='Orange').length >= 5;
-    // const purebloodGreen = attributes.filter(i => i.value ==='Green').length >= 5;
-    // const purebloodBlue = attributes.filter(i => i.value ==='Blue').length >= 5;
-    // const purebloodIndigo = attributes.filter(i => i.value ==='Indigo').length >= 5;
-    // const purebloodViolet = attributes.filter(i => i.value ==='Violet').length >= 5;
+    const purebloodRed =
+      attributes.filter((i) => i.value === "Red").length >= 5;
+    const purebloodYellow =
+      attributes.filter((i) => i.value === "Yellow").length >= 5;
+    const purebloodOrange =
+      attributes.filter((i) => i.value === "Orange").length >= 5;
+    const purebloodGreen =
+      attributes.filter((i) => i.value === "Green").length >= 5;
+    const purebloodBlue =
+      attributes.filter((i) => i.value === "Blue").length >= 5;
+    const purebloodIndigo =
+      attributes.filter((i) => i.value === "Indigo").length >= 5;
+    const purebloodViolet =
+      attributes.filter((i) => i.value === "Violet").length >= 5;
+
+    if (
+      purebloodBlue ||
+      purebloodGreen ||
+      purebloodIndigo ||
+      purebloodOrange ||
+      purebloodRed ||
+      purebloodViolet ||
+      purebloodYellow
+    ) {
+      diamondCount += 2;
+    }
+
     attributes.forEach((attribute) => {
       if (attribute.value.indexOf("Animated") >= 0) diamondCount += 2;
       if (attribute.value.indexOf("Ripped") >= 0) diamondCount += 1;
