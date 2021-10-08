@@ -131,6 +131,7 @@ export default function PufferCard({ pufferContract, walletAddress }) {
       attributes.filter((i) => i.value === "Green").length == 4;
     const fourBlue =
       attributes.filter((i) => i.value === "Blue").length == 4;
+      console.log('fourblue', fourBlue);
     const fourIndigo =
       attributes.filter((i) => i.value === "Indigo").length == 4;
     const fourViolet =
