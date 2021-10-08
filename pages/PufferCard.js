@@ -72,16 +72,6 @@ export default function PufferCard({ pufferContract, walletAddress }) {
   }, []);
 
   function numberOfPureBloods(attributes) {
-
-  }
-
-  function numberOfHalfBloods(attributes) {
-
-  }
-
-  function numberOfDiamonds(attributes) {
-    let diamondCount = 0;
-    let halfBloodCount = 0;
     let pureBloodCount = 0;
 
     //setup purebloods
@@ -99,6 +89,29 @@ export default function PufferCard({ pufferContract, walletAddress }) {
       attributes.filter((i) => i.value === "Indigo").length >= 5;
     const purebloodViolet =
       attributes.filter((i) => i.value === "Violet").length >= 5;
+
+    // if purebloods
+    if (
+      purebloodBlue ||
+      purebloodGreen ||
+      purebloodIndigo ||
+      purebloodOrange ||
+      purebloodRed ||
+      purebloodViolet ||
+      purebloodYellow
+    ) {
+      pureBloodCount += 1;
+    }
+    // console.log("purebloodCount", pureBloodCount);
+
+    return pureBloodCount;
+
+
+  }
+
+  function numberOfHalfBloods(attributes) {
+    let halfBloodCount = 0;
+
 
     // BODY PARTS THAT IMPACT BLOOD
     // body
@@ -124,6 +137,7 @@ export default function PufferCard({ pufferContract, walletAddress }) {
       attributes.filter((i) => i.value === "Violet").length == 4;
 
 
+    // need to find a way to remove background trait from length without editing traits database
     const threeRed =
       attributes.filter((i) => i.value === "Red").length == 3;
     const threeOrange = 
@@ -153,71 +167,95 @@ export default function PufferCard({ pufferContract, walletAddress }) {
       attributes.filter((i) => i.value === "Indigo").length == 2;
     const twoViolet =
       attributes.filter((i) => i.value === "Violet").length == 2;
+  
+
+    if (
+
+        fourRed ||
+        fourOrange || 
+        fourYellow ||
+        fourGreen ||
+        fourBlue ||
+        fourIndigo ||
+        fourViolet ||
+
+        (threeRed && twoOrange) ||
+        (threeRed && twoYellow) ||
+        (threeRed && twoGreen) ||
+        (threeRed && twoBlue) ||
+        (threeRed && twoIndigo) ||
+        (threeRed && twoViolet) ||
+
+        (threeOrange && twoRed) ||
+        (threeOrange && twoYellow) ||
+        (threeOrange && twoGreen) ||
+        (threeOrange && twoBlue) ||
+        (threeOrange && twoIndigo) ||
+        (threeOrange && twoViolet) || 
+
+        (threeYellow && twoOrange) ||
+        (threeYellow && twoRed) ||
+        (threeYellow && twoGreen) ||
+        (threeYellow && twoBlue) ||
+        (threeYellow && twoIndigo) ||
+        (threeYellow && twoViolet) ||
+
+        (threeGreen && twoOrange) ||
+        (threeGreen && twoRed) ||
+        (threeGreen && twoYellow) ||  
+        (threeGreen && twoBlue) ||
+        (threeGreen && twoIndigo) ||
+        (threeGreen && twoViolet) ||
+
+        (threeBlue && twoOrange) ||
+        (threeBlue && twoRed) ||
+        (threeBlue && twoYellow) ||
+        (threeBlue && twoGreen) ||
+        (threeBlue && twoIndigo) ||
+        (threeBlue && twoViolet) ||
+
+        (threeIndigo && twoOrange) ||
+        (threeIndigo && twoRed) ||
+        (threeIndigo && twoYellow) ||
+        (threeIndigo && twoGreen) ||
+        (threeIndigo && twoBlue) ||
+        (threeIndigo && twoViolet) ||
+
+        (threeViolet && twoOrange) ||
+        (threeViolet && twoRed) ||
+        (threeViolet && twoYellow) ||
+        (threeViolet && twoGreen) ||
+        (threeViolet && twoBlue) ||
+        (threeViolet && twoIndigo) 
 
 
+      ) {
+        halfBloodCount += 1;
+      }
 
-if (
+      // console.log("halfBloodCount", halfBloodCount);
+      return halfBloodCount;
 
-    fourRed ||
-    fourOrange || 
-    fourYellow ||
-    fourGreen ||
-    fourBlue ||
-    fourIndigo ||
-    fourViolet ||
-
-    threeRed && twoOrange == true ||
-    threeRed && twoYellow == true ||
-    threeRed && twoGreen == true ||
-    threeRed && twoBlue == true ||
-    threeRed && twoIndigo == true ||
-    threeRed && twoViolet == true ||
-
-    threeOrange && twoRed == true ||
-    threeOrange && twoYellow == true ||
-    threeOrange && twoGreen == true ||
-    threeOrange && twoBlue == true ||
-    threeOrange && twoIndigo == true ||
-    threeOrange && twoViolet == true || 
-    
-    threeYellow && twoOrange == true ||
-    threeYellow && twoRed == true ||
-    threeYellow && twoGreen == true ||
-    threeYellow && twoBlue == true ||
-    threeYellow && twoIndigo == true ||
-    threeYellow && twoViolet == true ||
-
-    threeGreen && twoOrange == true ||
-    threeGreen && twoRed == true ||
-    threeGreen && twoYellow == true ||  
-    threeGreen && twoBlue == true ||
-    threeGreen && twoIndigo == true ||
-    threeGreen && twoViolet == true ||
-
-    threeBlue && twoOrange == true ||
-    threeBlue && twoRed == true ||
-    threeBlue && twoYellow == true ||
-    threeBlue && twoGreen == true ||
-    threeBlue && twoIndigo == true ||
-    threeBlue && twoViolet == true ||
-
-    threeIndigo && twoOrange == true ||
-    threeIndigo && twoRed == true ||
-    threeIndigo && twoYellow == true ||
-    threeIndigo && twoGreen == true ||
-    threeIndigo && twoBlue == true ||
-    threeIndigo && twoViolet == true ||
-
-    threeViolet && twoOrange == true ||
-    threeViolet && twoRed == true ||
-    threeViolet && twoYellow == true ||
-    threeViolet && twoGreen == true ||
-    threeViolet && twoBlue == true ||
-    threeViolet && twoIndigo == true 
-  ) {
-    diamondCount += 1;
-    halfBloodCount += 1;
   }
+
+  function numberOfDiamonds(attributes) {
+    let diamondCount = 0;
+
+    //setup purebloods
+    const purebloodRed =
+      attributes.filter((i) => i.value === "Red").length >= 5;
+    const purebloodYellow =
+      attributes.filter((i) => i.value === "Yellow").length >= 5;
+    const purebloodOrange =
+      attributes.filter((i) => i.value === "Orange").length >= 5;
+    const purebloodGreen =
+      attributes.filter((i) => i.value === "Green").length >= 5;
+    const purebloodBlue =
+      attributes.filter((i) => i.value === "Blue").length >= 5;
+    const purebloodIndigo =
+      attributes.filter((i) => i.value === "Indigo").length >= 5;
+    const purebloodViolet =
+      attributes.filter((i) => i.value === "Violet").length >= 5;
 
     // if purebloods
     if (
@@ -229,8 +267,7 @@ if (
       purebloodViolet ||
       purebloodYellow
     ) {
-      diamondCount += 2;
-      pureBloodCount += 1;
+      diamondCount += 1;
     }
 
     attributes.forEach((attribute) => {
@@ -242,12 +279,8 @@ if (
       if (attribute.value.indexOf("Pool") >= 0) diamondCount += 1;
       if (attribute.value.indexOf("Animated Pool") >= 0) diamondCount += 1;
     });
-    console.log("diamondcount", diamondCount);
-    console.log("purebloodCount", pureBloodCount);
-    console.log("halfBloodCount", halfBloodCount);
+    // console.log("diamondcount", diamondCount);
 
-    // return pureBloodCount;
-    // return halfBloodCount;
     return diamondCount; // return a number
   }
 
@@ -268,14 +301,14 @@ if (
     <div id="puffer-pool" className="flex flex-wrap justify-center">
       {pufferCardData.map((obj) => {
         const { attributes } = obj;
+
         const diamondCount = numberOfDiamonds(attributes);
-
-        const pureBloodCount = numberOfDiamonds(attributes);
-        const halfBloodCount = numberOfDiamonds(attributes);
-
         const diamondArray = new Array(diamondCount).fill("");
 
+        const pureBloodCount = numberOfPureBloods(attributes);
         const pureBloodArray = new Array(pureBloodCount).fill("");
+
+        const halfBloodCount = numberOfHalfBloods(attributes);
         const halfBloodArray = new Array(halfBloodCount).fill("");
 
         /*  for (let i = 0; i < diamondCount; i++) {
