@@ -72,7 +72,7 @@ const pufferApi = async(req, res) => {
         "attributes": [          
             {
               "trait_type": "Background",
-              "value": trait["Background"]
+              "value": trait["Background"] + " Water"
             },
             {
               "trait_type": "Body",

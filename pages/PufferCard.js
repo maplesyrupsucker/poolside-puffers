@@ -71,10 +71,10 @@ export default function PufferCard({ pufferContract, walletAddress }) {
     }
   }, []);
 
-  function numberOfDiamonds(attributes) {
-    let diamondCount = 0;
+  function numberOfPureBloods(attributes) {
+    let pureBloodCount = 0;
 
-    //if PUREBLOOOOOD +1 diamon ************
+    //setup purebloods
     const purebloodRed =
       attributes.filter((i) => i.value === "Red").length >= 5;
     const purebloodYellow =
@@ -90,6 +90,7 @@ export default function PufferCard({ pufferContract, walletAddress }) {
     const purebloodViolet =
       attributes.filter((i) => i.value === "Violet").length >= 5;
 
+    // if purebloods
     if (
       purebloodBlue ||
       purebloodGreen ||
@@ -99,7 +100,175 @@ export default function PufferCard({ pufferContract, walletAddress }) {
       purebloodViolet ||
       purebloodYellow
     ) {
-      diamondCount += 2;
+      pureBloodCount += 1;
+    }
+    // console.log("purebloodCount", pureBloodCount);
+
+    return pureBloodCount;
+
+
+  }
+
+  function numberOfHalfBloods(attributes) {
+    let halfBloodCount = 0;
+
+
+    // BODY PARTS THAT IMPACT BLOOD
+    // body
+    // spikes
+    // fins
+    // tail
+    // tail fins 
+
+    //setup half breeds
+    const fourRed =
+      attributes.filter((i) => i.value === "Red").length == 4;
+    const fourOrange = 
+      attributes.filter((i) => i.value === "Orange").length == 4;
+    const fourYellow =
+      attributes.filter((i) => i.value === "Yellow").length == 4;
+    const fourGreen =
+      attributes.filter((i) => i.value === "Green").length == 4;
+    const fourBlue =
+      attributes.filter((i) => i.value === "Blue").length == 4;
+      console.log('fourblue', fourBlue);
+    const fourIndigo =
+      attributes.filter((i) => i.value === "Indigo").length == 4;
+    const fourViolet =
+      attributes.filter((i) => i.value === "Violet").length == 4;
+
+
+    // need to find a way to remove background trait from length without editing traits database
+    const threeRed =
+      attributes.filter((i) => i.value === "Red").length == 3;
+    const threeOrange = 
+      attributes.filter((i) => i.value === "Orange").length == 3;
+    const threeYellow =
+      attributes.filter((i) => i.value === "Yellow").length == 3;
+    const threeGreen =
+      attributes.filter((i) => i.value === "Green").length == 3;
+    const threeBlue =
+      attributes.filter((i) => i.value === "Blue").length == 3;
+    const threeIndigo =
+      attributes.filter((i) => i.value === "Indigo").length == 3;
+    const threeViolet =
+      attributes.filter((i) => i.value === "Violet").length == 3;
+    
+    const twoRed =
+      attributes.filter((i) => i.value === "Red").length == 2;
+    const twoOrange = 
+      attributes.filter((i) => i.value === "Orange").length == 2;
+    const twoYellow =
+      attributes.filter((i) => i.value === "Yellow").length == 2;
+    const twoGreen =
+      attributes.filter((i) => i.value === "Green").length == 2;
+    const twoBlue =
+      attributes.filter((i) => i.value === "Blue").length == 2;
+    const twoIndigo =
+      attributes.filter((i) => i.value === "Indigo").length == 2;
+    const twoViolet =
+      attributes.filter((i) => i.value === "Violet").length == 2;
+  
+
+    if (
+
+        fourRed ||
+        fourOrange || 
+        fourYellow ||
+        fourGreen ||
+        fourBlue ||
+        fourIndigo ||
+        fourViolet ||
+
+        (threeRed && twoOrange) ||
+        (threeRed && twoYellow) ||
+        (threeRed && twoGreen) ||
+        (threeRed && twoBlue) ||
+        (threeRed && twoIndigo) ||
+        (threeRed && twoViolet) ||
+
+        (threeOrange && twoRed) ||
+        (threeOrange && twoYellow) ||
+        (threeOrange && twoGreen) ||
+        (threeOrange && twoBlue) ||
+        (threeOrange && twoIndigo) ||
+        (threeOrange && twoViolet) || 
+
+        (threeYellow && twoOrange) ||
+        (threeYellow && twoRed) ||
+        (threeYellow && twoGreen) ||
+        (threeYellow && twoBlue) ||
+        (threeYellow && twoIndigo) ||
+        (threeYellow && twoViolet) ||
+
+        (threeGreen && twoOrange) ||
+        (threeGreen && twoRed) ||
+        (threeGreen && twoYellow) ||  
+        (threeGreen && twoBlue) ||
+        (threeGreen && twoIndigo) ||
+        (threeGreen && twoViolet) ||
+
+        (threeBlue && twoOrange) ||
+        (threeBlue && twoRed) ||
+        (threeBlue && twoYellow) ||
+        (threeBlue && twoGreen) ||
+        (threeBlue && twoIndigo) ||
+        (threeBlue && twoViolet) ||
+
+        (threeIndigo && twoOrange) ||
+        (threeIndigo && twoRed) ||
+        (threeIndigo && twoYellow) ||
+        (threeIndigo && twoGreen) ||
+        (threeIndigo && twoBlue) ||
+        (threeIndigo && twoViolet) ||
+
+        (threeViolet && twoOrange) ||
+        (threeViolet && twoRed) ||
+        (threeViolet && twoYellow) ||
+        (threeViolet && twoGreen) ||
+        (threeViolet && twoBlue) ||
+        (threeViolet && twoIndigo) 
+
+
+      ) {
+        halfBloodCount += 1;
+      }
+
+      // console.log("halfBloodCount", halfBloodCount);
+      return halfBloodCount;
+
+  }
+
+  function numberOfDiamonds(attributes) {
+    let diamondCount = 0;
+
+    //setup purebloods
+    const purebloodRed =
+      attributes.filter((i) => i.value === "Red").length >= 5;
+    const purebloodYellow =
+      attributes.filter((i) => i.value === "Yellow").length >= 5;
+    const purebloodOrange =
+      attributes.filter((i) => i.value === "Orange").length >= 5;
+    const purebloodGreen =
+      attributes.filter((i) => i.value === "Green").length >= 5;
+    const purebloodBlue =
+      attributes.filter((i) => i.value === "Blue").length >= 5;
+    const purebloodIndigo =
+      attributes.filter((i) => i.value === "Indigo").length >= 5;
+    const purebloodViolet =
+      attributes.filter((i) => i.value === "Violet").length >= 5;
+
+    // if purebloods
+    if (
+      purebloodBlue ||
+      purebloodGreen ||
+      purebloodIndigo ||
+      purebloodOrange ||
+      purebloodRed ||
+      purebloodViolet ||
+      purebloodYellow
+    ) {
+      diamondCount += 1;
     }
 
     attributes.forEach((attribute) => {
@@ -111,7 +280,7 @@ export default function PufferCard({ pufferContract, walletAddress }) {
       if (attribute.value.indexOf("Pool") >= 0) diamondCount += 1;
       if (attribute.value.indexOf("Animated Pool") >= 0) diamondCount += 1;
     });
-    console.log("diamondcount", diamondCount);
+    // console.log("diamondcount", diamondCount);
 
     return diamondCount; // return a number
   }
@@ -133,8 +302,16 @@ export default function PufferCard({ pufferContract, walletAddress }) {
     <div id="puffer-pool" className="flex flex-wrap justify-center">
       {pufferCardData.map((obj) => {
         const { attributes } = obj;
+
         const diamondCount = numberOfDiamonds(attributes);
         const diamondArray = new Array(diamondCount).fill("");
+
+        const pureBloodCount = numberOfPureBloods(attributes);
+        const pureBloodArray = new Array(pureBloodCount).fill("");
+
+        const halfBloodCount = numberOfHalfBloods(attributes);
+        const halfBloodArray = new Array(halfBloodCount).fill("");
+
         /*  for (let i = 0; i < diamondCount; i++) {
           diamondArray.push("");
         }
@@ -150,6 +327,24 @@ export default function PufferCard({ pufferContract, walletAddress }) {
                       alt="rare"
                       className="diamond"
                     ></img>
+                  );
+                })}
+                {pureBloodArray.map((attributes) => {
+                  return (
+                    <img
+                        src="images/pureblood.png"
+                        alt="pure blood"
+                        className="diamond"
+                      ></img>
+                  );
+                })}
+                {halfBloodArray.map((attributes) => {
+                  return (
+                    <img
+                        src="images/halfblood.png"
+                        alt="half blood"
+                        className="diamond"
+                      ></img>
                   );
                 })}
               </span>
