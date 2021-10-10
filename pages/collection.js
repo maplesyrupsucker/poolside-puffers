@@ -55,12 +55,11 @@ export default function Pool() {
 
           </div>
           <div className="text-center">
-            <div className="row text-right" style={{marginRight:'4%'}}>
+            <div className="row text-center text-black" style={{marginRight:'4%'}}>
               Sort By:
-              <select onChange={sortCollectionBy}>
-                <option value=""></option>
-                <option value="name">Name</option>
-                <option value="diamond">Diamond</option>
+              <select className="text-black" onChange={sortCollectionBy}>
+                <option className="text-black" value="name">Name</option>
+                <option className="text-black" value="diamond">Diamond</option>
               </select>
             </div>
             {

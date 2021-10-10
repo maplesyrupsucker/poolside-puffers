@@ -94,7 +94,7 @@ export default function CollectionCard({ sortBy }) {
           attribute.rarity = getRarity(i, attribute.trait_type_index, attribute.value);
           console.log(attribute.rarity)
           return (<li key={"comparisonTraits" + i}>
-            <span>{attribute.trait_type}:</span> {attribute.value} - {attribute.rarity.length > 0 && attribute.rarity[0].occurrence} of
+            <h3 className="rarity-header">{attribute.trait_type}: <span>{attribute.value}</span></h3><strong>{attribute.rarity.length > 0 && attribute.rarity[0].occurrence}</strong> of
             other cards have this feature
           </li>)}));
     }
@@ -203,8 +203,8 @@ export default function CollectionCard({ sortBy }) {
                   {attributes.map((attribute) => {
                     //attribute.rarity=getRarity(index,attribute.trait_type_index);
                     return (
-                        <li key={attributes.trait_type}>
-                          <span>{attributes.trait_type}:</span> {attribute.value}
+                        <li key={attribute.trait_type}>
+                          <span>{attribute.trait_type}:</span> {attribute.value}
                         </li>
                     );
                   })}
@@ -220,10 +220,11 @@ export default function CollectionCard({ sortBy }) {
             style={customStyles}
             contentLabel="Rarity"
         >
+          <h2 className="text-black Poppitandfinchsans text-left text-6xl">Rarity</h2>
           <ul>
             {rarityTraits}
           </ul>
-          <button onClick={ ()=> setShowModal(false)}>Close Modal</button>
+          <button className="closemodal" onClick={ ()=> setShowModal(false)}>Close</button>
         </ReactModal>
       </div>
   );
