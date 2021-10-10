@@ -5,6 +5,11 @@ import {ADDRESS, ABI} from "../config.js"
 import CollectionCard from "./CollectionCard";
 
 export default function Pool() {
+  const [sortBy, setSortBy] = useState('');
+
+  function sortCollectionBy(e){
+    setSortBy(e.target.value)
+  }
 
   return (
       <div id="bodyy" className="flex flex-col items-center justify-center min-h-screen py-2">
@@ -47,13 +52,19 @@ export default function Pool() {
           <div className="flex flex-col items-center">
 
             <span className=" Poppitandfinchsans text-5xl text-white items-center bg-grey-lighter rounded rounded-r-none my-4 ">PUFFERS IN <span className="text-blau">  ENTIRE COLLECTION</span></span>
-            <p>Please be patient while assets load from Interplanetary Filesystem (IPFS) gateways.</p>
-            <p>Tap image to load alternative gateway.</p>
+
           </div>
           <div className="text-center">
-            
+            <div className="row text-right" style={{marginRight:'4%'}}>
+              Sort By:
+              <select onChange={sortCollectionBy}>
+                <option value=""></option>
+                <option value="name">Name</option>
+                <option value="diamond">Diamond</option>
+              </select>
+            </div>
             {
-                <CollectionCard/>
+                <CollectionCard sortBy={sortBy} />
             }
 
           </div>
