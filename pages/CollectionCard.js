@@ -41,6 +41,24 @@ export default function CollectionCard({ pufferContract, walletAddress }) {
         // setCollectionCardData(attrs);
   }, []);
 
+
+  // function loadAlternative(element, list) {
+  //   var image = new Image();
+  
+  //   image.onload = function() {
+  //     element.src = this.src;
+  //   }
+  
+  //   image.onerror = function() {
+  //     if (list.length) {
+  //       loadAlternative(element, list);
+  //     }
+  //   }
+  
+  //   //  pick off the first url in the list
+  //   image.src = list.shift();
+  // }
+
   function numberOfDiamonds(attributes) {
     let diamondCount = 0;
 
@@ -105,6 +123,11 @@ export default function CollectionCard({ pufferContract, walletAddress }) {
         const diamondCount = numberOfDiamonds(attributes);
         const diamondArray = new Array(diamondCount).fill("");
 
+        // const fallback = '"https://ipfs.io/ipfs/' + obj.imageIPFS + "," 
+        // + 'https://gateway.pinata.cloud/ipfs/' + obj.imageIPFS + ',' 
+        // + 'https://ipfs.kxv.io/ipfs/' + obj.imageIPFS + ',' 
+        // + 'https://ipfs.eth.aragon.network/ipfs/' + obj.imageIPFS
+        
         return (
           <div className="puffer flex flex-col" key={obj.tokenId}>
             <div className="rare">
@@ -121,19 +144,42 @@ export default function CollectionCard({ pufferContract, walletAddress }) {
               </span>
             </div>
 
-            <a
+            {/* <a
               href={obj.image}
-            >
+            > */}
               <img
-                src={obj.local_image}
+                src={obj.image}
                 // src={images[obj.tokenId]} // probably needs fixing
                 alt={obj.name}
-                onError={(event) => {
+                //use local files - MIGHT not work because vercel limits
+                // onError={(event) => {
+                //   event.target.src = "";
+                //   event.target.src = obj.local_image.replace(/\.[^.]+$/, '.webp');
+                // }}
+                // data-alternative={fallback}
+
+                onClick={(event) => {
                   event.target.src = "";
-                  event.target.src = obj.local_image.replace(/\.[^.]+$/, '.webp');
+                  event.target.src = "https://ipfs.kxv.io/ipfs/" + obj.imageIPFS;
+                }}
+
+                onError={(event) => {
+                  setTimeout(() => {  
+                    event.target.src = "";
+                    event.target.src = "https://ipfs.io/ipfs/" + obj.imageIPFS;
+                }, 1050);
+                
+                // onError={(event) => {
+                //   setTimeout(() => {  
+                //     loadAlternative(event.target.src, event.target.getAttribute('data-alternative').split(/,/));
+                //     // event.target.src = "";
+                //     // event.target.src = "https://ipfs.io/ipfs/" + obj.imageIPFS;
+                
+                // }, 1100);
+
                 }}
               ></img>
-            </a>
+            {/* </a> */}
             <h3 className="Poppitandfinchsans text-center text-4xl text-black">
               {obj.name}
             </h3>

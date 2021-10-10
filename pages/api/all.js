@@ -33,6 +33,7 @@ export default async(req, res) => {
           "description": "Poolside Puffers is a community-centered art project to introduce the Bitcoin Cash community to smartBCH NFT's. Poolside Puffers are ready to catch!",
           "tokenId" : i,
           "image": `https://gateway.pinata.cloud/ipfs/${trait["imageIPFS"]}`,
+          "imageIPFS": trait["imageIPFS"],
           "local_image": `/images/all/`+i+`.png`,
           "external_url":"https://puffers.cash",
           "attributes": [

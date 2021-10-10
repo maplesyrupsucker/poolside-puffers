@@ -150,8 +150,10 @@
     #puffer-pool .puffer img {
         border:1px solid #016abb;
         box-shadow:0 3px 3px rgba(0,0,0,0.15);
-        background:#016abb;
-        min-height:200px;
+        background:#17ea8b url('/images/loading.gif') no-repeat center;
+        background-size:25px 25px;
+        min-height:250px;
+        width:100%;
     }
     #puffer-pool .puffer .loading {
         border:0;

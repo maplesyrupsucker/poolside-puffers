@@ -47,7 +47,8 @@ export default function Pool() {
           <div className="flex flex-col items-center">
 
             <span className=" Poppitandfinchsans text-5xl text-white items-center bg-grey-lighter rounded rounded-r-none my-4 ">PUFFERS IN <span className="text-blau">  ENTIRE COLLECTION</span></span>
-
+            <p>Please be patient while assets load from Interplanetary Filesystem (IPFS) gateways.</p>
+            <p>Tap image to load alternative gateway.</p>
           </div>
           <div className="text-center">
             
