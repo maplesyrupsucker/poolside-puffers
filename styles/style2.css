@@ -150,6 +150,8 @@
     #puffer-pool .puffer img {
         border:1px solid #016abb;
         box-shadow:0 3px 3px rgba(0,0,0,0.15);
+        background:#016abb;
+        min-height:200px;
     }
     #puffer-pool .puffer .loading {
         border:0;
@@ -158,7 +160,13 @@
         box-shadow:none;
         width:32px;
         height:32px;
+        min-height:auto;
+        background:none;
 
+    }
+    #puffer-pool .puffer .rare img {
+        min-height:auto;
+        background:none;
     }
     #puffer-pool .puffer .rare {
         position:absolute; 
@@ -167,6 +175,10 @@
         border:0;
         box-shadow:none;
         
+    }
+
+    #puffer-pool .puffer.sparkle {
+        margin-top:100px;
     }
 
     #puffer-pool .puffer .diamond {

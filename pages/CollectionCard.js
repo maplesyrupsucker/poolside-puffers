@@ -1,4 +1,3 @@
-/// NOTE: This file should loop through /api/all.js once that file is able to parse all traits
 
 import { useState, useEffect } from "react";
 
@@ -9,7 +8,7 @@ export default function CollectionCard({ pufferContract, walletAddress }) {
   
 
   useEffect(async () => {
-    const bal = await pufferContract.methods.balanceOf(walletAddress).call();
+    const bal = await pufferContract?.methods?.balanceOf(walletAddress)?.call();
     const make_range = (s, e) =>
       Array(e - s + 1)
         .fill()
@@ -17,39 +16,29 @@ export default function CollectionCard({ pufferContract, walletAddress }) {
     const c = 0;
     const CHUNK_SIZE = 2100; // in case we have tooo many
 
-    const r = make_range(0, Math.min(bal - 1, c + CHUNK_SIZE));
+    if (bal) {
+      const r = make_range(0, Math.min(bal - 1, c + CHUNK_SIZE));
 
-    try {
       const ids = await Promise.all(
-        r.map((i) =>
-          pufferContract.methods.tokenOfOwnerByIndex(walletAddress, i).call()
-        )
+          r?.map((i) =>
+              pufferContract.methods.tokenOfOwnerByIndex(walletAddress, i).call()
+          )
       );
+
       console.log(ids);
 
       const objs = await Promise.all(
-        ids.map((id) =>
-          pufferContract.methods.tokenURI(Number.parseInt(id, 10)).call()
-        )
+          ids.map((id) =>
+              pufferContract.methods.tokenURI(Number.parseInt(id, 10)).call()
+          )
       );
       console.log(objs);
-
-      // switch attrs to this once cors headers have been resolved on demopoolsidepuffers.vercel.app
-      // const attrs = await Promise.all(objs.map((obj) =>
-      //   fetch(obj).then((res) => res.json())
-      // ));
-      // console.log(attrs);
-
-// NOTE: Probably replace this ${id} with `/api/all`
-
-      const attrs = await Promise.all(
-        ids.map((id) => fetch(`/api/${id}`).then((res) => res.json()))
-      );
-      setCollectionCardData(attrs.sort((a, b) => a.tokenId - b.tokenId));
-      //   setCollectionCardData(attrs);
-    } catch (e) {
-      console.error(e);
     }
+
+      const attrs = await fetch(`/api/all`).then((res) => res.json());
+      setCollectionCardData(attrs.sort((a, b) => a.tokenId - b.tokenId));
+      // console.log(attrs);
+        // setCollectionCardData(attrs);
   }, []);
 
   function numberOfDiamonds(attributes) {
@@ -115,7 +104,7 @@ export default function CollectionCard({ pufferContract, walletAddress }) {
         const { attributes } = obj;
         const diamondCount = numberOfDiamonds(attributes);
         const diamondArray = new Array(diamondCount).fill("");
-        
+
         return (
           <div className="puffer flex flex-col" key={obj.tokenId}>
             <div className="rare">
@@ -131,20 +120,17 @@ export default function CollectionCard({ pufferContract, walletAddress }) {
                 })}
               </span>
             </div>
-{/* NOTE: I want href to point to obj.image but the img src should point to the correct image based on loop's index. /images/all/{loop[i]} 
-// I have added 20 images named 0-19. Note that some are PNG and some are WEBP. /pages/collection.js + CollectionCard.js should fetch all objects from public/images/all and display all data and show the images that are available. I'll upload the final ones locally on my end. Trying to keep project small for fiverr.
 
-*/}
             <a
               href={obj.image}
             >
               <img
-                // src={obj.image}
-                src={loop[i]} // probably needs fixing
+                src={obj.local_image}
+                // src={images[obj.tokenId]} // probably needs fixing
                 alt={obj.name}
                 onError={(event) => {
                   event.target.src = "";
-                  event.target.src = obj.image;
+                  event.target.src = obj.local_image.replace(/\.[^.]+$/, '.webp');
                 }}
               ></img>
             </a>
