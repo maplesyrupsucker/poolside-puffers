@@ -152,10 +152,11 @@ export default function CollectionCard({ pufferContract, walletAddress }) {
                 // src={images[obj.tokenId]} // probably needs fixing
                 alt={obj.name}
                 //use local files - MIGHT not work because vercel limits
-                // onError={(event) => {
-                //   event.target.src = "";
-                //   event.target.src = obj.local_image.replace(/\.[^.]+$/, '.webp');
-                // }}
+                onError={(event) => {
+                  event.target.src = "";
+                  event.target.src = obj.local_image.replace(/\.[^.]+$/, '.webp');
+                }}
+
                 // data-alternative={fallback}
 
                 onClick={(event) => {
@@ -163,11 +164,13 @@ export default function CollectionCard({ pufferContract, walletAddress }) {
                   event.target.src = "https://ipfs.kxv.io/ipfs/" + obj.imageIPFS;
                 }}
 
-                onError={(event) => {
-                  setTimeout(() => {  
-                    event.target.src = "";
-                    event.target.src = "https://ipfs.io/ipfs/" + obj.imageIPFS;
-                }, 1050);
+                
+
+                // onError={(event) => {
+                //   setTimeout(() => {  
+                //     event.target.src = "";
+                //     event.target.src = "https://ipfs.io/ipfs/" + obj.imageIPFS;
+                // }, 1050);
                 
                 // onError={(event) => {
                 //   setTimeout(() => {  
@@ -177,7 +180,7 @@ export default function CollectionCard({ pufferContract, walletAddress }) {
                 
                 // }, 1100);
 
-                }}
+                // }}
               ></img>
             {/* </a> */}
             <h3 className="Poppitandfinchsans text-center text-4xl text-black">
