@@ -80,7 +80,7 @@ export default function CollectionCard({ pufferContract, walletAddress }) {
       if (attribute.value.indexOf("Pool") >= 0) diamondCount += 1;
       if (attribute.value.indexOf("Animated Pool") >= 0) diamondCount += 1;
     });
-    console.log("diamondcount", diamondCount);
+    // console.log("diamondcount", diamondCount);
 
     return diamondCount; // return a number
   }
