@@ -186,7 +186,6 @@ export default function PufferCard({ pufferContract, walletAddress,sortBy }) {
     }
   }, [sortBy]);
 
-
   if (pufferCardData.length == 0) {
     return (
         <div id="puffer-pool" className="flex flex-wrap justify-center">
@@ -221,35 +220,53 @@ export default function PufferCard({ pufferContract, walletAddress,sortBy }) {
           return (
               <div className="puffer flex flex-col" key={obj.tokenId}>
                 <div className="rare">
-              <span>
-                {diamondArray.map((attributes) => {
-                  return (
-                      <img
-                          src="images/diamond.png"
-                          alt="rare"
-                          className="diamond"
-                      ></img>
-                  );
-                })}
-                {pureBloodArray.map((attributes) => {
-                  return (
-                    <img
-                        src="images/pureblood.png"
-                        alt="pure blood"
-                        className="diamond"
-                      ></img>
-                  );
-                })}
-                {halfBloodArray.map((attributes) => {
-                  return (
-                    <img
-                        src="images/halfblood.png"
-                        alt="half blood"
-                        className="diamond"
-                      ></img>
-                  );
-                })}
-              </span>
+                  <span>
+                    {diamondArray.map((attributes) => {
+                      return (
+                          <img
+                              src="images/diamond.png"
+                              alt="rare"
+                              className="diamond"
+                          ></img>
+                      );
+                    })}
+                    {pureBloodArray.map((attributes) => {
+                      return (
+                        <img
+                            src="images/pureblood.png"
+                            alt="pure blood"
+                            className="diamond"
+                          ></img>
+                      );
+                    })}
+                    {halfBloodArray.map((attributes) => {
+                      return (
+                        <img
+                            src="images/halfblood.png"
+                            alt="half blood"
+                            className="diamond"
+                          ></img>
+                      );
+                    })}
+                    {pureBloodArray.map((attributes) => {
+                      return (
+                        <img
+                            src="images/pureblood.png"
+                            alt="pure blood"
+                            className="diamond"
+                          ></img>
+                      );
+                    })}
+                    {halfBloodArray.map((attributes) => {
+                      return (
+                        <img
+                            src="images/halfblood.png"
+                            alt="half blood"
+                            className="diamond"
+                          ></img>
+                      );
+                    })}
+                  </span>
                 </div>
                 <img
                     src={obj.image}
