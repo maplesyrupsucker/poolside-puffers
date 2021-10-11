@@ -16,6 +16,176 @@ export default async(req, res) => {
 
   const totalSupply = 2099; // manually set the total supply so we don't need web3 0-2099 = 2100
 
+  
+function numberOfPureBloods(attributes) {
+  let pureBloodCount = 0;
+
+  //setup purebloods
+  const purebloodRed =
+    attributes.filter((i) => i.value === "Red").length >= 5;
+  const purebloodYellow =
+    attributes.filter((i) => i.value === "Yellow").length >= 5;
+  const purebloodOrange =
+    attributes.filter((i) => i.value === "Orange").length >= 5;
+  const purebloodGreen =
+    attributes.filter((i) => i.value === "Green").length >= 5;
+  const purebloodBlue =
+    attributes.filter((i) => i.value === "Blue").length >= 5;
+  const purebloodIndigo =
+    attributes.filter((i) => i.value === "Indigo").length >= 5;
+  const purebloodViolet =
+    attributes.filter((i) => i.value === "Violet").length >= 5;
+
+  // if purebloods
+  if (
+    purebloodBlue ||
+    purebloodGreen ||
+    purebloodIndigo ||
+    purebloodOrange ||
+    purebloodRed ||
+    purebloodViolet ||
+    purebloodYellow
+  ) {
+    pureBloodCount += 1;
+  }
+  // console.log("purebloodCount", pureBloodCount);
+
+  return pureBloodCount;
+
+
+}
+
+function numberOfHalfBloods(attributes) {
+  let halfBloodCount = 0;
+
+
+  // BODY PARTS THAT IMPACT BLOOD
+  // body
+  // spikes
+  // fins
+  // tail
+  // tail fins 
+
+  //setup half breeds
+  const fourRed =
+    attributes.filter((i) => i.value === "Red").length == 4;
+  const fourOrange = 
+    attributes.filter((i) => i.value === "Orange").length == 4;
+  const fourYellow =
+    attributes.filter((i) => i.value === "Yellow").length == 4;
+  const fourGreen =
+    attributes.filter((i) => i.value === "Green").length == 4;
+  const fourBlue =
+    attributes.filter((i) => i.value === "Blue").length == 4;
+    console.log('fourblue', fourBlue);
+  const fourIndigo =
+    attributes.filter((i) => i.value === "Indigo").length == 4;
+  const fourViolet =
+    attributes.filter((i) => i.value === "Violet").length == 4;
+
+
+  // need to find a way to remove background trait from length without editing traits database
+  const threeRed =
+    attributes.filter((i) => i.value === "Red").length == 3;
+  const threeOrange = 
+    attributes.filter((i) => i.value === "Orange").length == 3;
+  const threeYellow =
+    attributes.filter((i) => i.value === "Yellow").length == 3;
+  const threeGreen =
+    attributes.filter((i) => i.value === "Green").length == 3;
+  const threeBlue =
+    attributes.filter((i) => i.value === "Blue").length == 3;
+  const threeIndigo =
+    attributes.filter((i) => i.value === "Indigo").length == 3;
+  const threeViolet =
+    attributes.filter((i) => i.value === "Violet").length == 3;
+  
+  const twoRed =
+    attributes.filter((i) => i.value === "Red").length == 2;
+  const twoOrange = 
+    attributes.filter((i) => i.value === "Orange").length == 2;
+  const twoYellow =
+    attributes.filter((i) => i.value === "Yellow").length == 2;
+  const twoGreen =
+    attributes.filter((i) => i.value === "Green").length == 2;
+  const twoBlue =
+    attributes.filter((i) => i.value === "Blue").length == 2;
+  const twoIndigo =
+    attributes.filter((i) => i.value === "Indigo").length == 2;
+  const twoViolet =
+    attributes.filter((i) => i.value === "Violet").length == 2;
+
+
+  if (
+
+      fourRed ||
+      fourOrange || 
+      fourYellow ||
+      fourGreen ||
+      fourBlue ||
+      fourIndigo ||
+      fourViolet ||
+
+      (threeRed && twoOrange) ||
+      (threeRed && twoYellow) ||
+      (threeRed && twoGreen) ||
+      (threeRed && twoBlue) ||
+      (threeRed && twoIndigo) ||
+      (threeRed && twoViolet) ||
+
+      (threeOrange && twoRed) ||
+      (threeOrange && twoYellow) ||
+      (threeOrange && twoGreen) ||
+      (threeOrange && twoBlue) ||
+      (threeOrange && twoIndigo) ||
+      (threeOrange && twoViolet) || 
+
+      (threeYellow && twoOrange) ||
+      (threeYellow && twoRed) ||
+      (threeYellow && twoGreen) ||
+      (threeYellow && twoBlue) ||
+      (threeYellow && twoIndigo) ||
+      (threeYellow && twoViolet) ||
+
+      (threeGreen && twoOrange) ||
+      (threeGreen && twoRed) ||
+      (threeGreen && twoYellow) ||  
+      (threeGreen && twoBlue) ||
+      (threeGreen && twoIndigo) ||
+      (threeGreen && twoViolet) ||
+
+      (threeBlue && twoOrange) ||
+      (threeBlue && twoRed) ||
+      (threeBlue && twoYellow) ||
+      (threeBlue && twoGreen) ||
+      (threeBlue && twoIndigo) ||
+      (threeBlue && twoViolet) ||
+
+      (threeIndigo && twoOrange) ||
+      (threeIndigo && twoRed) ||
+      (threeIndigo && twoYellow) ||
+      (threeIndigo && twoGreen) ||
+      (threeIndigo && twoBlue) ||
+      (threeIndigo && twoViolet) ||
+
+      (threeViolet && twoOrange) ||
+      (threeViolet && twoRed) ||
+      (threeViolet && twoYellow) ||
+      (threeViolet && twoGreen) ||
+      (threeViolet && twoBlue) ||
+      (threeViolet && twoIndigo) 
+
+
+    ) {
+      halfBloodCount += 1;
+    }
+
+    // console.log("halfBloodCount", halfBloodCount);
+    return halfBloodCount;
+
+}
+
+
   function numberOfDiamonds(attributes) {
     let diamondCount = 0;
 
@@ -71,7 +241,7 @@ export default async(req, res) => {
         {
           "trait_type": "Background",
           "trait_type_index":"Background",
-          "value": trait["Background"],
+          "value": trait["Background"] + " Water",
           "rarity":{}
         },
         {
@@ -128,6 +298,8 @@ export default async(req, res) => {
         "local_image": `/images/all/`+i+`.png`,
         "external_url":"https://puffers.cash",
         "numberOfDiamonds":numberOfDiamonds(attributes),
+        "numberOfPureBloods":numberOfPureBloods(attributes),
+        "numberOfHalfBloods":numberOfHalfBloods(attributes),
         "attributes":attributes
       }
 

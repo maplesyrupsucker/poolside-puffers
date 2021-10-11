@@ -1,7 +1,6 @@
 
 import React, { useState, useEffect } from "react";
 import useInfiniteScroll from "./useInfiniteScroll";
-import traits from "../database/traitsfinal.json";
 import ReactModal from 'react-modal';
 
 const customStyles = {
@@ -17,7 +16,11 @@ export default function CollectionCard({ sortBy }) {
   const [isFetching, setIsFetching] = useInfiniteScroll(listMoreCollections);
   const [showModal, setShowModal] = useState(false);
   const [rarityTraits, setRarityTraits] = useState([]);
-  let perPage=16;
+  const [rarityImage, setRarityImage] = useState('');
+  const [rarityName, setRarityName] = useState('');
+  const [rarityDiamonds, setRarityDiamonds] = useState('');
+  const [showLoadMoreButton, setShowLoadMoreButton] = useState(true);
+  let perPage=10;
 
   function listMoreCollections() {
     let nextCollectionCardData=[];
@@ -26,16 +29,23 @@ export default function CollectionCard({ sortBy }) {
       nextCollectionCardData = collectionCardData.slice(start, start+perPage);
     }else{
       try {
-        nextCollectionCardData = collectionCardData.slice(start, (collectionCardData.length - paginatedCollectionCardData.length));
+        nextCollectionCardData = collectionCardData.slice(start, start+(collectionCardData.length - paginatedCollectionCardData.length));
       }catch (e){}
     }
 
       setPaginatedCollectionCardData(prevState => ([...prevState, ...nextCollectionCardData]));
-      setIsFetching(false);
+      setIsFetching(false); // THIS IS WHAT TRIGGERS THE AUTO SCROLL
+
+    // UNCOMMENT THIS SECTION AND CHECK IF IT AUTO HIDES THE LOAD MORE BUTTON ON YOUR BROWSER
+    // if (paginatedCollectionCardData.length > 0 && paginatedCollectionCardData.length < collectionCardData.length){
+    //   setShowLoadMoreButton(true);
+    // }else{
+    //   setShowLoadMoreButton(false);
+    // }
   }
 
 
-  useEffect(async () => {
+  async function fetchData (){
     const attrs = await fetch(`/api/all`).then((res) => res.json());
     let sortedAttr;
     if ( !sortBy || sortBy==='' ) {
@@ -49,53 +59,50 @@ export default function CollectionCard({ sortBy }) {
     }
 
     setCollectionCardData(sortedAttr);
-    setPaginatedCollectionCardData(sortedAttr.slice(0, perPage));
-    console.log(sortBy)
+    let sortedAttrSliced=sortedAttr.slice(0, perPage);
+    setPaginatedCollectionCardData(sortedAttrSliced);
+
+    // UNCOMMENT THIS SECTION AND CHECK IF IT AUTO HIDES THE LOAD MORE BUTTON ON YOUR BROWSER
+    // if (sortedAttrSliced.length > 0 && sortedAttrSliced.length < sortedAttr.length){
+    //   setShowLoadMoreButton(true);
+    // }else{
+    //   setShowLoadMoreButton(false);
+    // }
+  }
+
+  useEffect(async () => {
+    await fetchData();
   }, [sortBy]);
 
   function getRarity(i,trait_type,trait_type_value) {
-    return findOcc(traits,trait_type,trait_type_value);
+    return findOcc(collectionCardData,trait_type,trait_type_value);
   }
 
   function findOcc(arr, key, value){
-    let arr2 = [];
+    let occurrence=0;
 
     arr.forEach((x)=>{
-
-      // Checking if there is any object in arr2
-      // which contains the key value
-      if(arr2.some((val)=>{ return val[key][value] == x[key][value] })){
-
-        // If yes! then increase the occurrence by 1
-        arr2.forEach((k)=>{
-          if(k[key] === x[key]){
-            k["occurrence"]++
-          }
-        })
-
-      }else{
-        // If not! Then create a new object initialize
-        // it with the present iteration key's value and
-        // set the occurrence to 1
-        let a = {}
-        a[key] = x[key]
-        a["occurrence"] = 1
-        arr2.push(a);
-      }
+      x.attributes.forEach((a)=>{
+        if(key == a.trait_type_index && value == a.value){
+          occurrence++
+        }
+      });
     })
 
-    return arr2
+    return occurrence;
   }
 
   function comparisonTraits(i) {
     setShowModal(true);
     if (paginatedCollectionCardData[i]) {
+      setRarityImage(paginatedCollectionCardData[i].image);
+      setRarityName(paginatedCollectionCardData[i].tokenId);
+      setRarityDiamonds(paginatedCollectionCardData[i].numberOfDiamonds);
       setRarityTraits(paginatedCollectionCardData[i].attributes.map((attribute) => {
           attribute.rarity = getRarity(i, attribute.trait_type_index, attribute.value);
           console.log(attribute.rarity)
           return (<li key={"comparisonTraits" + i}>
-            <h3 className="rarity-header">{attribute.trait_type}: <span>{attribute.value}</span></h3><strong>{attribute.rarity.length > 0 && attribute.rarity[0].occurrence}</strong> of
-            other cards have this feature
+            <h3 className="rarity-header">{attribute.trait_type}: <span>{attribute.value}</span></h3><strong>{attribute?.rarity}</strong> cards have this feature
           </li>)}));
     }
   }
@@ -210,22 +217,42 @@ export default function CollectionCard({ sortBy }) {
                   })}
                 </ul>
                 <br/>
-                <button style={{background:'black',color:'white',width:'50%','margin':'auto'}} onClick={()=>comparisonTraits(index)}>Rarity</button>
+
+                <button className="rarity" onClick={()=>comparisonTraits(index)}>Rarity</button>
               </div>
           );
         })}
 
-        <ReactModal
+          <ReactModal
             isOpen={showModal}
             style={customStyles}
             contentLabel="Rarity"
         >
-          <h2 className="text-black Poppitandfinchsans text-left text-6xl">Rarity</h2>
-          <ul>
+          <h2 className="text-black Poppitandfinchsans text-center text-6xl">Rarity #{rarityName}</h2>
+          <img
+              className="rarityImage"
+              src={rarityImage}
+              alt={rarityImage}
+          ></img>
+          <h4 className="text-center">
+            <span>{rarityDiamonds}</span> Diamond
+              <img
+                  src="images/diamond.png"
+                  alt="rare"
+                  className="diamond"
+              ></img>
+          </h4>
+          <ul className="text-center">
             {rarityTraits}
           </ul>
+          
           <button className="closemodal" onClick={ ()=> setShowModal(false)}>Close</button>
         </ReactModal>
+
+        <br/>
+        {
+          showLoadMoreButton && <div className="loader"><button onClick={() => listMoreCollections()}>Load more..</button></div>
+        }
       </div>
   );
 }

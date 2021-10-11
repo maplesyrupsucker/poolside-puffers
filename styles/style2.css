@@ -47,6 +47,7 @@
         background-position: 0px 0px;
         background-repeat: repeat;
         background-attachment: fixed;
+        padding-bottom:50px;
     }
     
     .montserrat {
@@ -213,7 +214,7 @@
     }
 
     .rarity-header {
-        font-size: 25px;
+        font-size: 18px;
         margin-top:10px;
         margin-bottom:10px;
     }
@@ -237,8 +238,8 @@
         margin-bottom:15px;
     }
 
-    .ReactModalPortal ul li span {
-        background:#eee;
+    .ReactModalPortal ul li span, .ReactModalPortal h4 span  {
+        background:rgb(119, 210, 255);
         border-radius:5px;
         margin:5px 0;
         padding:3px 10px;
@@ -260,6 +261,56 @@
 
     .ReactModalPortal .ReactModal__Content {
         border-radius:25px !important;
+        max-width:800px;
+        margin:0 auto;
+        box-shadow:5px 5px 50px #000;
+        background:rgb(207, 243, 255) !important;
+        border:0 !important;
+    }
+
+    .ReactModalPortal .ReactModal__Content h4 img {
+        display:inline;
+        width:24px;
+    }
+
+    select {
+        margin:0 5px;
+        display:inline-block;
+    }
+
+    .rarity {
+        background: rgb(67,0,111);
+        background: linear-gradient(
+    90deg, rgba(67,0,111,1) 0%, rgba(0,135,236,1) 50%, rgba(72,0,255,1) 100%);
+        border:1px solid #0087EC;
+        color:white;
+        width:50%;
+        margin:0 auto;
+        border-radius:30px;
+    }
+
+    .rarityImage {
+        width:100px;
+        height:auto;
+        margin:10px auto;
+        border-radius:100%;
+    }
+
+    .loader {
+        position:fixed;
+        bottom:15px;
+        width:200px;
+        left:50%;
+        margin-left:-100px;
+        padding:10px;
+        display:block;
+        background:black;
+
+    }
+
+    .loader button {
+        width:100%;
+        color:white;
     }
     
     @media (min-width: 1280px) {

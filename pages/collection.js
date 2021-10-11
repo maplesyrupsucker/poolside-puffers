@@ -1,5 +1,5 @@
 import Head from 'next/head'
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import {ADDRESS, ABI} from "../config.js"
 import CollectionCard from "./CollectionCard";
@@ -39,6 +39,7 @@ export default function Pool() {
               <a href="/" className="text-4xl text-white hover:text-black m-3">Home</a>
               <a href="/mint" className="text-4xl hover:text-black m-3 text-blau">MINT!</a>
               <a href="/your-pool" className="text-4xl text-white hover:text-black m-3">Your Pool</a>
+              <a href="/collection" className="text-4xl text-white hover:text-black m-3">Collection</a>
               {/* <a href="https://twitter.com/poolsidepuffers" className="text-4xl text-white hover:text-black m-3">TWITTER</a> */}
               <a href="https://t.me/poolsidepuffers" className="text-4xl text-white hover:text-black m-3">TELEGRAM</a>
             </nav>
@@ -54,9 +55,13 @@ export default function Pool() {
             <span className=" Poppitandfinchsans text-5xl text-white items-center bg-grey-lighter rounded rounded-r-none my-4 ">PUFFERS IN <span className="text-blau">  ENTIRE COLLECTION</span></span>
 
           </div>
-          <div className="text-center">
+          <div className=" py-6 w-4/4 text-center">
+            <div><p>Contract: <span className="text-blau">0x88fA0495d5E9C1B178EAc1D76DF9D729e39fD8E8</span></p></div>
+
+          </div>
+          <div className="text-center py-6">
             <div className="row text-center text-black" style={{marginRight:'4%'}}>
-              Sort By:
+              Sort By: 
               <select className="text-black" onChange={sortCollectionBy}>
                 <option className="text-black" value="name">Name</option>
                 <option className="text-black" value="diamond">Diamond</option>
@@ -65,13 +70,9 @@ export default function Pool() {
             {
                 <CollectionCard sortBy={sortBy} />
             }
-
           </div>
 
-          <div className="mt5 py-6 w-4/4 text-center mt-6">
-            <div><p className="mt-5">Contract: <span className="text-blau">0x88fA0495d5E9C1B178EAc1D76DF9D729e39fD8E8</span></p></div>
-
-          </div>
+          
 
         </div>
       </div>
