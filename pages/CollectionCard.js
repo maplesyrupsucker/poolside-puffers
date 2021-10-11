@@ -142,8 +142,15 @@ export default function CollectionCard({ sortBy }) {
       <div id="puffer-pool" className="flex flex-wrap justify-center">
         {paginatedCollectionCardData.map((obj,index) => {
           const { attributes } = obj;
+          
           const diamondCount = obj.numberOfDiamonds;
           const diamondArray = new Array(diamondCount).fill("");
+
+          const pureBloodCount = obj.numberOfPureBloods;
+          const pureBloodArray = new Array(pureBloodCount).fill("");
+  
+          const halfBloodCount = obj.numberOfHalfBloods;
+          const halfBloodArray = new Array(halfBloodCount).fill("");
 
           // const fallback = '"https://ipfs.io/ipfs/' + obj.imageIPFS + ","
           // + 'https://gateway.pinata.cloud/ipfs/' + obj.imageIPFS + ','
@@ -160,6 +167,24 @@ export default function CollectionCard({ sortBy }) {
                           src="images/diamond.png"
                           alt="rare"
                           className="diamond"
+                      ></img>
+                  );
+                })}
+                {pureBloodArray.map((attributes) => {
+                  return (
+                    <img
+                        src="images/pureblood.png"
+                        alt="pure blood"
+                        className="diamond"
+                      ></img>
+                  );
+                })}
+                {halfBloodArray.map((attributes) => {
+                  return (
+                    <img
+                        src="images/halfblood.png"
+                        alt="half blood"
+                        className="diamond"
                       ></img>
                   );
                 })}
