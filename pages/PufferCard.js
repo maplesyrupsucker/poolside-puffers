@@ -248,24 +248,6 @@ export default function PufferCard({ pufferContract, walletAddress,sortBy }) {
                           ></img>
                       );
                     })}
-                    {pureBloodArray.map((attributes) => {
-                      return (
-                        <img
-                            src="images/pureblood.png"
-                            alt="pure blood"
-                            className="diamond"
-                          ></img>
-                      );
-                    })}
-                    {halfBloodArray.map((attributes) => {
-                      return (
-                        <img
-                            src="images/halfblood.png"
-                            alt="half blood"
-                            className="diamond"
-                          ></img>
-                      );
-                    })}
                   </span>
                 </div>
                 <img
