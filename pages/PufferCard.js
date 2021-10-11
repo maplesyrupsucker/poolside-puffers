@@ -22,7 +22,7 @@ export default function PufferCard({ pufferContract, walletAddress,sortBy }) {
   const [rarityDiamonds, setRarityDiamonds] = useState('');
   const [showLoadMoreButton, setShowLoadMoreButton] = useState(true);
   
-  let perPage=25;
+  let perPage=21;
 
   function listMorePuffers() {
     let nextCollectionCardData=[];

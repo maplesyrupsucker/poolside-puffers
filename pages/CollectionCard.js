@@ -20,7 +20,7 @@ export default function CollectionCard({ sortBy }) {
   const [rarityName, setRarityName] = useState('');
   const [rarityDiamonds, setRarityDiamonds] = useState('');
   const [showLoadMoreButton, setShowLoadMoreButton] = useState(true);
-  let perPage=10;
+  let perPage=9;
 
   function listMoreCollections() {
     let nextCollectionCardData=[];
@@ -196,14 +196,7 @@ export default function CollectionCard({ sortBy }) {
             > */}
                 <img
                     src={obj.image}
-                    // src={images[obj.tokenId]} // probably needs fixing
                     alt={obj.name}
-                    //use local files - MIGHT not work because vercel limits
-                    // onError={(event) => {
-                    //   event.target.src = "";
-                    //   event.target.src = obj.local_image.replace(/\.[^.]+$/, '.webp');
-                    // }}
-                    // data-alternative={fallback}
 
                     onClick={(event) => {
                       event.target.src = "";
