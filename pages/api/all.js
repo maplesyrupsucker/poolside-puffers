@@ -1,13 +1,22 @@
-import {INFURA_ADDRESS, ADDRESS, ABI} from "../../config.js"
-import Web3 from "web3";
+// import {INFURA_ADDRESS, ADDRESS, ABI} from "../../config.js"
+// import Web3 from "web3";
 
-// import the json containing all metadata. not recommended, try to fetch the database from a middleware if possible, I use MONGODB for example
 import traits from "../../database/traitsfinal.json";
 
-const infuraAddress = INFURA_ADDRESS
+// const infuraAddress = INFURA_ADDRESS
+export default async(req, res) => {
 
-const pufferApi = async(req, res) => {
+  // SOME WEB3 STUFF TO CONNECT TO SMART CONTRACT
+  // const provider = new Web3.providers.HttpProvider(infuraAddress)
+  // const web3infura = new Web3(provider);
+  // const pufferContract = new web3infura.eth.Contract(ABI, ADDRESS);
 
+  // IF YOU ARE USING INSTA REVEAL MODEL, USE THIS TO GET HOW MANY NFTS ARE MINTED
+  // const totalSupply = await pufferContract.methods.totalSupply().call();
+
+  const totalSupply = 2099; // manually set the total supply so we don't need web3 0-2099 = 2100
+
+  
 function numberOfPureBloods(attributes) {
   let pureBloodCount = 0;
 
@@ -176,7 +185,8 @@ function numberOfHalfBloods(attributes) {
 
 }
 
-function numberOfDiamonds(attributes) {
+
+  function numberOfDiamonds(attributes) {
     let diamondCount = 0;
 
     const purebloodRed =
@@ -203,159 +213,106 @@ function numberOfDiamonds(attributes) {
         purebloodViolet ||
         purebloodYellow
     ) {
-        diamondCount += 2;
+      diamondCount += 2;
     }
 
     attributes.forEach((attribute) => {
-        if (attribute.value.indexOf("Animated") >= 0) diamondCount += 2;
-        if (attribute.value.indexOf("Ripped") >= 0) diamondCount += 1;
-        if (attribute.value.indexOf("Cigarette") >= 0) diamondCount += 1;
-        if (attribute.value.indexOf("Joint") >= 0) diamondCount += 1;
-        if (attribute.value.indexOf("Summer") >= 0) diamondCount += 1;
-        if (attribute.value.indexOf("Pool") >= 0) diamondCount += 1;
-        if (attribute.value.indexOf("Animated Pool") >= 0) diamondCount += 1;
+      if (attribute.value.indexOf("Animated") >= 0) diamondCount += 2;
+      if (attribute.value.indexOf("Ripped") >= 0) diamondCount += 1;
+      if (attribute.value.indexOf("Cigarette") >= 0) diamondCount += 1;
+      if (attribute.value.indexOf("Joint") >= 0) diamondCount += 1;
+      if (attribute.value.indexOf("Summer") >= 0) diamondCount += 1;
+      if (attribute.value.indexOf("Pool") >= 0) diamondCount += 1;
+      if (attribute.value.indexOf("Animated Pool") >= 0) diamondCount += 1;
     });
 
     return diamondCount; // return a number
-}
+  }
 
+  if(totalSupply > 0) {
+    let all_metadata=[];
+    for (let i=0; i<=totalSupply; i++){
 
-    // SOME WEB3 STUFF TO CONNECT TO SMART CONTRACT
-  const provider = new Web3.providers.HttpProvider(infuraAddress)
-  const web3infura = new Web3(provider);
-  const pufferContract = new web3infura.eth.Contract(ABI, ADDRESS)
-  
+      let tokenName = `#${i}`;
 
+      const trait = traits[i];
 
-  // IF YOU ARE USING INSTA REVEAL MODEL, USE THIS TO GET HOW MANY NFTS ARE MINTED
-  const totalSupply = await pufferContract.methods.totalSupply().call();
-  console.log(totalSupply)
-  
+      let attributes= [
+        {
+          "trait_type": "Background",
+          "trait_type_index":"Background",
+          "value": trait["Background"] + " Water",
+          "rarity":{}
+        },
+        {
+          "trait_type": "Body",
+          "trait_type_index":"Body",
+          "value": trait["Body"],
+          "rarity": {}
+        },
+        {
+          "trait_type": "Tail",
+          "trait_type_index":"Tail",
+          "value": trait["Tail"],
+          "rarity":{}
+        },
+        {
+          "trait_type": "Tail Fins",
+          "trait_type_index":"Assfins",
+          "value": trait["Assfins"],
+          "rarity":{}
+        },
+        {
+          "trait_type": "Spikes",
+          "trait_type_index":"Spikes",
+          "value": trait["Spikes"],
+          "rarity":{}
+        },
+        {
+          "trait_type": "Face",
+          "trait_type_index":"Eyes",
+          "value": trait["Eyes"],
+          "rarity":{}
+        },
+        {
+          "trait_type": "Fins",
+          "trait_type_index":"Fins",
+          "value": trait["Fins"],
+          "rarity":{}
+        },
+        {
+          "trait_type": "Accessories",
+          "trait_type_index":"Accessories",
+          "value": trait["Accessories"],
+          "rarity":{}
+        }
 
+      ]
 
-// THE ID YOU ASKED IN THE URL
-  const query = req.query.id;
-
-
-  // IF YOU ARE USING INSTA REVEAL MODEL, UNCOMMENT THIS AND COMMENT THE TWO LINES BELOW
-  if(parseInt(query) < totalSupply) {
-  // const totalPuffers = 2100;
-  // if(parseInt(query) < totalPuffers) {
-
-
-    // CALL CUSTOM TOKEN NAME IN THE CONTRACT
-    const tokenNameCall = await pufferContract.methods.pufferNames(query).call();
-    let tokenName = `#${query}${(tokenNameCall === '') ? "" : ` - ${tokenNameCall}`}`
-
-    // IF YOU ARE NOT USING CUSTOM NAMES, JUST USE THIS
-    // let tokenName= `#${query}`
-
-    const signatures = [99999,999999]
-    const trait = traits[parseInt(query)]
-    // const trait = traits[ Math.floor(Math.random() * 2100) ] // for testing on rinkeby 
-
-    // CHECK OPENSEA METADATA STANDARD DOCUMENTATION https://docs.opensea.io/docs/metadata-standards
-    let metadata = {}
-    // IF THE REQUESTED TOKEN IS A SIGNATURE, RETURN THIS METADATA
-    if ( signatures.includes( parseInt( query ) ) ) {
-    
-      metadata = {
+      let metadata = {
         "name": tokenName,
         "description": "Poolside Puffers is a community-centered art project to introduce the Bitcoin Cash community to smartBCH NFT's. Poolside Puffers are ready to catch!",
-        "tokenId" : parseInt(query),
+        "tokenId" : i,
         "image": `https://gateway.pinata.cloud/ipfs/${trait["imageIPFS"]}`,
-        "external_url":"https://puffers.cash",
-        "attributes": [   
-          {
-            "trait_type": "Signature Series",
-            "value": trait["Signature Series"]
-          }    
-        ]
-      }
-      // console.log(metadata)
-    } else {
-    // GENERAL PUFFER METADATA
-
-        let attributes = [
-            {
-                "trait_type": "Background",
-                "value": trait["Background"] + " Water",
-                "trait_type_index":"Background",
-                "rarity":{}
-            },
-            {
-                "trait_type": "Body",
-                "value": trait["Body"],
-                "trait_type_index":"Body",
-                "rarity":{}
-            },
-            {
-                "trait_type": "Tail",
-                "value": trait["Tail"],
-                "trait_type_index":"Tail",
-                "rarity":{}
-            },
-            {
-                "trait_type": "Tail Fins",
-                "value": trait["Assfins"],
-                "trait_type_index":"Assfins",
-                "rarity":{}
-            },
-            {
-                "trait_type": "Spikes",
-                "value": trait["Spikes"],
-                "trait_type_index":"Spikes",
-                "rarity":{}
-            },
-            {
-                "trait_type": "Face",
-                "value": trait["Eyes"],
-                "trait_type_index":"Eyes",
-                "rarity":{}
-            },
-            {
-                "trait_type": "Fins",
-                "value": trait["Fins"],
-                "trait_type_index":"Fins",
-                "rarity":{}
-            },
-            {
-                "trait_type": "Accessories",
-                "value": trait["Accessories"],
-                "trait_type_index":"Accessories",
-                "rarity":{}
-            }
-
-        ];
-
-      metadata = {
-        "name": tokenName,
-        "description": "Poolside Puffers is a community-centered art project to introduce the Bitcoin Cash community to smartBCH NFT's. Poolside Puffers are ready to catch!",
-        "tokenId" : parseInt(query),
-        "image": `https://gateway.pinata.cloud/ipfs/${trait["imageIPFS"]}`,
+        "imageIPFS": trait["imageIPFS"],
+        "local_image": `/images/all/`+i+`.png`,
         "external_url":"https://puffers.cash",
         "numberOfDiamonds":numberOfDiamonds(attributes),
         "numberOfPureBloods":numberOfPureBloods(attributes),
         "numberOfHalfBloods":numberOfHalfBloods(attributes),
-        "attributes": attributes
+        "attributes":attributes
       }
-      
-      // console.log(metadata)
 
+      all_metadata.push(metadata)
     }
-    
-    res.statusCode = 200
-    res.json(metadata)
-  } else {
-    res.statuscode = 404
-    res.json({error: "The puffer you requested is out of range"})
 
+
+
+    res.statusCode = 200
+    res.json(all_metadata)
+  } else {
+    res.statuscode = 400
+    res.json({error: "No puffer was found"})
   }
 
-
-  // this is after the reveal
-
-  
 }
-
-export default pufferApi

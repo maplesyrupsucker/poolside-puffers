@@ -19,6 +19,11 @@ export default function Pool() {
   const [pufferPrice, setPufferPrice] = useState(0)
   const [totalSupply, setTotalSupply] = useState(0)
   const [saleStarted, setSaleStarted] = useState(false)
+  const [sortBy, setSortBy] = useState('');
+
+  function sortCollectionBy(e){
+    setSortBy(e.target.value)
+  }
 
   useEffect( async() => {
 
@@ -41,7 +46,7 @@ export default function Pool() {
       alert("No Ethereum interface injected into browser. Read-only access");
     }
 
-    window.ethereum.enable()
+    window.ethereum?.enable()
         .then(function (accounts) {
           window.web3.eth.net.getNetworkType()
               // checks if connected network is mainnet (change this to rinkeby if you wanna test on testnet)
@@ -136,6 +141,7 @@ export default function Pool() {
               <a href="/" className="text-4xl text-white hover:text-black m-3">Home</a>
               <a href="/mint" className="text-4xl hover:text-black m-3 text-blau">MINT!</a>
               <a href="/your-pool" className="text-4xl text-white hover:text-black m-3">Your Pool</a>
+              <a href="/collection" className="text-4xl text-white hover:text-black m-3">Collection</a>
               {/* <a href="https://twitter.com/poolsidepuffers" className="text-4xl text-white hover:text-black m-3">TWITTER</a> */}
               <a href="https://t.me/poolsidepuffers" className="text-4xl text-white hover:text-black m-3">TELEGRAM</a>
             </nav>
@@ -166,7 +172,16 @@ export default function Pool() {
                 :
                 
                 // signedIn state
-                <PufferCard pufferContract={pufferContract} walletAddress={walletAddress}/>
+                <div className="text-center">
+                <div className="row text-center text-black" style={{marginRight:'4%'}}>
+                  Sort By: 
+                  <select className="text-black" onChange={sortCollectionBy}>
+                    <option className="text-black" value="name">Name</option>
+                    <option className="text-black" value="diamond">Diamond</option>
+                  </select>
+                </div>
+                <PufferCard pufferContract={pufferContract} walletAddress={walletAddress} sortBy={sortBy} />
+                </div>
                 
                 // <img src="images/loader.gif" alt="loader"/>
               // end signedIn check
