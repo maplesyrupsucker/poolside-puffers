@@ -2,6 +2,8 @@
 
 The website is made with Next.js + Tailwind CSS Example
 
+This project was originally forked from: https://github.com/vortextemporum/BoringBananasCompany
+
 Type `yarn` on main folder to install the requirements. `yarn dev` to start running on your computer (localhost:3000).
 
 /image_generation has the python code
