@@ -1,26 +1,8 @@
-//ipfs://QmStvRUZKquoJmiJ2yFhZZQBWTJkPUN9sFJzQxqAFdZ3oX
- 
-//ipfs://QmaRJjQJfT4cESENkL9uBmQxjXp5A3Z2xLEZNFZxT3YuGd
+
 
 
 // GET YOUR INFURA API ENDPOINT FROM https://infura.io/
 export const INFURA_ADDRESS = "https://smartbch.fountainhead.cash/mainnet"
-
-// new
-// https://www.smartscan.cash/tx/0x81117022972f4a527366321a6a5d6d16f8d6d8e0e51c5b469e110933b5507c02
-// new: 0xd70F74CD35F5D6892A4e4351583c258Fd1C8d8aA
-
-//new mon sept 20 
-// https://www.smartscan.cash/tx/0x80e3dba971f7f3ba2262d217f264b616435dbc20eeda48473ad2f079bc5502ee
-// 0x88fA0495d5E9C1B178EAc1D76DF9D729e39fD8E8
-
-
-// old
-//https://www.smartscan.cash/transaction/0xadb1b05fc2155808b779e9b9af1162936fd5d9a5bfcd4a1ab2283b550282ff86
-
-// put smart contract here
-// export const ADDRESS = "0xcf014E0FD923e0e2Be4dB383319e39E40e70cf4D"
-// export const ADDRESS = "0xd70F74CD35F5D6892A4e4351583c258Fd1C8d8aA"
 
 export const ADDRESS = "0x88fA0495d5E9C1B178EAc1D76DF9D729e39fD8E8"
 
