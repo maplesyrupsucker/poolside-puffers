@@ -137,6 +137,7 @@ export default function Mint() {
               <a href="/mint" className="text-4xl hover:text-black m-3 text-black">MINT!</a>
               <a href="/your-pool" className="text-4xl text-white hover:text-black m-3">Your Pool</a>
               <a href="/collection" className="text-4xl text-white hover:text-black m-3">Collection</a>
+              <a href="/rarity" className="text-4xl text-white hover:text-black m-3">Rarity</a>
               {/* <a href="https://twitter.com/poolsidepuffers" className="text-4xl text-white hover:text-black m-3">TWITTER</a> */}
               <a href="https://t.me/poolsidepuffers" className="text-4xl text-white hover:text-black m-3">TELEGRAM</a>
             </nav>
@@ -176,14 +177,14 @@ export default function Mint() {
     
                 </div>
                 {/* <small>To avoid overfishing, we limit 25 puffers per mint transaction.</small> */}
-                {/* {saleStarted ? 
-                <button onClick={() => mintPuffer(how_many_puffers)} className="mt-4 Poppitandfinchsans text-4xl border-6 bg-blau  text-white hover:text-black p-2 ">CATCH {how_many_puffers} puffers for {(pufferPrice * how_many_puffers) / (10 ** 18)} BCH + GAS</button>        
+                {saleStarted ? 
+                <button onClick={() => mintPuffer(how_many_puffers)} className="mt-4 Poppitandfinchsans text-4xl border-6 bg-blau  text-white hover:text-black p-2 ">CATCH {how_many_puffers} puffers for {(pufferPrice * how_many_puffers) / (10 ** 18)} ETH + GAS</button>        
                   : <button className="mt-4 Poppitandfinchsans text-4xl border-6 bg-blau  text-white hover:text-black p-2 ">NO WALLET IS CONNECTED</button>        
             
-              } */}
+              }
 
               <h3 className="mt-5 text-2xl">Visit <a href="/your-pool" className="underline">Your Pool</a> to view your puffers!</h3>
-              <div><p>As NFT marketplaces emerge on SmartBCH you should be able to purchase them there.</p></div>
+              <div><p>Visit <a href="https://oasis.cash/collection/0x88fA0495d5E9C1B178EAc1D76DF9D729e39fD8E8">Oasis.cash</a> to buy on open market. </p></div>
 
               <p><a href="https://smartbch.org/" target="_blank"><img src="images/smartbch.png" alt="smartbch" className="smartbch"/></a>
               <a href="https://bitcoincash.org/" target="_blank"><img src="images/bitcoin-cash-logo-horizontal-wt.svg" alt="BCH" className="bch"/></a></p>
