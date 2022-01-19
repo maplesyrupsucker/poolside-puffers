@@ -30,9 +30,10 @@ export default function Home() {
           <div className="flex items-center justify-between w-full border-b-2">
             <nav className="flex flex-wrap flex-row justify-around Poppitandfinchsans">
               <a href="#" className="text-4xl text-white hover:text-black m-3">Home</a>
-              <a href="/mint" className="text-4xl hover:text-black m-3 text-black">MINT!</a>
+              <a href="https://oasis.cash/collection/0x88fA0495d5E9C1B178EAc1D76DF9D729e39fD8E8" className="text-4xl hover:text-black m-3 text-black">Buy!</a>
               <a href="/your-pool" className="text-4xl text-white hover:text-black m-3">Your Pool</a>
               <a href="/collection" className="text-4xl text-white hover:text-black m-3">Collection</a>
+              <a href="/rarity" className="text-4xl text-white hover:text-black m-3">Rarity</a>
               {/* <a href="https://twitter.com/poolsidepuffers" className="text-4xl text-white hover:text-black m-3">TWITTER</a> */}
               <a href="https://t.me/poolsidepuffers" className="text-4xl text-white hover:text-black m-3">TELEGRAM</a>
             </nav>
@@ -60,7 +61,7 @@ export default function Home() {
                     <span className="text-white text-2xl montserrat"><strong>TOTAL SUPPLY:</strong> 2100 Puffers<br/><strong>PRICE:</strong> 0.0035 BCH each</span></p>
 
                     <a href="/collection" className="mt-4 Poppitandfinchsans text-4xl border-6 bg-blau  text-white hover:text-black p-2 mint-btn ">VIEW THE COLLECTION!</a>
-                    <a href="/mint" className="mt-4 Poppitandfinchsans text-4xl border-6 bg-blau  text-white hover:text-black p-2 mint-btn ">GO TO MINTING PAGE!</a>
+                    <a href="https://oasis.cash/collection/0x88fA0495d5E9C1B178EAc1D76DF9D729e39fD8E8" className="mt-4 Poppitandfinchsans text-4xl border-6 bg-blau  text-white hover:text-black p-2 mint-btn ">Buy on Oasis.cash</a>
                     <a href="https://smartbch.org/" target="_blank"><img src="images/smartbch.png" alt="smartbch" className="smartbch"/></a>
                     <a href="https://bitcoincash.org/" target="_blank"><img src="images/bitcoin-cash-logo-horizontal-wt.svg" alt="BCH" className="bch"/></a>
                     <p class="mt-5"><a href="https://read.cash/@carisdaneym2/how-to-set-up-smartbch-network-on-metamask-and-smartbch-coinflex-bridge-7f64c443" className="underline">How to setup Metamask with smartBCH &amp; Bridge BCH</a> | <a href="https://read.cash/@maplesyrupsuckr/announcing-poolside-puffers-help-mint-2100-nfts-and-support-a-local-vietnamese-orphanage-0557fc83" className="underline">About Poolside Puffers</a></p>
