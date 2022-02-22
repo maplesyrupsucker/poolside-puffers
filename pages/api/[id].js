@@ -263,7 +263,7 @@ function numberOfDiamonds(attributes) {
         "name": tokenName,
         "description": "Poolside Puffers is a community-centered art project to introduce the Bitcoin Cash community to smartBCH NFT's. Poolside Puffers are ready to catch!",
         "tokenId" : parseInt(query),
-        "image": `https://gateway.pinata.cloud/ipfs/${trait["imageIPFS"]}`,
+        "image": `https://cong.mypinata.cloud/ipfs/${trait["imageIPFS"]}`,
         "external_url":"https://puffers.cash",
         "attributes": [   
           {
@@ -332,7 +332,7 @@ function numberOfDiamonds(attributes) {
         "name": tokenName,
         "description": "Poolside Puffers is a community-centered art project to introduce the Bitcoin Cash community to smartBCH NFT's. Poolside Puffers are ready to catch!",
         "tokenId" : parseInt(query),
-        "image": `https://gateway.pinata.cloud/ipfs/${trait["imageIPFS"]}`,
+        "image": `https://cong.mypinata.cloud/ipfs/${trait["imageIPFS"]}`,
         "external_url":"https://puffers.cash",
         "numberOfDiamonds":numberOfDiamonds(attributes),
         "numberOfPureBloods":numberOfPureBloods(attributes),
