@@ -3,7 +3,7 @@ import Web3 from "web3";
 import { useState, useEffect } from 'react';
 
 import {ADDRESS, ABI} from "../config.js"
-import PufferCard from "./PufferCard";
+import PufferCard from "../components/PufferCard";
 
 export default function Pool() {
 

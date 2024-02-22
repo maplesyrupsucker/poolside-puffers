@@ -1,4 +1,5 @@
 import Head from 'next/head'
+import Navigation from '../components/navigation'
 
 export default function Home() {
 
@@ -21,31 +22,14 @@ export default function Home() {
         <meta name="twitter:title" content="Poolside Puffers" key="twtitle" />
         <meta name="twitter:description" content="Poolside Puffers is a community-centered art project to introduce the Bitcoin Cash community to smartBCH NFT's. Poolside Puffers are ready to catch!" key="twdesc" />
         <meta name="twitter:image" content="https://puffers.cash/images/puffers-bch.gif" key="twimage" />
-      </Head>
+      </Head>  
 
-
-        
-
-      <div >
-          <div className="flex items-center justify-between w-full border-b-2">
-            <nav className="flex flex-wrap flex-row justify-around Poppitandfinchsans">
-              <a href="#" className="text-4xl text-white hover:text-black m-3">Home</a>
-              <a href="https://oasis.cash/collection/0x88fA0495d5E9C1B178EAc1D76DF9D729e39fD8E8" className="text-4xl hover:text-black m-3 text-black">Buy!</a>
-              <a href="/your-pool" className="text-4xl text-white hover:text-black m-3">Your Pool</a>
-              <a href="/collection" className="text-4xl text-white hover:text-black m-3">Collection</a>
-              <a href="/rarity" className="text-4xl text-white hover:text-black m-3">Rarity</a>
-              {/* <a href="https://twitter.com/poolsidepuffers" className="text-4xl text-white hover:text-black m-3">TWITTER</a> */}
-              <a href="https://t.me/poolsidepuffers" className="text-4xl text-white hover:text-black m-3">TELEGRAM</a>
-            </nav>
-             
-          </div>
-          
-        </div>
+      <Navigation />
 
         <div className="md:w-3/3 w-4/5 " id="about">
        
         
-          <div className="mt-6 py-6">
+        <div className="mt-6 py-6">
             <div className="flex flex-wrap lg:flex-nowrap justify-around items-center">
                   <div className="w-4/4 lg:w-2/4">
                     <h1 className="text-7xl Poppitandfinchsans text-white ">Poolside Puffers</h1>
