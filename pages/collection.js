@@ -43,7 +43,8 @@ export default function Pool() {
 
           </div>
           <div className=" py-6 w-4/4 text-center">
-            <div><p>Contract: <span className="text-blau">0x88fA0495d5E9C1B178EAc1D76DF9D729e39fD8E8</span></p></div>
+            <div><p>CashTokens TokenId: <span className="text-blau">to-be-announced</span></p></div>
+            <div><p>SmartBCH Contract: <span className="text-blau">0x88fA0495d5E9C1B178EAc1D76DF9D729e39fD8E8</span></p></div>
 
           </div>
           <div className="text-center py-6">
