@@ -47,7 +47,7 @@ export default function Home() {
                     <a href="https://bitcoincash.org/" target="_blank" className='mr-5'><img src="images/bitcoin-cash-logo-horizontal-wt.svg" alt="BCH" className="bch"/></a>
                     <a href="https://smartbch.org/" target="_blank"><img src="images/smartbch.png" alt="smartbch" className="smartbch"/></a>
                     
-                    <p class="mt-5">
+                    <p className="mt-5">
                     <a href="https://read.cash/@maplesyrupsuckr/announcing-poolside-puffers-help-mint-2100-nfts-and-support-a-local-vietnamese-orphanage-0557fc83" className="underline">About Poolside Puffers</a><br/><br/>
                     <a href="https://news.bitcoin.com/smartbch-poolside-puffers-nft-collection-sells-out-in-3-days-100-of-proceeds-goes-to-orphanage-in-vietnam/" className="underline">"Smartbch Poolside Puffers NFT Collection Sells Out in 3 Days — 100% of Proceeds Goes to Orphanage in Vietnam"</a> - Bitcoin.com News
                     </p>

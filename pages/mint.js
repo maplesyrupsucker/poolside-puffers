@@ -188,7 +188,7 @@ export default function Mint() {
 
               <p><a href="https://smartbch.org/" target="_blank"><img src="images/smartbch.png" alt="smartbch" className="smartbch"/></a>
               <a href="https://bitcoincash.org/" target="_blank"><img src="images/bitcoin-cash-logo-horizontal-wt.svg" alt="BCH" className="bch"/></a></p>
-              <p class="mt-5"><a href="https://read.cash/@carisdaneym2/how-to-set-up-smartbch-network-on-metamask-and-smartbch-coinflex-bridge-7f64c443" className="underline">How to setup Metamask with smartBCH &amp; Bridge BCH</a> | <a href="https://read.cash/@maplesyrupsuckr/announcing-poolside-puffers-help-mint-2100-nfts-and-support-a-local-vietnamese-orphanage-0557fc83" className="underline">About Poolside Puffers</a></p>
+              <p className="mt-5"><a href="https://read.cash/@carisdaneym2/how-to-set-up-smartbch-network-on-metamask-and-smartbch-coinflex-bridge-7f64c443" className="underline">How to setup Metamask with smartBCH &amp; Bridge BCH</a> | <a href="https://read.cash/@maplesyrupsuckr/announcing-poolside-puffers-help-mint-2100-nfts-and-support-a-local-vietnamese-orphanage-0557fc83" className="underline">About Poolside Puffers</a></p>
               <div><p className="mt-5">Contract: <span className="text-blau">0x88fA0495d5E9C1B178EAc1D76DF9D729e39fD8E8</span></p></div>
 
             </div> 
