@@ -1,22 +1,33 @@
 import Head from 'next/head'
 import Navigation from '../components/navigation'
 import Web3 from "web3";
+import {decodeCashAddress} from '@bitauth/libauth'
 import { useState, useEffect } from 'react';
-
-import {ADDRESS, ABI} from "../config.js"
 
 export default function Home() {
 
     // FOR WALLET
     const [signedIn, setSignedIn] = useState(false)
     const [walletAddress, setWalletAddress] = useState(null)
-    const [myTokenId, setMyTokenId] = useState(null)
-    const [pufferContract, setPufferContract] = useState(null)
+    const [userBurnedNfts, setUserBurnedNfts] = useState([11,225])
+    const [nftsBridged, setNftsBridged] = useState(null)
+    const [validTokenAddress, setValidTokenAddress] = useState(false)
 
+    const serverUrl = "https://api.reapers.cash/"
+
+    function isTokenAddress(address) {
+      const result = decodeCashAddress(address);
+      if (typeof result === 'string') throw new Error(result);
+      const supportsTokens = (result.type === 'p2pkhWithTokens' || result.type === 'p2shWithTokens');
+      return supportsTokens;
+    }
   
     useEffect( async() => {
       await new Promise(resolve => setTimeout(resolve, 500));
       signIn()
+      const fetchBackend = await fetch(serverUrl);
+      const jsonResult = await fetchBackend.json()
+      setNftsBridged(jsonResult?.nftsBridged)
     }, [])
   
     async function signIn() {
@@ -27,9 +38,6 @@ export default function Home() {
   
         const walletAddress = (await web3.eth.getAccounts())[0];
         setWalletAddress(walletAddress);
-        const pufferContract = new window.web3.eth.Contract(ABI, ADDRESS)
-        setPufferContract(pufferContract)
-  
       } else {
         alert("No Ethereum interface injected into browser. Read-only access");
       }
@@ -45,8 +53,6 @@ export default function Home() {
             let wallet = accounts[0]
             setWalletAddress(wallet)
             setSignedIn(true)
-            callContractData(wallet)
-            setMyTokenId(wallet)
   
           })
           .catch(function (error) {
@@ -81,6 +87,7 @@ export default function Home() {
       </Head>
 
       <Navigation />
+      
       <div className="flex auth my-8 font-bold  connect-btn  justify-center items-center vw2">
         {!signedIn ? <button onClick={signIn} className="montserrat inline-block border-2 border-black bg-white border-opacity-100 no-underline hover:text-black py-2 px-4 mx-4 shadow-lg hover:bg-blue-500 hover:text-gray-100">Connect Wallet with Metamask</button>
           : <button onClick={signOut} className="montserratinline-block border-2 border-black bg-white border-opacity-100 no-underline hover:text-black py-2 px-4 mx-4 shadow-lg hover:bg-blue-500 hover:text-gray-100">Wallet Connected: {walletAddress.slice(0,20) + "..."}</button>
@@ -97,31 +104,53 @@ export default function Home() {
               <div><h3 className="Poppitandfinchsans text-6xl text-white items-center bg-grey-lighter rounded rounded-r-none px-3 font-bold">BRIDGE NOW!</h3></div>
             </div>
 
-            <p className='my-3'>
+            <div className='my-3'>
               <a href="https://smartbch.org/" target="_blank"><img src="images/smartbch.png" alt="smartbch" className="smartbch" style={{marginTop:"0px"}}/></a>
               ➔
               <a href="https://bitcoincash.org/" target="_blank"><img src="images/bitcoin-cash-logo-horizontal-wt.svg" alt="BCH" className="bch"  style={{marginTop:"0px", marginLeft:"10px"}}/></a>
+            </div>
+
+            <p className="text-2xl text-white my-6  montserrat" style={{display:"flex", justifyContent:"center", margin:"0"}}>
+              <span className="text-white text-2xl montserrat">
+                  <strong>BRIDGE PRICE:</strong> 0.005 BCH each
+                </span>
             </p>
             
           <span className="flex Poppitandfinchsans text-5xl text-white items-center bg-grey-lighter rounded rounded-r-none my-3 ">
             TOTAL PUFFERS RESCUED: 
-            <span className="text-blau text-6xl" style={{marginLeft:"25px"}}> 0 / 2100</span>
+            <span className="text-blau text-6xl" style={{marginLeft:"25px"}}> {nftsBridged} / 2100</span>
           </span>
 
           <div className='w-4/4 lg:w-3/4 text-center'>
             {! walletAddress?
               <p className="text-xl montserrat text-white">
                 Connect your MetaMask Wallet to bridge...
-              </p> : <p className="text-xl montserrat text-white">
-                Status: Connected
-              </p>
+              </p> : <div>
+                <p className="montserrat">
+                  To bridge your Poolside Puffers, send your Puffers to the SBCH burn address <br/>
+                  <code className="text-white">0x000000000000000000000000000000000000dead</code><br/>
+                </p>
+                
+                {!userBurnedNfts?.length ? 
+                <p className="mt-4 montserrat">
+                  Listening for incoming transactions...
+                </p>
+                : <><p className="mt-4 montserrat">
+                    Your Poolside Puffers <span className="text-white">{userBurnedNfts.map(n => `#${n}`).join(", ")} </span>
+                    are ready to be bridged!
+                  </p>
+                  <p className="mt-4 montserrat">Input a CashTokens receiving address below:</p>
+                  <input style={{width:"350px", padding:"4px 6px"}} placeholder="CashTokens Address"/>
+                  <button className="mt-5 Poppitandfinchsans text-4xl border-6 bg-blau  text-white hover:text-black p-2 ">
+                    Complete bridge payment ({0.005 * userBurnedNfts.length} BCH)
+                  </button>
+                </>}
+
+              </div>
             }
           </div>
-          
 
-            <div style={{height:"250px"}}></div>
-
-            <p><strong>Note: </strong>bridging to CashTokens is only one way, your Puffers cannot be returned to SBCH.</p>
+            <p className='mt-5'><strong>Note: </strong>bridging to CashTokens is only one way, your Puffers cannot be returned to SBCH.</p>
           </div> 
         </div>
       </div>  
