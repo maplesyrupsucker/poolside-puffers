@@ -9,11 +9,11 @@ export default function Home() {
     // FOR WALLET
     const [signedIn, setSignedIn] = useState(false)
     const [walletAddress, setWalletAddress] = useState(null)
-    const [userBurnedNfts, setUserBurnedNfts] = useState([11,225])
+    const [userBurnedNfts, setUserBurnedNfts] = useState(null)
     const [nftsBridged, setNftsBridged] = useState(null)
-    const [validTokenAddress, setValidTokenAddress] = useState(false)
+    const [validTokenAddress, setValidTokenAddress] = useState(undefined)
 
-    const serverUrl = "https://api.reapers.cash/"
+    const serverUrl = "https://api.reapers.cash"
 
     function isTokenAddress(address) {
       const result = decodeCashAddress(address);
@@ -29,6 +29,29 @@ export default function Home() {
       const jsonResult = await fetchBackend.json()
       setNftsBridged(jsonResult?.nftsBridged)
     }, [])
+
+    useEffect(() => {
+      const getUserBurnedPuffers = async () => {
+        try {
+          const res = await fetch(serverUrl+'/address/'+ walletAddress);
+          const userBurnedPuffers = await res.json();
+          const listNftItems = userBurnedPuffers.filter(item => !item.timebridged)
+          const listNftNumbers = listNftItems.map(item => item.nftnumber)
+          setUserBurnedNfts(listNftNumbers)
+        } catch (error) {
+          console.log(error);
+        }
+      };
+
+      getUserBurnedPuffers();
+        
+      const refetch = setInterval(() => {
+        getUserBurnedPuffers();
+      }, 5000);
+    
+      return () => clearInterval(refetch);
+    }, [walletAddress])
+    
   
     async function signIn() {
       if (typeof window.web3 !== 'undefined') {
@@ -64,6 +87,19 @@ export default function Home() {
     async function signOut() {
       setSignedIn(false)
     }
+
+    function inputUserAdrr (event) {
+      const userAddress = event.target.value;
+      if(!userAddress){ 
+        setValidTokenAddress(undefined)
+        return
+      }
+      let isValidAddress = false
+      try{
+        isValidAddress = isTokenAddress(userAddress)
+      } catch {}
+      setValidTokenAddress(isValidAddress)
+    };
 
   return (
     <div id="bodyy" className="flex flex-col items-center justify-center min-h-screen py-2">
@@ -140,11 +176,22 @@ export default function Home() {
                     are ready to be bridged!
                   </p>
                   <p className="mt-4 montserrat">Input a CashTokens receiving address below:</p>
-                  <input style={{width:"350px", padding:"4px 6px"}} placeholder="CashTokens Address"/>
-                  <button className="mt-5 Poppitandfinchsans text-4xl border-6 bg-blau  text-white hover:text-black p-2 ">
+                  <input onChange={(e) => inputUserAdrr(e)} style={{width:"350px", padding:"4px 6px"}} placeholder="CashTokens Address"/>
+                  {validTokenAddress? <span className="text-xl"> ✅</span>:null}
+                  {validTokenAddress === false ?<div id="addressError" style={{color: "black", fontWeight: "500", marginTop: "10px"}}>
+                    Not a valid CashTokens address.
+                  </div> : null}
+
+                  {!validTokenAddress ?<div className="mt-5 Poppitandfinchsans text-4xl border-6 bg-blau  text-white p-2 ">
                     Complete bridge payment ({0.005 * userBurnedNfts.length} BCH)
-                  </button>
+                  </div> : null}
                 </>}
+
+                {userBurnedNfts?.length && validTokenAddress ? 
+                  <button className="mt-5 Poppitandfinchsans text-4xl border-6 bg-blau  text-white hover:text-black p-2" style={{width:"100%"}}>
+                    Complete bridge payment ({0.005 * userBurnedNfts.length} BCH)
+                  </button> : null
+              }
 
               </div>
             }
