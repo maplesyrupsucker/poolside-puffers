@@ -1,6 +1,7 @@
 import Head from 'next/head'
 import Navigation from '../components/navigation'
 import Web3 from "web3";
+import { ethers } from "ethers";
 import {decodeCashAddress} from '@bitauth/libauth'
 import { useState, useEffect } from 'react';
 
@@ -8,12 +9,15 @@ export default function Home() {
 
     // FOR WALLET
     const [signedIn, setSignedIn] = useState(false)
-    const [walletAddress, setWalletAddress] = useState(null)
+    const [sbchWalletAddress, setSbchWalletAddress] = useState(null)
+    const [cashtokensAddr, setCashtokensAddr] = useState(null)
     const [userBurnedNfts, setUserBurnedNfts] = useState(null)
     const [nftsBridged, setNftsBridged] = useState(null)
     const [validTokenAddress, setValidTokenAddress] = useState(undefined)
+    const [orderId, setOrderId] = useState(null)
 
-    const serverUrl = "https://api.reapers.cash"
+    const serverUrl = "http://localhost:3000"
+    const successPageRedirect = "http://localhost:3001/succes"
 
     function isTokenAddress(address) {
       const result = decodeCashAddress(address);
@@ -33,9 +37,9 @@ export default function Home() {
     useEffect(() => {
       const getUserBurnedPuffers = async () => {
         try {
-          const res = await fetch(serverUrl+'/address/'+ walletAddress);
+          const res = await fetch(serverUrl+'/address/'+ sbchWalletAddress);
           const userBurnedPuffers = await res.json();
-          const listNftItems = userBurnedPuffers.filter(item => !item.timebridged)
+          const listNftItems = userBurnedPuffers.filter(item => !item.orderid)
           const listNftNumbers = listNftItems.map(item => item.nftnumber)
           setUserBurnedNfts(listNftNumbers)
         } catch (error) {
@@ -50,7 +54,37 @@ export default function Home() {
       }, 5000);
     
       return () => clearInterval(refetch);
-    }, [walletAddress])
+    }, [sbchWalletAddress])
+
+    useEffect(() => {
+      if(!validTokenAddress){
+        setOrderId(null)
+        return
+      }
+      const createOrder = async () => {
+        try {
+          // use ethers instead of Web3 because Web3 prefixes message
+          const provider = new ethers.providers.Web3Provider(window.ethereum)
+          const signer = provider.getSigner()   
+          const signature = await signer.signMessage(cashtokensAddr);
+          const rawResponse = await fetch(serverUrl+'/signbridging', {
+            method: 'POST',
+            headers: {
+              'Accept': 'application/json',
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({signature, sbchOriginAddress:sbchWalletAddress, destinationAddress:cashtokensAddr, nftList:userBurnedNfts})
+          });
+          const response = await rawResponse.json();
+          console.log(response)
+          setOrderId(response.orderId)
+        } catch (error) {
+          console.log(error);
+        }
+      };
+
+      createOrder();
+    }, [validTokenAddress])
     
   
     async function signIn() {
@@ -60,28 +94,28 @@ export default function Home() {
   
   
         const walletAddress = (await web3.eth.getAccounts())[0];
-        setWalletAddress(walletAddress);
+        setSbchWalletAddress(walletAddress);
       } else {
         alert("No Ethereum interface injected into browser. Read-only access");
       }
   
       window.ethereum?.enable()
-          .then(function (accounts) {
-            window.web3.eth.net.getNetworkType()
-                // checks if connected network is mainnet (change this to rinkeby if you wanna test on testnet)
-  
-                .then((network) => {console.log(network);if(network != "private"){
-                  alert("You are on " + network + " network. Change Metamask network to smartBCH or you won't be able to do anything here")}
-                });
-            let wallet = accounts[0]
-            setWalletAddress(wallet)
-            setSignedIn(true)
-  
-          })
-          .catch(function (error) {
-            // Handle error. Likely the user rejected the login
-            console.error(error)
-          })
+        .then(async function () {
+          window.web3.eth.net.getNetworkType()
+              // checks if connected network is mainnet (change this to rinkeby if you wanna test on testnet)
+    
+              .then((network) => {console.log(network);if(network != "private"){
+                alert("You are on " + network + " network. Change Metamask network to smartBCH or you won't be able to do anything here")}
+              });
+          const walletAddress = (await web3.eth.getAccounts())[0];
+          setSbchWalletAddress(walletAddress)
+          setSignedIn(true)
+
+        })
+        .catch(function (error) {
+          // Handle error. Likely the user rejected the login
+          console.error(error)
+        })
     }
   
     async function signOut() {
@@ -97,6 +131,7 @@ export default function Home() {
       let isValidAddress = false
       try{
         isValidAddress = isTokenAddress(userAddress)
+        setCashtokensAddr(userAddress)
       } catch {}
       setValidTokenAddress(isValidAddress)
     };
@@ -104,7 +139,7 @@ export default function Home() {
   return (
     <div id="bodyy" className="flex flex-col items-center justify-center min-h-screen py-2">
       <Head>
-        <title>Poolside Puffers - Trait Rarity</title>
+        <title>Poolside Puffers - Bridge</title>
         <link rel="icon" href="/images/favicon.png" />
 
         <meta property="og:title" content="Poolside Puffers" key="ogtitle" />
@@ -126,7 +161,7 @@ export default function Home() {
       
       <div className="flex auth my-8 font-bold  connect-btn  justify-center items-center vw2">
         {!signedIn ? <button onClick={signIn} className="montserrat inline-block border-2 border-black bg-white border-opacity-100 no-underline hover:text-black py-2 px-4 mx-4 shadow-lg hover:bg-blue-500 hover:text-gray-100">Connect Wallet with Metamask</button>
-          : <button onClick={signOut} className="montserratinline-block border-2 border-black bg-white border-opacity-100 no-underline hover:text-black py-2 px-4 mx-4 shadow-lg hover:bg-blue-500 hover:text-gray-100">Wallet Connected: {walletAddress.slice(0,20) + "..."}</button>
+          : <button onClick={signOut} className="montserratinline-block border-2 border-black bg-white border-opacity-100 no-underline hover:text-black py-2 px-4 mx-4 shadow-lg hover:bg-blue-500 hover:text-gray-100">Wallet Connected: {sbchWalletAddress.slice(0,20) + "..."}</button>
         }
       </div>
 
@@ -163,8 +198,8 @@ export default function Home() {
           </span>
 
           <div className='w-4/4 lg:w-3/4 text-center'>
-            {! walletAddress?
-              <p className="text-xl montserrat text-white">
+            {! sbchWalletAddress?
+              <p className="text-xl montserrat text-white my-9">
                 Connect your MetaMask Wallet to bridge...
               </p> : <div>
                 <p className="montserrat">
@@ -195,10 +230,23 @@ export default function Home() {
                   </div> : null}
                 </>}
 
-                {userBurnedNfts?.length && validTokenAddress ? 
-                  <button className="mt-5 Poppitandfinchsans text-4xl border-6 bg-blau  text-white hover:text-black p-2" style={{width:"100%"}}>
+                {userBurnedNfts?.length && validTokenAddress && !orderId?
+                  <div className='mt-5'>Sign CashTokens address in MetaMask...</div>
+                :null}
+
+                {userBurnedNfts?.length && orderId ?
+                  <form name="prompt-cash-form" action="https://prompt.cash/pay" method="get">
+                    <input type="hidden" name="token" value="956-3A2pABrf"/>
+                    <input type="hidden" name="tx_id" value={orderId}/>
+                    <input type="hidden" name="amount" value="0.01"/>
+                    <input type="hidden" name="currency" value="USD"/>
+                    <input type="hidden" name="return" value={successPageRedirect+orderId}/>
+                    <input type="hidden" name="callback" value={serverUrl+"/callback"}/>
+                    <button type="submit" className="mt-5 Poppitandfinchsans text-4xl border-6 bg-blau  text-white hover:text-black p-2" style={{width:"100%"}}>
                     Complete bridge payment ({0.005 * userBurnedNfts.length} BCH)
-                  </button> : null
+                  </button>
+                  </form>
+                   : null
               }
 
               </div>
