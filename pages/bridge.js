@@ -151,6 +151,11 @@ export default function Home() {
                   <strong>BRIDGE PRICE:</strong> 0.005 BCH each
                 </span>
             </p>
+            <p className="mt-2">
+              ❤️ <strong>100% DONATED TO </strong>
+              <a href="https://www.facebook.com/pages/Tr%E1%BA%A1i%20Tr%E1%BA%BB%20M%E1%BB%93%20C%C3%B4i,%20Khuy%E1%BA%BFt%20T%E1%BA%ADt%20K291%20L%C3%AA%20V%C4%83n%20Hi%E1%BA%BFn%20-%20%C4%90%C3%A0%20N%E1%BA%B5ng/735114560005794/" className="underline text-blau">Orphanage - Disabled Children</a>
+              , K291 Lê Văn Hiến Da Nang, Vietnam
+            </p>
             
           <span className="flex Poppitandfinchsans text-5xl text-white items-center bg-grey-lighter rounded rounded-r-none my-3 ">
             TOTAL PUFFERS RESCUED: 
@@ -168,9 +173,12 @@ export default function Home() {
                 </p>
                 
                 {!userBurnedNfts?.length ? 
-                <p className="mt-4 montserrat">
-                  Listening for incoming transactions...
-                </p>
+                <div>
+                  <p className="mt-4 montserrat">
+                    Listening for incoming transactions...
+                  </p>
+                  <p className='mt-5'><strong>Note: </strong>bridging to CashTokens is only one way, your Puffers cannot be returned to SBCH.</p>
+                </div>
                 : <><p className="mt-4 montserrat">
                     Your Poolside Puffers <span className="text-white">{userBurnedNfts.map(n => `#${n}`).join(", ")} </span>
                     are ready to be bridged!
@@ -196,8 +204,6 @@ export default function Home() {
               </div>
             }
           </div>
-
-            <p className='mt-5'><strong>Note: </strong>bridging to CashTokens is only one way, your Puffers cannot be returned to SBCH.</p>
           </div> 
         </div>
       </div>  
