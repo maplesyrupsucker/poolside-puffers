@@ -186,22 +186,18 @@ export default function Home() {
                   <strong>BRIDGE PRICE:</strong> 0.005 BCH each
                 </span>
             </p>
-            <p className="mt-2">
-              ❤️ <strong>100% DONATED TO </strong>
-              <a href="https://www.facebook.com/pages/Tr%E1%BA%A1i%20Tr%E1%BA%BB%20M%E1%BB%93%20C%C3%B4i,%20Khuy%E1%BA%BFt%20T%E1%BA%ADt%20K291%20L%C3%AA%20V%C4%83n%20Hi%E1%BA%BFn%20-%20%C4%90%C3%A0%20N%E1%BA%B5ng/735114560005794/" className="underline text-blau">Orphanage - Disabled Children</a>
-              , K291 Lê Văn Hiến Da Nang, Vietnam
-            </p>
             
-          <span className="flex Poppitandfinchsans text-5xl text-white items-center bg-grey-lighter rounded rounded-r-none my-3 ">
-            TOTAL PUFFERS RESCUED: 
-            <span className="text-blau text-6xl" style={{marginLeft:"25px"}}> {nftsBridged} / 2100</span>
-          </span>
+            <span className="flex Poppitandfinchsans text-5xl text-white items-center bg-grey-lighter rounded rounded-r-none my-3 ">
+              TOTAL PUFFERS RESCUED: 
+              <span className="text-blau text-6xl" style={{marginLeft:"25px"}}> {nftsBridged} / 2100</span>
+            </span>
 
-          <div className='w-4/4 lg:w-3/4 text-center'>
+            <div className='w-4/4 lg:w-3/4 text-center'>
             {! sbchWalletAddress?
               <p className="text-xl montserrat text-white my-9">
                 Connect your MetaMask Wallet to bridge...
-              </p> : <div>
+              </p> 
+            : <div>
                 <p className="montserrat">
                   To bridge your Poolside Puffers, send your Puffers to the SBCH burn address <br/>
                   <code className="text-white">0x000000000000000000000000000000000000dead</code><br/>
@@ -248,10 +244,14 @@ export default function Home() {
                   </form>
                    : null
               }
-
               </div>
             }
-          </div>
+              <p className="mt-5">
+                ❤️ <strong>100% DONATED TO </strong>
+                <a href="https://www.facebook.com/pages/Tr%E1%BA%A1i%20Tr%E1%BA%BB%20M%E1%BB%93%20C%C3%B4i,%20Khuy%E1%BA%BFt%20T%E1%BA%ADt%20K291%20L%C3%AA%20V%C4%83n%20Hi%E1%BA%BFn%20-%20%C4%90%C3%A0%20N%E1%BA%B5ng/735114560005794/" className="underline text-blau">Orphanage - Disabled Children</a>
+                , K291 Lê Văn Hiến Da Nang, Vietnam
+              </p>
+            </div>
           </div> 
         </div>
       </div>  
