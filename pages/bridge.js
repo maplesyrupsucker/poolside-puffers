@@ -17,7 +17,7 @@ export default function Home() {
     const [orderId, setOrderId] = useState(null)
 
     const serverUrl = "http://localhost:3000"
-    const successPageRedirect = "http://localhost:3001/succes"
+    const successPageRedirect = "http://localhost:3001/success"
 
     function isTokenAddress(address) {
       const result = decodeCashAddress(address);
@@ -236,7 +236,7 @@ export default function Home() {
                     <input type="hidden" name="tx_id" value={orderId}/>
                     <input type="hidden" name="amount" value="0.01"/>
                     <input type="hidden" name="currency" value="USD"/>
-                    <input type="hidden" name="return" value={successPageRedirect+orderId}/>
+                    <input type="hidden" name="return" value={successPageRedirect+"?orderid="+orderId}/>
                     <input type="hidden" name="callback" value={serverUrl+"/callback"}/>
                     <button type="submit" className="mt-5 Poppitandfinchsans text-4xl border-6 bg-blau  text-white hover:text-black p-2" style={{width:"100%"}}>
                     Complete bridge payment ({0.005 * userBurnedNfts.length} BCH)
