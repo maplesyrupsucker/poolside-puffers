@@ -16,7 +16,7 @@ export default function Home() {
     const [validTokenAddress, setValidTokenAddress] = useState(undefined)
     const [orderId, setOrderId] = useState(null)
 
-    const serverUrl = "http://localhost:3000"
+    const serverUrl = "https://puffers.reapers.cash"
     const successPageRedirect = "http://localhost:3001/success"
 
     function isTokenAddress(address) {
@@ -234,8 +234,8 @@ export default function Home() {
                   <form name="prompt-cash-form" action="https://prompt.cash/pay" method="get">
                     <input type="hidden" name="token" value="956-3A2pABrf"/>
                     <input type="hidden" name="tx_id" value={orderId}/>
-                    <input type="hidden" name="amount" value="0.01"/>
-                    <input type="hidden" name="currency" value="USD"/>
+                    <input type="hidden" name="amount" value={0.005 * userBurnedNfts.length}/>
+                    <input type="hidden" name="currency" value="BCH"/>
                     <input type="hidden" name="return" value={successPageRedirect+"?orderid="+orderId}/>
                     <input type="hidden" name="callback" value={serverUrl+"/callback"}/>
                     <button type="submit" className="mt-5 Poppitandfinchsans text-4xl border-6 bg-blau  text-white hover:text-black p-2" style={{width:"100%"}}>

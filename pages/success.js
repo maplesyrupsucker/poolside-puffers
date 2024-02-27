@@ -1,11 +1,29 @@
 import Head from 'next/head'
 import Navigation from '../components/navigation'
-import { useRouter } from 'next/router'
+import { useSearchParams } from 'next/navigation'
+import { useState, useEffect } from 'react';
 
 export default function Success() {
-  const router = useRouter()
-  const {orderid} = router.query
-  console.log(orderid)
+  const [orderId, setOrderId] = useState(undefined);
+  const [myorder, setMyorder] = useState(undefined)
+
+  const searchParams = useSearchParams()
+  const serverUrl = "https://puffers.reapers.cash"
+ 
+  useEffect(() => {
+    const orderid = searchParams.get('orderid')
+    setOrderId(orderid)
+  }, [searchParams])
+  
+  useEffect(() => {
+    async function fetchData() {
+      const fetchBackend = await fetch(serverUrl+"/recentorders");
+      const jsonResult = await fetchBackend.json();
+      const myorder = jsonResult.find(item => item.id == orderId);
+      setMyorder(myorder)
+    }
+    if(orderId) fetchData();
+  }, [orderId])
 
   return (
     <div id="bodyy" className="flex flex-col items-center justify-center min-h-screen py-2">
@@ -38,9 +56,25 @@ export default function Success() {
           <div className="flex flex-col items-center">
             <div id="mint" className="flex justify-around mx-6">
               <div><h3 className="Poppitandfinchsans text-6xl text-white items-center bg-grey-lighter rounded rounded-r-none px-3 font-bold">
-                BRIDGED SUCESSFULLY!
+                BRIDGED SUCESSFULLY! 
               </h3></div>
             </div>
+            <br/>
+            <div className="text-2xl text-white my-6  montserrat" >
+              <div className="text-white text-2xl montserrat">
+                  <strong>TxId:</strong> {myorder?.txidbch}
+                </div>
+                <div className="text-white text-2xl montserrat">
+                  <strong>Address:</strong> {myorder?.destinationaddress}
+                </div>
+                <div className="text-white text-2xl montserrat">
+                  <strong>Bridged Puffers:</strong> {myorder?.nftlist.map(n => `#${n}`).join(", ")}
+                </div>
+                <div className="text-white text-2xl montserrat">
+                  <strong>Proceeds to charity:</strong> {myorder?.amountbchpaid +" BCH"}
+                </div>
+            </div>
+            
           </div>
         </div>
       </div>
