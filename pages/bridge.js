@@ -13,6 +13,7 @@ export default function Home() {
     const [cashtokensAddr, setCashtokensAddr] = useState(null)
     const [userBurnedNfts, setUserBurnedNfts] = useState(null)
     const [nftsBridged, setNftsBridged] = useState(null)
+    const [failedToFetch, setFailedToFetch] = useState(false)
     const [validTokenAddress, setValidTokenAddress] = useState(undefined)
     const [orderId, setOrderId] = useState(null)
 
@@ -26,12 +27,19 @@ export default function Home() {
       return supportsTokens;
     }
   
-    useEffect( async() => {
-      await new Promise(resolve => setTimeout(resolve, 500));
-      signIn()
-      const fetchBackend = await fetch(serverUrl);
-      const jsonResult = await fetchBackend.json()
-      setNftsBridged(jsonResult?.nftsBridged)
+    useEffect(() => {
+      async function fetchNumberBridged(){
+        try{
+          signIn()
+          const fetchBackend = await fetch(serverUrl);
+          const jsonResult = await fetchBackend.json()
+          setNftsBridged(jsonResult?.nftsBridged)
+        } catch(error){
+          console.log(error);
+          setFailedToFetch(true);
+        }
+      }
+      fetchNumberBridged()
     }, [])
 
     useEffect(() => {
@@ -44,6 +52,7 @@ export default function Home() {
           setUserBurnedNfts(listNftNumbers)
         } catch (error) {
           console.log(error);
+          setFailedToFetch(true);
         }
       };
 
@@ -80,6 +89,7 @@ export default function Home() {
           setOrderId(response.orderId)
         } catch (error) {
           console.log(error);
+          setFailedToFetch(true);
         }
       };
 
@@ -193,6 +203,7 @@ export default function Home() {
             </span>
 
             <div className='w-4/4 lg:w-3/4 text-center'>
+              {failedToFetch ? <strong>failed to reach backend... </strong> :<>
             {! sbchWalletAddress?
               <p className="text-xl montserrat text-white my-9">
                 Connect your MetaMask Wallet to bridge...
@@ -245,6 +256,7 @@ export default function Home() {
                    : null
               }
               </div>
+            }</>
             }
               <p className="mt-5">
                 ❤️ <strong>100% DONATED TO </strong>
