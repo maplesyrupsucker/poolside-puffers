@@ -52,7 +52,9 @@ export default function Home() {
                     <a href="https://news.bitcoin.com/smartbch-poolside-puffers-nft-collection-sells-out-in-3-days-100-of-proceeds-goes-to-orphanage-in-vietnam/" className="underline">"Smartbch Poolside Puffers NFT Collection Sells Out in 3 Days — 100% of Proceeds Goes to Orphanage in Vietnam"</a> - Bitcoin.com News
                     </p>
 
-                    <div><p className="mt-5">CashTokens TokenId: <span className="text-blau">to-be-announced</span></p></div>
+                    <div><p className="mt-5">CashTokens TokenId: <a className="text-blau" target='_blank' href='https://explorer.salemkode.com/token/8ded0441eab6fdb69560b396594861eb38b515bf98353e2b4d7ebdf388ebbec2'>
+                      8ded0441eab6fdb69560...3e2b4d7ebdf388ebbec2</a></p>
+                    </div>
                     <div><p className="mt-5">SmartBCH Contract: <span className="text-blau">0x88fA0495d5E9C1B178EAc1D76DF9D729e39fD8E8</span></p></div>
                   </div>
                   
