@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 
 import {ADDRESS, ABI} from "../config.js"
 import PufferCard from "../components/PufferCard";
+import Navigation from '../components/navigation'
 
 export default function Pool() {
 
@@ -134,26 +135,12 @@ export default function Pool() {
           <meta name="twitter:image" conpool="https://puffers.cashimages/puffers-bch.gif" key="twimage" />
         </Head>
 
-
-        <div >
-          <div className="flex items-center justify-between w-full border-b-2">
-            <nav className="flex flex-wrap flex-row justify-around Poppitandfinchsans">
-              <a href="/" className="text-4xl text-white hover:text-black m-3">Home</a>
-              <a href="https://oasis.cash/collection/0x88fA0495d5E9C1B178EAc1D76DF9D729e39fD8E8" className="text-4xl hover:text-black m-3 text-blau">Buy!</a>
-              <a href="/your-pool" className="text-4xl text-white hover:text-black m-3">Your Pool</a>
-              <a href="/collection" className="text-4xl text-white hover:text-black m-3">Collection</a>
-              <a href="/rarity" className="text-4xl text-white hover:text-black m-3">Rarity</a>
-              {/* <a href="https://twitter.com/poolsidepuffers" className="text-4xl text-white hover:text-black m-3">TWITTER</a> */}
-              <a href="https://t.me/poolsidepuffers" className="text-4xl text-white hover:text-black m-3">TELEGRAM</a>
-            </nav>
-
-          </div>
-          <div className="flex auth my-8 font-bold  connect-btn  justify-center items-center vw2">
-            {!signedIn ? <button onClick={signIn} className="montserrat inline-block border-2 border-black bg-white border-opacity-100 no-underline hover:text-black py-2 px-4 mx-4 shadow-lg hover:bg-blue-500 hover:text-gray-100">Connect Wallet with Metamask</button>
-                :
-                <button onClick={signOut} className="montserratinline-block border-2 border-black bg-white border-opacity-100 no-underline hover:text-black py-2 px-4 mx-4 shadow-lg hover:bg-blue-500 hover:text-gray-100">Wallet Connected: {walletAddress}</button>
-            }
-          </div>
+        <Navigation />
+      
+        <div className="flex auth my-8 font-bold  connect-btn  justify-center items-center vw2">
+          {!signedIn ? <button onClick={signIn} className="montserrat inline-block border-2 border-black bg-white border-opacity-100 no-underline hover:text-black py-2 px-4 mx-4 shadow-lg hover:bg-blue-500 hover:text-gray-100">Connect Wallet with Metamask</button>
+            : <button onClick={signOut} className="montserratinline-block border-2 border-black bg-white border-opacity-100 no-underline hover:text-black py-2 px-4 mx-4 shadow-lg hover:bg-blue-500 hover:text-gray-100">Wallet Connected: {walletAddress.slice(0,20) + "..."}</button>
+          }
         </div>
 
         <div className="w-4/5">
@@ -192,7 +179,13 @@ export default function Pool() {
 
           <div className="mt5 py-6 w-4/4 text-center mt-6">
             <small>Not seeing your minted puffers? Make sure you're connected to the right wallet and refresh the page.</small>
-            <div><p className="mt-5">Contract: <span className="text-blau">0x88fA0495d5E9C1B178EAc1D76DF9D729e39fD8E8</span></p></div>
+
+            <div className=" py-6 w-4/4 text-center">
+              <div><p>CashTokens TokenId: <a className="text-blau" target='_blank' href='https://explorer.salemkode.com/token/8ded0441eab6fdb69560b396594861eb38b515bf98353e2b4d7ebdf388ebbec2'>
+              8ded0441eab6fdb69560...3e2b4d7ebdf388ebbec2</a></p>
+              </div>
+              <div><p>SmartBCH Contract: <span className="text-blau">0x88fA0495d5E9C1B178EAc1D76DF9D729e39fD8E8</span></p></div>
+            </div>
 
             {/* Link to the full collection on a NFT marketplace like Opensea */}
             {/* <a href="#" className="Poppitandfinchsans text-4xl border-6 bg-black  text-white hover:text-blau p-2 ">VIEW ENTIRE COLLECTION!</a> */}
