@@ -225,8 +225,12 @@ export default function Home() {
                     Your Poolside Puffers <span className="text-white">{userBurnedNfts.map(n => `#${n}`).join(", ")} </span>
                     are ready to be bridged!
                   </p>
-                  <p className="mt-4 montserrat">Input a CashTokens receiving address below:</p>
-                  <input onChange={(e) => inputUserAdrr(e)} style={{width:"350px", padding:"4px 6px"}} placeholder="CashTokens Address"/>
+                  <p className="mt-4 montserrat">Input a CashTokens receiving address from 
+                    {" "}<a href="https://cashonize.com/" target="_blank" className="underline text-blau">Cashonize</a>,
+                    {" "}<a href="https://zapit.io/" target="_blank" className="underline text-blau">Zapit</a>
+                    {" or "}<a href="https://www.paytaca.com/" target="_blank" className="underline text-blau">Paytaca</a> wallet:
+                  </p>               
+                  <input onChange={(e) => inputUserAdrr(e)} style={{width:"350px", padding:"4px 6px"}} placeholder="CashTokens Address" className='mt-1'/>
                   {validTokenAddress? <span className="text-xl"> ✅</span>:null}
                   {validTokenAddress === false ?<div id="addressError" style={{color: "black", fontWeight: "500", marginTop: "10px"}}>
                     Not a valid CashTokens address.
