@@ -5,7 +5,8 @@ import { useState, useEffect } from 'react';
 
 export default function Success() {
   const [orderId, setOrderId] = useState(undefined);
-  const [myorder, setMyorder] = useState(undefined)
+  const [myorder, setMyorder] = useState(undefined);
+  const [failedToFetch, setFailedToFetch] = useState(false);
 
   const searchParams = useSearchParams()
   const serverUrl = "https://puffers.reapers.cash"
@@ -17,10 +18,15 @@ export default function Success() {
   
   useEffect(() => {
     async function fetchData() {
-      const fetchBackend = await fetch(serverUrl+"/recentorders");
-      const jsonResult = await fetchBackend.json();
-      const myorder = jsonResult.find(item => item.id == orderId);
-      setMyorder(myorder)
+      try{
+        const fetchBackend = await fetch(serverUrl+"/recentorders");
+        const jsonResult = await fetchBackend.json();
+        const myorder = jsonResult.find(item => item.id == orderId);
+        setMyorder(myorder)
+      } catch(error){
+        console.log(error);
+        setFailedToFetch(true)
+      }  
     }
     if(orderId) fetchData();
   }, [orderId])
@@ -60,6 +66,7 @@ export default function Success() {
               </h3></div>
             </div>
             <br/>
+            {failedToFetch ? <strong>failed to reach backend... </strong> :
             <div className="text-2xl text-white my-6  montserrat" >
               <div className="text-white text-2xl montserrat">
                   <strong>TxId:</strong> {myorder?.txidbch}
@@ -73,7 +80,7 @@ export default function Success() {
                 <div className="text-white text-2xl montserrat">
                   <strong>Proceeds to charity:</strong> {myorder?.amountbchpaid +" BCH"}
                 </div>
-            </div>
+            </div>}
             
           </div>
         </div>
