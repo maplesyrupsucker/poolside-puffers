@@ -263,7 +263,7 @@ export default function Home() {
             }</>
             }
               <p className="mt-5">
-                ❤️ <strong>100% DONATED TO </strong>
+                ❤️ <strong>100% OF BRIDGE FEES WILL BE DONATED TO </strong>
                 <a href="https://www.facebook.com/pages/Tr%E1%BA%A1i%20Tr%E1%BA%BB%20M%E1%BB%93%20C%C3%B4i,%20Khuy%E1%BA%BFt%20T%E1%BA%ADt%20K291%20L%C3%AA%20V%C4%83n%20Hi%E1%BA%BFn%20-%20%C4%90%C3%A0%20N%E1%BA%B5ng/735114560005794/" className="underline text-blau">Orphanage - Disabled Children</a>
                 , K291 Lê Văn Hiến Da Nang, Vietnam
               </p>
