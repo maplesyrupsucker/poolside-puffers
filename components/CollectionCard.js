@@ -1,6 +1,6 @@
 
 import React, { useState, useEffect } from "react";
-import useInfiniteScroll from "./useInfiniteScroll";
+import useInfiniteScroll from "../components/useInfiniteScroll";
 import ReactModal from 'react-modal';
 
 const customStyles = {
@@ -236,7 +236,7 @@ export default function CollectionCard({ sortBy }) {
                 </ul>
                 <br/>
 
-                <button className="rarity" onClick={()=>comparisonTraits(index)}>Rarity</button>
+                <button className=" rarity" onClick={()=>comparisonTraits(index)}>Rarity</button>
               </div>
           );
         })}

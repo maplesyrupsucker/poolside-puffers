@@ -1,8 +1,9 @@
 import Head from 'next/head'
 import React, { useState, useEffect } from 'react';
+import Navigation from '../components/navigation'
 
 import {ADDRESS, ABI} from "../config.js"
-import CollectionCard from "./CollectionCard";
+import CollectionCard from "../components/CollectionCard.js";
 
 export default function Pool() {
   const [sortBy, setSortBy] = useState('');
@@ -32,22 +33,7 @@ export default function Pool() {
           <meta name="twitter:image" conpool="https://puffers.cashimages/puffers-bch.gif" key="twimage" />
         </Head>
 
-
-        <div >
-          <div className="flex items-center justify-between w-full border-b-2">
-            <nav className="flex flex-wrap flex-row justify-around Poppitandfinchsans">
-              <a href="/" className="text-4xl text-white hover:text-black m-3">Home</a>
-              <a href="https://oasis.cash/collection/0x88fA0495d5E9C1B178EAc1D76DF9D729e39fD8E8" className="text-4xl hover:text-black m-3 text-blau">Buy!</a>
-              <a href="/your-pool" className="text-4xl text-white hover:text-black m-3">Your Pool</a>
-              <a href="/collection" className="text-4xl text-white hover:text-black m-3">Collection</a>
-              <a href="/rarity" className="text-4xl text-white hover:text-black m-3">Rarity</a>
-              {/* <a href="https://twitter.com/poolsidepuffers" className="text-4xl text-white hover:text-black m-3">TWITTER</a> */}
-              <a href="https://t.me/poolsidepuffers" className="text-4xl text-white hover:text-black m-3">TELEGRAM</a>
-            </nav>
-
-          </div>
-
-        </div>
+        <Navigation />
 
         <div className="w-4/5">
 
@@ -57,7 +43,10 @@ export default function Pool() {
 
           </div>
           <div className=" py-6 w-4/4 text-center">
-            <div><p>Contract: <span className="text-blau">0x88fA0495d5E9C1B178EAc1D76DF9D729e39fD8E8</span></p></div>
+            <div><p>CashTokens TokenId: <a className="text-blau" target='_blank' href='https://explorer.salemkode.com/token/8ded0441eab6fdb69560b396594861eb38b515bf98353e2b4d7ebdf388ebbec2'>
+            8ded0441eab6fdb69560...3e2b4d7ebdf388ebbec2</a></p>
+            </div>
+            <div><p>SmartBCH Contract: <span className="text-blau">0x88fA0495d5E9C1B178EAc1D76DF9D729e39fD8E8</span></p></div>
 
           </div>
           <div className="text-center py-6">
