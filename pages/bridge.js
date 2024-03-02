@@ -18,7 +18,6 @@ export default function Home() {
     const [orderId, setOrderId] = useState(null)
 
     const serverUrl = "https://puffers.reapers.cash"
-    const successPageRedirect = "http://localhost:3001/success"
 
     function isTokenAddress(address) {
       const result = decodeCashAddress(address);
@@ -210,16 +209,16 @@ export default function Home() {
               </p> 
             : <div>
                 <p className="montserrat">
-                  To bridge your Poolside Puffers, send your Puffers to the SBCH burn address <br/>
-                  <code className="text-white">0x000000000000000000000000000000000000dead</code><br/>
+                  <strong>Step 1)</strong> Prepare to bridge  🌉 some Puffers in <a target='_blank' href='/your-pool' className='text-white'>your pool</a>. <br/>
+                  <strong>Step 2)</strong> Enter your CashTokens address below & pay the bridging fee
                 </p>
                 
                 {!userBurnedNfts?.length ? 
                 <div>
-                  <p className="mt-4 montserrat">
-                    Listening for incoming transactions...
+                  <p className="my-7 montserrat text-white text-xl">
+                    No Puffers ready to be bridged yet...
                   </p>
-                  <p className='mt-5'><strong>Note: </strong>bridging to CashTokens is only one way, your Puffers cannot be returned to SBCH.</p>
+                  <p><strong>Note: </strong>bridging to CashTokens is only one way, your Puffers cannot be returned to SBCH.</p>
                 </div>
                 : <><p className="mt-4 montserrat">
                     Your Poolside Puffers <span className="text-white">{userBurnedNfts.map(n => `#${n}`).join(", ")} </span>
@@ -251,7 +250,7 @@ export default function Home() {
                     <input type="hidden" name="tx_id" value={orderId}/>
                     <input type="hidden" name="amount" value={0.005 * userBurnedNfts.length}/>
                     <input type="hidden" name="currency" value="BCH"/>
-                    <input type="hidden" name="return" value={successPageRedirect+"?orderid="+orderId}/>
+                    <input type="hidden" name="return" value={"https://puffers.cash/success?orderid="+orderId}/>
                     <input type="hidden" name="callback" value={serverUrl+"/callback"}/>
                     <button type="submit" className="mt-5 Poppitandfinchsans text-4xl border-6 bg-blau  text-white hover:text-black p-2" style={{width:"100%"}}>
                     Complete bridge payment ({0.005 * userBurnedNfts.length} BCH)
@@ -265,7 +264,7 @@ export default function Home() {
               <p className="mt-5">
                 ❤️ <strong>100% OF BRIDGE FEES WILL BE DONATED TO </strong>
                 <a href="https://www.facebook.com/pages/Tr%E1%BA%A1i%20Tr%E1%BA%BB%20M%E1%BB%93%20C%C3%B4i,%20Khuy%E1%BA%BFt%20T%E1%BA%ADt%20K291%20L%C3%AA%20V%C4%83n%20Hi%E1%BA%BFn%20-%20%C4%90%C3%A0%20N%E1%BA%B5ng/735114560005794/" className="underline text-blau">Orphanage - Disabled Children</a>
-                , K291 Lê Văn Hiến Da Nang, Vietnam
+                , <br/>K291 Lê Văn Hiến Da Nang, Vietnam
               </p>
             </div>
           </div> 

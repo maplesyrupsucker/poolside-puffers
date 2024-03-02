@@ -121,6 +121,28 @@ export default function PufferCard({ pufferContract, walletAddress,sortBy }) {
     }
   }
 
+  async function bridge(obj) {
+    console.log(obj);
+    if (!obj.tokenId) {
+      alert("something went wrong");
+    } else {
+      let address = "0x000000000000000000000000000000000000dead";
+      
+      const confirmed = window.confirm("Bridging to CashTokens is one way only, are you sure?");
+
+      if (!confirmed) {
+        console.log("bridging not confirmed");
+        return;
+      }
+
+      await pufferContract.methods
+        .safeTransferFrom(walletAddress, address, obj.tokenId)
+        .send({
+          from: walletAddress,
+        });
+    }
+  }
+
   useEffect(async () => {
     let r;
     if (sortBy==''){ // this is to ensure sort by does not call the api(its slow)
@@ -274,9 +296,15 @@ export default function PufferCard({ pufferContract, walletAddress,sortBy }) {
                 <br/>
                 <button className="rarity" onClick={()=>openTraitsModal(index)}>Rarity</button>
                 <br/>
-                <button className="transfer" onClick={() => transfer(obj)}>
-                  <small>Transfer</small>💌
-                </button>
+                <div style={{ position:"absolute", bottom: "0px", right:"0px"}}>
+                  <button className="transfer" onClick={() => transfer(obj)}>
+                    Transfer💌
+                  </button>
+                  <button className="transfer" onClick={() => bridge(obj)}>
+                    Bridge 🌉
+                  </button>
+                </div>
+                
               </div>
           );
         })}
