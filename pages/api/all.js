@@ -293,7 +293,7 @@ function numberOfHalfBloods(attributes) {
         "name": tokenName,
         "description": "Poolside Puffers is a community-centered art project to introduce the Bitcoin Cash community to smartBCH NFT's. Poolside Puffers are ready to catch!",
         "tokenId" : i,
-        "image": `https://cong.mypinata.cloud/ipfs/${trait["imageIPFS"]}`,
+        "image": `https://cong.mypinata.cloud/ipfs/${trait["imageIPFS"]}?pinataGatewayToken=${process.env.PINATA}`,
         "imageIPFS": trait["imageIPFS"],
         "local_image": `/images/all/`+i+`.png`,
         "external_url":"https://puffers.cash",
