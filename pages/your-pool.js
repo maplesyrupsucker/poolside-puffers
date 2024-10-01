@@ -180,11 +180,11 @@ export default function Pool() {
           <div className="mt5 py-6 w-4/4 text-center mt-6">
             <small>Not seeing your minted puffers? Make sure you're connected to the right wallet and refresh the page.</small>
 
-            <div className=" py-6 w-4/4 text-center">
-              <div><p>CashTokens TokenId: <a className="text-blau" target='_blank' href='https://explorer.salemkode.com/token/8ded0441eab6fdb69560b396594861eb38b515bf98353e2b4d7ebdf388ebbec2'>
-              8ded0441eab6fdb69560...3e2b4d7ebdf388ebbec2</a></p>
+            <div className="py-6 w-4/4 text-center">
+              <div><p>CashTokens TokenId: <a className="text-blau" target='_blank' href='https://explorer.salemkode.com/token/8ded0441eab6fdb69560b396594861eb38b515bf98353e2b4d7ebdf388ebbec2' style={{wordBreak: 'break-all'}}>
+              8ded0441eab6fdb69560b396594861eb38b515bf98353e2b4d7ebdf388ebbec2</a></p>
               </div>
-              <div><p>SmartBCH Contract: <span className="text-blau">0x88fA0495d5E9C1B178EAc1D76DF9D729e39fD8E8</span></p></div>
+              <div><p>SmartBCH Contract: <span className="text-blau" style={{wordBreak: 'break-all'}}>0x88fA0495d5E9C1B178EAc1D76DF9D729e39fD8E8</span></p></div>
             </div>
 
             {/* Link to the full collection on a NFT marketplace like Opensea */}

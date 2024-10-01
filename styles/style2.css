@@ -154,6 +154,13 @@
         min-height:250px;
         width:100%;
     }
+    
+    @media (max-width: 600px) {
+        #puffer-pool .puffer img {
+            min-height: auto !important;
+            max-width: 100% !important;
+        }
+    }
     #puffer-pool .puffer .loading {
         border:0;
         margin:0 auto;

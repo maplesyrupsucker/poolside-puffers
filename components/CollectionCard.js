@@ -10,6 +10,13 @@ const customStyles = {
   },
 };
 
+const IPFS_GATEWAYS = [
+  "https://ipfs.io/ipfs/",
+  "https://gateway.pinata.cloud/ipfs/",
+  "https://ipfs.kxv.io/ipfs/",
+  "https://ipfs.eth.aragon.network/ipfs/"
+];
+
 export default function CollectionCard({ sortBy }) {
   const [collectionCardData, setCollectionCardData] = useState([]);
   const [paginatedCollectionCardData, setPaginatedCollectionCardData] = useState([]);
@@ -17,6 +24,7 @@ export default function CollectionCard({ sortBy }) {
   const [showModal, setShowModal] = useState(false);
   const [rarityTraits, setRarityTraits] = useState([]);
   const [rarityImage, setRarityImage] = useState('');
+  const [rarityImageIPFS, setRarityImageIPFS] = useState('');
   const [rarityName, setRarityName] = useState('');
   const [rarityDiamonds, setRarityDiamonds] = useState('');
   const [showLoadMoreButton, setShowLoadMoreButton] = useState(true);
@@ -34,16 +42,14 @@ export default function CollectionCard({ sortBy }) {
     }
 
       setPaginatedCollectionCardData(prevState => ([...prevState, ...nextCollectionCardData]));
-      setIsFetching(false); // THIS IS WHAT TRIGGERS THE AUTO SCROLL
+      setIsFetching(false);
 
-    // UNCOMMENT THIS SECTION AND CHECK IF IT AUTO HIDES THE LOAD MORE BUTTON ON YOUR BROWSER
-    // if (paginatedCollectionCardData.length > 0 && paginatedCollectionCardData.length < collectionCardData.length){
-    //   setShowLoadMoreButton(true);
-    // }else{
-    //   setShowLoadMoreButton(false);
-    // }
+    if (paginatedCollectionCardData.length > 0 && paginatedCollectionCardData.length < collectionCardData.length){
+      setShowLoadMoreButton(true);
+    }else{
+      setShowLoadMoreButton(false);
+    }
   }
-
 
   async function fetchData (){
     const attrs = await fetch(`/api/all`).then((res) => res.json());
@@ -62,16 +68,15 @@ export default function CollectionCard({ sortBy }) {
     let sortedAttrSliced=sortedAttr.slice(0, perPage);
     setPaginatedCollectionCardData(sortedAttrSliced);
 
-    // UNCOMMENT THIS SECTION AND CHECK IF IT AUTO HIDES THE LOAD MORE BUTTON ON YOUR BROWSER
-    // if (sortedAttrSliced.length > 0 && sortedAttrSliced.length < sortedAttr.length){
-    //   setShowLoadMoreButton(true);
-    // }else{
-    //   setShowLoadMoreButton(false);
-    // }
+    if (sortedAttrSliced.length > 0 && sortedAttrSliced.length < sortedAttr.length){
+      setShowLoadMoreButton(true);
+    }else{
+      setShowLoadMoreButton(false);
+    }
   }
 
-  useEffect(async () => {
-    await fetchData();
+  useEffect(() => {
+    fetchData();
   }, [sortBy]);
 
   function getRarity(i,trait_type,trait_type_value) {
@@ -96,6 +101,7 @@ export default function CollectionCard({ sortBy }) {
     setShowModal(true);
     if (paginatedCollectionCardData[i]) {
       setRarityImage(paginatedCollectionCardData[i].image);
+      setRarityImageIPFS(paginatedCollectionCardData[i].imageIPFS);
       setRarityName(paginatedCollectionCardData[i].tokenId);
       setRarityDiamonds(paginatedCollectionCardData[i].numberOfDiamonds);
       setRarityTraits(paginatedCollectionCardData[i].attributes.map((attribute) => {
@@ -107,23 +113,17 @@ export default function CollectionCard({ sortBy }) {
     }
   }
 
-  // function loadAlternative(element, list) {
-  //   var image = new Image();
+  function loadAlternative(element, index = 0) {
+    if (index >= IPFS_GATEWAYS.length) {
+      element.src = "images/error.png"; // fallback image if all gateways fail
+      return;
+    }
 
-  //   image.onload = function() {
-  //     element.src = this.src;
-  //   }
-
-  //   image.onerror = function() {
-  //     if (list.length) {
-  //       loadAlternative(element, list);
-  //     }
-  //   }
-
-  //   //  pick off the first url in the list
-  //   image.src = list.shift();
-  // }
-
+    element.src = IPFS_GATEWAYS[index] + element.dataset.ipfs;
+    element.onerror = () => {
+      setTimeout(() => loadAlternative(element, index + 1), 1000);
+    };
+  }
 
   if (collectionCardData.length == 0) {
     return (
@@ -152,91 +152,57 @@ export default function CollectionCard({ sortBy }) {
           const halfBloodCount = obj.numberOfHalfBloods;
           const halfBloodArray = new Array(halfBloodCount).fill("");
 
-          // const fallback = '"https://ipfs.io/ipfs/' + obj.imageIPFS + ","
-          // + 'https://gateway.pinata.cloud/ipfs/' + obj.imageIPFS + ','
-          // + 'https://ipfs.kxv.io/ipfs/' + obj.imageIPFS + ','
-          // + 'https://ipfs.eth.aragon.network/ipfs/' + obj.imageIPFS
-
           return (
               <div className="puffer flex flex-col" key={obj.tokenId}>
                 <div className="rare">
               <span>
-                {diamondArray.map((attributes) => {
-                  return (
-                      <img
-                          src="images/diamond.png"
-                          alt="rare"
-                          className="diamond"
-                      ></img>
-                  );
-                })}
-                {pureBloodArray.map((attributes) => {
-                  return (
-                    <img
-                        src="images/pureblood.png"
-                        alt="pure blood"
-                        className="diamond"
-                      ></img>
-                  );
-                })}
-                {halfBloodArray.map((attributes) => {
-                  return (
-                    <img
-                        src="images/halfblood.png"
-                        alt="half blood"
-                        className="diamond"
-                      ></img>
-                  );
-                })}
+                {diamondArray.map((_, i) => (
+                  <img
+                    key={`diamond-${i}`}
+                    src="images/diamond.png"
+                    alt="rare"
+                    className="diamond"
+                  />
+                ))}
+                {pureBloodArray.map((_, i) => (
+                  <img
+                    key={`pureblood-${i}`}
+                    src="images/pureblood.png"
+                    alt="pure blood"
+                    className="diamond"
+                  />
+                ))}
+                {halfBloodArray.map((_, i) => (
+                  <img
+                    key={`halfblood-${i}`}
+                    src="images/halfblood.png"
+                    alt="half blood"
+                    className="diamond"
+                  />
+                ))}
               </span>
                 </div>
 
-                {/* <a
-              href={obj.image}
-            > */}
                 <img
-                    src={obj.image}
+                    src={`https://ipfs.io/ipfs/${obj.imageIPFS}`}
                     alt={obj.name}
-
-                    onClick={(event) => {
-                      event.target.src = "";
-                      event.target.src = "https://ipfs.kxv.io/ipfs/" + obj.imageIPFS;
-                    }}
-
-                    onError={(event) => {
-                      setTimeout(() => {
-                        event.target.src = "";
-                        event.target.src = "https://ipfs.io/ipfs/" + obj.imageIPFS;
-                      }, 1050);
-
-                      // onError={(event) => {
-                      //   setTimeout(() => {
-                      //     loadAlternative(event.target.src, event.target.getAttribute('data-alternative').split(/,/));
-                      //     // event.target.src = "";
-                      //     // event.target.src = "https://ipfs.io/ipfs/" + obj.imageIPFS;
-
-                      // }, 1100);
-
-                    }}
-                ></img>
-                {/* </a> */}
+                    data-ipfs={obj.imageIPFS}
+                    onError={(e) => loadAlternative(e.target)}
+                />
                 <h3 className="Poppitandfinchsans text-center text-4xl text-black">
                   {obj.name}
                 </h3>
                 <p className="Poppitandfinchsans text-center text-black">Traits:</p>
                 <ul className="pufferAttributes ">
-                  {attributes.map((attribute) => {
-                    //attribute.rarity=getRarity(index,attribute.trait_type_index);
-                    return (
-                        <li key={attribute.trait_type}>
-                          <span>{attribute.trait_type}:</span> {attribute.value}
-                        </li>
-                    );
-                  })}
+                  {attributes.map((attribute) => (
+                    <li key={attribute.trait_type}>
+                      <span>{attribute.trait_type}:</span> {attribute.value}
+                    </li>
+                  ))}
                 </ul>
                 <br/>
 
-                <button className=" rarity" onClick={()=>comparisonTraits(index)}>Rarity</button>
+                <button className="rarity" onClick={() => comparisonTraits(index)}>Rarity</button>
               </div>
           );
         })}
@@ -245,13 +211,19 @@ export default function CollectionCard({ sortBy }) {
             isOpen={showModal}
             style={customStyles}
             contentLabel="Rarity"
+            onRequestClose={() => setShowModal(false)}
+            shouldCloseOnOverlayClick={true}
+            shouldCloseOnEsc={true}
         >
           <h2 className="text-black Poppitandfinchsans text-center text-6xl">Rarity #{rarityName}</h2>
           <img
               className="rarityImage"
-              src={rarityImage}
-              alt={rarityImage}
-          ></img>
+              src={`https://ipfs.io/ipfs/${rarityImageIPFS}`}
+              alt={rarityName}
+              data-ipfs={rarityImageIPFS}
+              onError={(e) => loadAlternative(e.target)}
+              style={{ width: '100%', maxWidth: '500px', height: 'auto' }}
+          />
           <h4 className="text-center">
             <span>{rarityDiamonds}</span> Diamond
               <img
@@ -264,7 +236,19 @@ export default function CollectionCard({ sortBy }) {
             {rarityTraits}
           </ul>
           
-          <button className="closemodal" onClick={ ()=> setShowModal(false)}>Close</button>
+          <button className="closemodal" onClick={() => setShowModal(false)} style={{
+            position: 'absolute',
+            top: '5px',
+            left: 'auto',
+            right: '20px',
+            border: 'none',
+            fontSize: '20px',
+            cursor: 'pointer',
+            height: '50px',
+            width: '50px'
+          }}>
+            &#10005;
+          </button>
         </ReactModal>
 
         <br/>

@@ -43,10 +43,10 @@ export default function Pool() {
 
           </div>
           <div className=" py-6 w-4/4 text-center">
-            <div><p>CashTokens TokenId: <a className="text-blau" target='_blank' href='https://explorer.salemkode.com/token/8ded0441eab6fdb69560b396594861eb38b515bf98353e2b4d7ebdf388ebbec2'>
-            8ded0441eab6fdb69560...3e2b4d7ebdf388ebbec2</a></p>
+            <div><p style={{wordBreak: 'break-all'}}>CashTokens TokenId: <a className="text-blau" target='_blank' href='https://explorer.salemkode.com/token/8ded0441eab6fdb69560b396594861eb38b515bf98353e2b4d7ebdf388ebbec2'>
+            8ded0441eab6fdb69560b396594861eb38b515bf98353e2b4d7ebdf388ebbec2</a></p>
             </div>
-            <div><p>SmartBCH Contract: <span className="text-blau">0x88fA0495d5E9C1B178EAc1D76DF9D729e39fD8E8</span></p></div>
+            <div><p style={{wordBreak: 'break-all'}}>SmartBCH Contract: <span className="text-blau">0x88fA0495d5E9C1B178EAc1D76DF9D729e39fD8E8</span></p></div>
 
           </div>
           <div className="text-center py-6">
