@@ -10,19 +10,41 @@ const customStyles = {
   },
 };
 
+const IPFS_GATEWAYS = [
+  "https://ipfs.io/ipfs/",
+  "https://gateway.pinata.cloud/ipfs/",
+  "https://ipfs.kxv.io/ipfs/",
+  "https://ipfs.eth.aragon.network/ipfs/"
+];
+
 export default function PufferCard({ pufferContract, walletAddress,sortBy }) {
   const [allPufferCardData, setAllPufferCardData] = useState([]);
   const [pufferCardData, setPufferCardData] = useState([]);
   const [paginatedPufferCardData, setPaginatedPufferCardData] = useState([]);
   const [isFetching, setIsFetching] = useInfiniteScroll(listMorePuffers);
   const [showModal, setShowModal] = useState(false);
+  const [showBridgeModal, setShowBridgeModal] = useState(false);
+  const [selectedPuffer, setSelectedPuffer] = useState(null);
   const [rarityTraits, setRarityTraits] = useState([]);
   const [rarityImage, setRarityImage] = useState('');
+  const [rarityImageIPFS, setRarityImageIPFS] = useState('');
   const [rarityName, setRarityName] = useState('');
   const [rarityDiamonds, setRarityDiamonds] = useState('');
   const [showLoadMoreButton, setShowLoadMoreButton] = useState(true);
   
   let perPage=21;
+
+  function loadAlternative(element, index = 0) {
+    if (index >= IPFS_GATEWAYS.length) {
+      element.src = "images/error.png"; // fallback image if all gateways fail
+      return;
+    }
+
+    element.src = IPFS_GATEWAYS[index] + element.dataset.ipfs;
+    element.onerror = () => {
+      setTimeout(() => loadAlternative(element, index + 1), 1000);
+    };
+  }
 
   function listMorePuffers() {
     let nextCollectionCardData=[];
@@ -75,6 +97,7 @@ export default function PufferCard({ pufferContract, walletAddress,sortBy }) {
 
     if (paginatedPufferCardData[i]) {
       setRarityImage(paginatedPufferCardData[i].image);
+      setRarityImageIPFS(paginatedPufferCardData[i].image?.replace('ipfs://', '') || '');
       setRarityName(paginatedPufferCardData[i].tokenId);
       setRarityDiamonds(paginatedPufferCardData[i].numberOfDiamonds);
 
@@ -126,20 +149,24 @@ export default function PufferCard({ pufferContract, walletAddress,sortBy }) {
     if (!obj.tokenId) {
       alert("something went wrong");
     } else {
-      let address = "0x000000000000000000000000000000000000dead";
-      
-      const confirmed = window.confirm("Bridging to CashTokens is one way only, are you sure?");
+      setSelectedPuffer(obj);
+      setShowBridgeModal(true);
+    }
+  }
 
-      if (!confirmed) {
-        console.log("bridging not confirmed");
-        return;
-      }
-
+  async function confirmBridge() {
+    const address = "0x000000000000000000000000000000000000dead";
+    
+    try {
       await pufferContract.methods
-        .safeTransferFrom(walletAddress, address, obj.tokenId)
+        .safeTransferFrom(walletAddress, address, selectedPuffer.tokenId)
         .send({
           from: walletAddress,
         });
+      setShowBridgeModal(false);
+    } catch (error) {
+      console.error("Bridge failed:", error);
+      alert("Bridge failed. Please try again.");
     }
   }
 
@@ -191,6 +218,12 @@ export default function PufferCard({ pufferContract, walletAddress,sortBy }) {
           sortedAttr = attrs.sort((a, b) => b.numberOfDiamonds - a.numberOfDiamonds);
       }
 
+      // Add imageIPFS field by extracting from image URL
+      sortedAttr = sortedAttr.map(attr => ({
+        ...attr,
+        imageIPFS: attr.image?.replace('ipfs://', '') || ''
+      }));
+
       setPufferCardData(sortedAttr);
       let sortedAttrSliced=sortedAttr.slice(0, perPage);
       setPaginatedPufferCardData(sortedAttrSliced);
@@ -235,63 +268,53 @@ export default function PufferCard({ pufferContract, walletAddress,sortBy }) {
   
           const halfBloodCount = obj.numberOfHalfBloods;
           const halfBloodArray = new Array(halfBloodCount).fill("");
-          /*  for (let i = 0; i < diamondCount; i++) {
-            diamondArray.push("");
-          }
-   */
+
           return (
               <div className="puffer flex flex-col" key={obj.tokenId}>
                 <div className="rare">
                   <span>
-                    {diamondArray.map((attributes) => {
-                      return (
-                          <img
-                              src="images/diamond.png"
-                              alt="rare"
-                              className="diamond"
-                          ></img>
-                      );
-                    })}
-                    {pureBloodArray.map((attributes) => {
-                      return (
-                        <img
-                            src="images/pureblood.png"
-                            alt="pure blood"
-                            className="diamond"
-                          ></img>
-                      );
-                    })}
-                    {halfBloodArray.map((attributes) => {
-                      return (
-                        <img
-                            src="images/halfblood.png"
-                            alt="half blood"
-                            className="diamond"
-                          ></img>
-                      );
-                    })}
+                    {diamondArray.map((_, i) => (
+                      <img
+                        key={`diamond-${i}`}
+                        src="images/diamond.png"
+                        alt="rare"
+                        className="diamond"
+                      />
+                    ))}
+                    {pureBloodArray.map((_, i) => (
+                      <img
+                        key={`pureblood-${i}`}
+                        src="images/pureblood.png"
+                        alt="pure blood"
+                        className="diamond"
+                      />
+                    ))}
+                    {halfBloodArray.map((_, i) => (
+                      <img
+                        key={`halfblood-${i}`}
+                        src="images/halfblood.png"
+                        alt="half blood"
+                        className="diamond"
+                      />
+                    ))}
                   </span>
                 </div>
                 <img
-                    src={obj.image}
+                    src={`https://ipfs.io/ipfs/${obj.imageIPFS}`}
                     alt={obj.name}
-                    onError={(event) => {
-                      event.target.src = "";
-                      event.target.src = obj.image;
-                    }}
-                ></img>
+                    data-ipfs={obj.imageIPFS}
+                    onError={(e) => loadAlternative(e.target)}
+                />
                 <h3 className="Poppitandfinchsans text-center text-4xl text-black">
                   {obj.name}
                 </h3>
                 <p className="Poppitandfinchsans text-center text-black">Traits:</p>
                 <ul className="pufferAttributes ">
-                  {attributes.map((attributes) => {
-                    return (
-                        <li key={attributes.trait_type}>
-                          <span>{attributes.trait_type}:</span> {attributes.value}
-                        </li>
-                    );
-                  })}
+                  {attributes.map((attribute) => (
+                    <li key={attribute.trait_type}>
+                      <span>{attribute.trait_type}:</span> {attribute.value}
+                    </li>
+                  ))}
                 </ul>
                 <br/>
                 <button className="rarity" onClick={()=>openTraitsModal(index)}>Rarity</button>
@@ -309,8 +332,6 @@ export default function PufferCard({ pufferContract, walletAddress,sortBy }) {
           );
         })}
 
-        
-
         <ReactModal
             isOpen={showModal}
             style={customStyles}
@@ -320,9 +341,12 @@ export default function PufferCard({ pufferContract, walletAddress,sortBy }) {
           
           <img
               className="rarityImage"
-              src={rarityImage}
-              alt={rarityImage}
-          ></img>
+              src={`https://ipfs.io/ipfs/${rarityImageIPFS}`}
+              alt={rarityName}
+              data-ipfs={rarityImageIPFS}
+              onError={(e) => loadAlternative(e.target)}
+              style={{ width: '100%', maxWidth: '500px', height: 'auto' }}
+          />
           <h4 className="text-center">
             <span>{rarityDiamonds}</span> Diamond
               <img
@@ -335,7 +359,53 @@ export default function PufferCard({ pufferContract, walletAddress,sortBy }) {
             {rarityTraits}
           </ul>
           
-          <button className="closemodal" onClick={ ()=> setShowModal(false)}>Close</button>
+          <button className="closemodal" onClick={ ()=> setShowModal(false)} style={{
+            position: 'absolute',
+            top: '5px',
+            left: 'auto',
+            right: '20px',
+            border: 'none',
+            fontSize: '20px',
+            cursor: 'pointer',
+            height: '50px',
+            width: '50px'
+          }}>
+            &#10005;
+          </button>
+        </ReactModal>
+
+        <ReactModal
+          isOpen={showBridgeModal}
+          style={customStyles}
+          contentLabel="Bridge Confirmation"
+        >
+          <h2 className="text-black Poppitandfinchsans text-center text-4xl mb-4">Bridge Confirmation</h2>
+          <p className="text-center mt-4 mb-4">
+            Are you sure you want to bridge Puffer #{selectedPuffer?.tokenId} to CashTokens? 
+            This action cannot be undone.<br/>
+            <strong>Note this is a one way action and cannot be reversed.</strong>
+          </p>
+          <div className="flex justify-center gap-4">
+            <button className="transfer btn-primary" onClick={confirmBridge} style={{backgroundColor: '#4CAF50', color: 'white', padding: '10px 20px', border: 'none', borderRadius: '4px', cursor: 'pointer'}}>
+              Confirm Bridge
+            </button>
+            <button className="transfer btn-secondary" onClick={() => setShowBridgeModal(false)} style={{backgroundColor: '#f44336', color: 'white', padding: '10px 20px', border: 'none', borderRadius: '4px', cursor: 'pointer'}}>
+              Cancel
+            </button>
+          </div>
+          <button className="closemodal" onClick={() => setShowBridgeModal(false)} style={{
+            position: 'absolute',
+            top: '5px',
+            left: 'auto',
+            right: '20px',
+            border: 'none',
+            fontSize: '20px',
+            cursor: 'pointer',
+            height: '50px',
+            width: '50px'
+          }}>
+            &#10005;
+          </button>
         </ReactModal>
 
         <br/>
