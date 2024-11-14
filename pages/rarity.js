@@ -32,93 +32,110 @@ export default function Home() {
           <div className="mt-6 py-6">
             <div className="flex flex-wrap lg:flex-nowrap justify-around items-center">
                   <div className="w-4/4 lg:w-3/4">
-                    <h1 className="text-7xl Poppitandfinchsans text-white ">Trait Rarity</h1>
-                    <p className="text-3xl text-white my-6  montserrat">Check out which raits are <span className="text-6xl Poppitandfinch text-blau">Most </span> <span className="text-blau text-6xl Poppitandfinchsans">Rare</span>. </p>
+                    <h1 className="text-7xl Poppitandfinchsans text-white">Trait Rarity</h1>
+                    <p className="text-3xl text-white my-6 montserrat">Discover which traits are <span className="text-6xl Poppitandfinch text-blau">Most </span> <span className="text-blau text-6xl Poppitandfinchsans">Rare</span> 🔍</p>
                     
-                    
-                    
+                    <hr/><h2 className="text-white text-4xl text-blau mt-3 code-line">Background</h2>
+                    <table className="text-white text-2xl w-full">
+                      <tr><td>🌊 Dark Blue</td><td>17% (357 Puffers)</td></tr>
+                      <tr><td>🌿 Green</td><td>25% (525 Puffers)</td></tr>
+                      <tr><td>✨ Neon Green</td><td>30% (630 Puffers)</td></tr>
+                      <tr><td>💧 Blue</td><td>13% (273 Puffers)</td></tr>
+                      <tr><td>🏊‍♂️ Pool</td><td>5% (105 Puffers)</td></tr>
+                      <tr><td>⚡ Dark Blue Animated</td><td>2% (42 Puffers)</td></tr>
+                      <tr><td>⚡ Green Animated</td><td>3% (63 Puffers)</td></tr>
+                      <tr><td>⚡ Neon Green Animated</td><td>2% (42 Puffers)</td></tr>
+                      <tr><td>⚡ Blue Animated</td><td>2% (42 Puffers)</td></tr>
+                      <tr><td>⚡ Pool Animated</td><td>1% (2 Puffers)</td></tr>
+                    </table>
 
-                    <h2 className="text-white text-4xl text-blau mt-3 code-line"><a id="Background_2"></a>Background:</h2>
-<p className="text-white text-2xl has-line-data">Dark Blue: 17% (357 Puffers)<br/>
-Green: 25% (525 Puffers)<br/>
-Neon Green: 30% (630 Puffers)<br/>
-Blue: 13% (273 Puffers)<br/>
-Pool: 5% (105 Puffers)<br/>
-Dark Blue Animated: 2% (42 Puffers)<br/>
-Green Animated: 3% (63 Puffers)<br/>
-Neon Green Animated: 2% (42 Puffers)<br/>
-Blue Animated: 2% (42 Puffers)<br/>
-Pool Animated: 1% (2 Puffers)</p>
-<h2 className="text-white text-4xl text-blau mt-3 code-line"><a id="Body_14"></a>Body:</h2>
-<p className="text-white text-2xl has-line-data">Red: 14% (294 Puffers)<br/>
-Orange: 14% (294 Puffers)<br/>
-Yellow: 14% (294 Puffers)<br/>
-Green: 14% (294 Puffers)<br/>
-Blue: 14% (294 Puffers)<br/>
-Indigo: 14% (294 Puffers)<br/>
-Violet: 16% (336 Puffers)</p>
-<h2 className="text-white text-4xl text-blau mt-3 code-line"><a id="Tail_23"></a>Tail:</h2>
-<p className="text-white text-2xl has-line-data">Red: 14% (294 Puffers)<br/>
-Orange: 14% (294 Puffers)<br/>
-Yellow: 14% (294 Puffers)<br/>
-Green: 14% (294 Puffers)<br/>
-Blue: 14% (294 Puffers)<br/>
-Indigo: 14% (294 Puffers)<br/>
-Violet: 16% (336 Puffers)</p>
-<h2 className="text-white text-4xl text-blau mt-3 code-line"><a id="Tailfins_32"></a>Tailfins:</h2>
-<p className="text-white text-2xl has-line-data">Red: 14% (294 Puffers)<br/>
-Orange: 14% (294 Puffers)<br/>
-Yellow: 14% (294 Puffers)<br/>
-Green: 14% (294 Puffers)<br/>
-Blue: 14% (294 Puffers)<br/>
-Indigo: 14% (294 Puffers)<br/>
-Violet: 16% (336 Puffers)</p>
-<h2 className="text-white text-4xl text-blau mt-3 code-line"><a id="Spikes_41"></a>Spikes</h2>
-<p className="text-white text-2xl has-line-data">Red: 14% (294 Puffers)<br/>
-Orange: 14% (294 Puffers)<br/>
-Yellow: 14% (294 Puffers)<br/>
-Green: 14% (294 Puffers)<br/>
-Blue: 14% (294 Puffers)<br/>
-Indigo: 14% (294 Puffers)<br/>
-Violet: 16% (336 Puffers)</p>
-<h2 className="text-white text-4xl text-blau mt-3 code-line"><a id="Faces_50"></a>Faces</h2>
-<p className="text-white text-2xl has-line-data">Weak Smile: 12% (252 Puffers)<br/>
-Mischief Smile: 12% (252 Puffers)<br/>
-Frown: 12% (252 Puffers)<br/>
-Furrow: 12% (252 Puffers)<br/>
-Angel: 12%  (252 Puffers)<br/>
-Melancholy: 12% (252 Puffers)<br/>
-Amazed: 12% (252 Puffers)<br/>
-Grumpy: 11% (231 Puffers)<br/>
-Ripped &amp; Angry: 3% (63 Puffers)<br/>
-Ripped &amp; Melancholic: 2% (42 Puffers)</p>
-<h2 className="text-white text-4xl text-blau mt-3 code-line"><a id="Accessories_62"></a>Accessories</h2>
-<p className="text-white text-2xl has-line-data">None: 30% (630 Puffers)<br/>
-Aviators: 25% (525 Puffers)<br/>
-Mask: 20% (420 Puffers)<br/>
-Sports Hat: 10% (210 Puffers)<br/>
-Cigarette: 7% (147 Puffers)<br/>
-Summer Shades: 5% (105 Puffers)<br/>
-Joint: 3% (63 Puffers)</p>
-<h3 className="text-white text-4xl text-blau mt-3 code-line" ><a id="Purebloods_single_colour_puffers_71"></a>Purebloods (single colour puffers)</h3>
-<p className="text-white text-2xl has-line-data">3 puffers</p>
-<h3 className="text-white text-4xl text-blau mt-3 code-line"><a id="Halfbloods_two_colour_puffers_74"></a>Halfbloods (two colour puffers)</h3>
-<p className="text-white text-2xl has-line-data">89 puffers</p>
-<h3 className="text-white text-4xl text-blau mt-3 code-line"><a id="4_Diamond_77"></a>4 Diamond</h3>
-<p className="text-white text-2xl has-line-data">3 puffers</p>
-<h3 className="text-white text-4xl text-blau mt-3 code-line"><a id="3_Diamond_80"></a>3 Diamond</h3>
-<p className="text-white text-2xl has-line-data">58 puffers</p>
-<h2 className="text-white text-4xl text-blau mt-3 code-line"><a id="2_Diamond_83"></a>2 Diamond</h2>
-<p className="text-white text-2xl has-line-data">205 puffers</p>
-<h2 className="text-white text-4xl text-blau mt-3 code-line"><a id="1_diamond_86"></a>1 diamond</h2>
-<p className="text-white text-2xl has-line-data">442 puffers</p>
+                    <hr/><h2 className="text-white text-4xl text-blau mt-3 code-line">Body</h2>
+                    <table className="text-white text-2xl w-full">
+                      <tr><td>❤️ Red</td><td>14% (294 Puffers)</td></tr>
+                      <tr><td>🧡 Orange</td><td>14% (294 Puffers)</td></tr>
+                      <tr><td>💛 Yellow</td><td>14% (294 Puffers)</td></tr>
+                      <tr><td>💚 Green</td><td>14% (294 Puffers)</td></tr>
+                      <tr><td>💙 Blue</td><td>14% (294 Puffers)</td></tr>
+                      <tr><td>💜 Indigo</td><td>14% (294 Puffers)</td></tr>
+                      <tr><td>🟣 Violet</td><td>16% (336 Puffers)</td></tr>
+                    </table>
+
+                    <hr/><h2 className="text-white text-4xl text-blau mt-3 code-line">Tail</h2>
+                    <table className="text-white text-2xl w-full">
+                      <tr><td>❤️ Red</td><td>14% (294 Puffers)</td></tr>
+                      <tr><td>🧡 Orange</td><td>14% (294 Puffers)</td></tr>
+                      <tr><td>💛 Yellow</td><td>14% (294 Puffers)</td></tr>
+                      <tr><td>💚 Green</td><td>14% (294 Puffers)</td></tr>
+                      <tr><td>💙 Blue</td><td>14% (294 Puffers)</td></tr>
+                      <tr><td>💜 Indigo</td><td>14% (294 Puffers)</td></tr>
+                      <tr><td>🟣 Violet</td><td>16% (336 Puffers)</td></tr>
+                    </table>
+
+                    <hr/><h2 className="text-white text-4xl text-blau mt-3 code-line">Tailfins</h2>
+                    <table className="text-white text-2xl w-full">
+                      <tr><td>❤️ Red</td><td>14% (294 Puffers)</td></tr>
+                      <tr><td>🧡 Orange</td><td>14% (294 Puffers)</td></tr>
+                      <tr><td>💛 Yellow</td><td>14% (294 Puffers)</td></tr>
+                      <tr><td>💚 Green</td><td>14% (294 Puffers)</td></tr>
+                      <tr><td>💙 Blue</td><td>14% (294 Puffers)</td></tr>
+                      <tr><td>💜 Indigo</td><td>14% (294 Puffers)</td></tr>
+                      <tr><td>🟣 Violet</td><td>16% (336 Puffers)</td></tr>
+                    </table>
+
+                    <hr/><h2 className="text-white text-4xl text-blau mt-3 code-line">Spikes</h2>
+                    <table className="text-white text-2xl w-full">
+                      <tr><td>❤️ Red</td><td>14% (294 Puffers)</td></tr>
+                      <tr><td>🧡 Orange</td><td>14% (294 Puffers)</td></tr>
+                      <tr><td>💛 Yellow</td><td>14% (294 Puffers)</td></tr>
+                      <tr><td>💚 Green</td><td>14% (294 Puffers)</td></tr>
+                      <tr><td>💙 Blue</td><td>14% (294 Puffers)</td></tr>
+                      <tr><td>💜 Indigo</td><td>14% (294 Puffers)</td></tr>
+                      <tr><td>🟣 Violet</td><td>16% (336 Puffers)</td></tr>
+                    </table>
+
+                    <hr/><h2 className="text-white text-4xl text-blau mt-3 code-line">Faces</h2>
+                    <table className="text-white text-2xl w-full">
+                      <tr><td>🙂 Weak Smile</td><td>12% (252 Puffers)</td></tr>
+                      <tr><td>😏 Mischief Smile</td><td>12% (252 Puffers)</td></tr>
+                      <tr><td>☹️ Frown</td><td>12% (252 Puffers)</td></tr>
+                      <tr><td>🤨 Furrow</td><td>12% (252 Puffers)</td></tr>
+                      <tr><td>😇 Angel</td><td>12% (252 Puffers)</td></tr>
+                      <tr><td>😢 Melancholy</td><td>12% (252 Puffers)</td></tr>
+                      <tr><td>😮 Amazed</td><td>12% (252 Puffers)</td></tr>
+                      <tr><td>😠 Grumpy</td><td>11% (231 Puffers)</td></tr>
+                      <tr><td>😡 Ripped & Angry</td><td>3% (63 Puffers)</td></tr>
+                      <tr><td>😥 Ripped & Melancholic</td><td>2% (42 Puffers)</td></tr>
+                    </table>
+
+                    <hr/><h2 className="text-white text-4xl text-blau mt-3 code-line">Accessories</h2>
+                    <table className="text-white text-2xl w-full">
+                      <tr><td>❌ None</td><td>30% (630 Puffers)</td></tr>
+                      <tr><td>🕶️ Aviators</td><td>25% (525 Puffers)</td></tr>
+                      <tr><td>😷 Mask</td><td>20% (420 Puffers)</td></tr>
+                      <tr><td>🧢 Sports Hat</td><td>10% (210 Puffers)</td></tr>
+                      <tr><td>🚬 Cigarette</td><td>7% (147 Puffers)</td></tr>
+                      <tr><td>🕶️ Summer Shades</td><td>5% (105 Puffers)</td></tr>
+                      <tr><td>🌿 Joint</td><td>3% (63 Puffers)</td></tr>
+                    </table>
+
+                    <hr/><h2 className="text-white text-4xl text-blau mt-3 code-line">Special Categories</h2>
+                    
+                    <table className="text-white text-2xl w-full mt-2">
+                      <tr><td>💫 Purebloods (single colour)</td><td>👑 3 puffers</td></tr>
+                      <tr><td>🌓 Halfbloods (two colours)</td><td>✨ 89 puffers</td></tr>
+                    </table>
+                    
+                    <h3 className="text-white text-3xl mt-2">Diamond Ratings</h3>
+                    <table className="text-white text-2xl w-full">
+                      <tr><td>💎💎💎💎 4 Diamond</td><td>3 puffers</td></tr>
+                      <tr><td>💎💎💎 3 Diamond</td><td>58 puffers</td></tr>
+                      <tr><td>💎💎 2 Diamond</td><td>205 puffers</td></tr>
+                      <tr><td>💎 1 Diamond</td><td>442 puffers</td></tr>
+                    </table>
                    
                   </div>
                               </div>
             <div className="flex flex-col items-center">
-
-                
-                
             </div> 
             </div>
               
